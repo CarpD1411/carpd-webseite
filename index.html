@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CarpD – die App nur fürs Karpfenangeln</title>
+  <meta name="description" content="CarpD – die App nur fürs Karpfenangeln. Gewässer, Wetter, Luftdruck-Trend, Beißindex, Fangbuch, Crews und Rotlicht für die Nacht. Deine Spots bleiben geheim. Wir suchen 200 Testangler ab 01.01.2027.">
+  <meta property="og:title" content="CarpD – Dein Gewässer. Deine Daten. Dein nächster Fisch.">
+  <meta property="og:description" content="Die App nur fürs Karpfenangeln. Kostenlos testen ab 01.01.2027 – iPhone und Android.">
+  <meta property="og:image" content="https://carpd.de/vorschau.png">
+  <meta property="og:url" content="https://carpd.de/">
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    /* Keine fremden Schriften, keine Tracker, keine Cookies – alles kommt von carpd.de */
+    :root {
+      --hg: #0B0B0B; --flaeche: #151515; --flaeche2: #1D1D1D; --linie: #2A2A2A;
+      --text: #F2F2F2; --neben: #A3A3A3; --oliv: #8A9A3B; --oliv-hell: #A8BA4A; --oliv-dunkel: #6B7A2E;
+      --rund: 22px;
+      --schrift: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--hg); color: var(--text); font-family: var(--schrift); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    a { color: var(--oliv-hell); }
+    .breite { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .d { color: var(--oliv); }
+
+    /* Leiste oben */
+    .leiste { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(11,11,11,.72); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .leiste .breite { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .marke { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 22px; letter-spacing: -.5px; }
+    .marke img { width: 34px; height: 34px; }
+    .leiste nav { display: flex; gap: 22px; align-items: center; }
+    .leiste nav a { color: var(--neben); text-decoration: none; font-size: 15px; font-weight: 600; }
+    .leiste nav a:hover { color: var(--text); }
+    .leiste nav a.knopf { color: #0B0B0B; }
+    .knopf { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: 999px; background: var(--oliv); color: #0B0B0B; font-weight: 800; font-size: 17px; text-decoration: none; transition: transform .15s, background .15s; }
+    .knopf:hover { background: var(--oliv-hell); transform: translateY(-1px); }
+    .knopf.klein { min-height: 40px; padding: 0 18px; font-size: 15px; }
+    .knopf.leer { background: transparent; color: var(--text); border: 1.5px solid var(--linie); }
+    .knopf.leer:hover { border-color: var(--oliv); background: transparent; }
+
+    /* Start */
+    .start { position: relative; overflow: hidden; padding: 72px 0 40px; }
+    .start::before { content: ""; position: absolute; inset: -30% -10% auto auto; width: 820px; height: 820px; background: radial-gradient(circle, rgba(138,154,59,.22), transparent 62%); pointer-events: none; }
+    .start .breite { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .plakette { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(138,154,59,.14); color: var(--oliv-hell); font-weight: 700; font-size: 14px; border: 1px solid rgba(138,154,59,.35); }
+    .plakette i { width: 8px; height: 8px; border-radius: 50%; background: var(--oliv-hell); box-shadow: 0 0 0 4px rgba(168,186,74,.25); }
+    h1 { font-size: clamp(56px, 9vw, 104px); line-height: .95; letter-spacing: -3px; margin: 22px 0 18px; font-weight: 900; }
+    h1 .d { text-shadow: 0 0 40px rgba(138,154,59,.45); }
+    .slogan { font-size: clamp(22px, 3vw, 32px); font-weight: 800; line-height: 1.25; letter-spacing: -.5px; margin: 0 0 18px; }
+    .slogan > span { display: block; }
+    .slogan .d { font-size: 1.12em; }
+    .einleitung { color: var(--neben); font-size: 19px; max-width: 520px; margin: 0 0 28px; }
+    .knoepfe { display: flex; flex-wrap: wrap; gap: 12px; }
+    .geraete { margin-top: 18px; color: var(--neben); font-size: 15px; }
+
+    .handys { position: relative; height: 640px; }
+    .handy { position: absolute; width: 240px; border-radius: 38px; padding: 10px; background: linear-gradient(160deg, #2b2b2b, #111); box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08); }
+    .handy img { display: block; width: 100%; height: auto; border-radius: 30px; }
+    .handy.vorne { right: 20px; top: 20px; transform: rotate(4deg); z-index: 2; }
+    .handy.hinten { right: 175px; top: 90px; transform: rotate(-6deg); opacity: .85; }
+
+    /* Abschnitte */
+    section { padding: 80px 0; }
+    .ueber { text-align: center; max-width: 720px; margin: 0 auto 46px; }
+    .ueber small { color: var(--oliv-hell); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 13px; }
+    h2 { font-size: clamp(32px, 4.5vw, 48px); line-height: 1.08; letter-spacing: -1.2px; margin: 10px 0 14px; font-weight: 900; }
+    .ueber p { color: var(--neben); font-size: 18px; margin: 0; }
+
+    /* Datenschutz */
+    .schutz { background: linear-gradient(180deg, rgba(138,154,59,.08), transparent 70%); border-top: 1px solid rgba(138,154,59,.18); }
+    .schild { width: 74px; height: 74px; margin: 0 auto 8px; border-radius: 22px; display: grid; place-items: center; background: rgba(138,154,59,.16); border: 1px solid rgba(138,154,59,.35); }
+    .raster { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .karte { background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--rund); padding: 24px; transition: border-color .2s, transform .2s; }
+    .karte:hover { border-color: rgba(138,154,59,.5); transform: translateY(-2px); }
+    .karte h3 { margin: 14px 0 6px; font-size: 19px; letter-spacing: -.2px; }
+    .karte p { margin: 0; color: var(--neben); font-size: 15.5px; }
+    .symbol { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: rgba(138,154,59,.14); }
+    .symbol svg { width: 24px; height: 24px; stroke: var(--oliv-hell); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Funktionen */
+    .gruppe { margin-top: 44px; }
+    .gruppe-titel { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 14px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--neben); }
+    .gruppe-titel::after { content: ""; flex: 1; height: 1px; background: var(--linie); }
+    .raster.vier { grid-template-columns: repeat(4, 1fr); }
+    .neu { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--oliv); color: #0B0B0B; font-size: 11px; font-weight: 800; vertical-align: middle; letter-spacing: .5px; }
+
+    /* Rotlicht */
+    .rot { background: #0B0B0B; }
+    .rot-kasten { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; border-radius: 30px; padding: 44px; background: radial-gradient(circle at 80% 30%, rgba(224,52,43,.22), transparent 60%), #120404; border: 1px solid rgba(224,52,43,.25); }
+    .rot-kasten h2 { color: #E0342B; }
+    .rot-kasten p { color: #B9483F; font-size: 18px; }
+    .rot-handy { justify-self: center; width: 230px; border-radius: 36px; padding: 10px; background: #1a0605; box-shadow: 0 30px 70px rgba(224,52,43,.18); }
+    .rot-handy img { display: block; width: 100%; height: auto; border-radius: 28px; filter: grayscale(1) brightness(.55) sepia(1) hue-rotate(-50deg) saturate(6); }
+
+    /* Test */
+    .test-kasten { position: relative; overflow: hidden; border-radius: 30px; padding: 56px 44px; text-align: center; background: linear-gradient(135deg, #1b1f0c, #0f0f0f 60%); border: 1px solid rgba(138,154,59,.35); }
+    .test-kasten::after { content: ""; position: absolute; inset: auto -20% -60% auto; width: 600px; height: 600px; background: radial-gradient(circle, rgba(138,154,59,.25), transparent 60%); }
+    .test-kasten > * { position: relative; z-index: 1; }
+    .zahl { font-size: clamp(64px, 10vw, 112px); font-weight: 900; letter-spacing: -4px; line-height: 1; color: var(--oliv); }
+    .schritte { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 36px 0 30px; text-align: left; }
+    .schritt b { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--oliv); color: #0B0B0B; margin-bottom: 10px; }
+    .schritt p { margin: 0; color: var(--neben); }
+
+    /* Wir */
+    .wir { display: grid; grid-template-columns: auto 1fr; gap: 30px; align-items: center; max-width: 860px; margin: 0 auto; }
+    .wir img { width: 140px; height: 140px; }
+    .wir p { color: var(--neben); font-size: 18px; }
+
+    footer { border-top: 1px solid var(--linie); padding: 34px 0 44px; color: var(--neben); font-size: 14px; }
+    footer .breite { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+    footer a { color: var(--neben); }
+
+    @media (max-width: 900px) {
+      .start .breite, .rot-kasten { grid-template-columns: 1fr; }
+      .handys { height: 470px; }
+      .handy { width: 210px; }
+      .handy.vorne { right: 50%; transform: translateX(65%) rotate(4deg); }
+      .handy.hinten { right: 50%; transform: translateX(-35%) rotate(-6deg); }
+      .raster, .raster.vier, .schritte { grid-template-columns: 1fr 1fr; }
+      .leiste nav a:not(.knopf) { display: none; }
+      .rot-kasten { padding: 30px; }
+    }
+    @media (max-width: 560px) {
+      .raster, .raster.vier, .schritte { grid-template-columns: 1fr; }
+      .wir { grid-template-columns: 1fr; text-align: center; }
+      .wir img { margin: 0 auto; }
+      .start { padding-top: 40px; }
+      .test-kasten { padding: 40px 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <header class="leiste">
+    <div class="breite">
+      <a class="marke" href="#"><img src="logo.svg" alt="" width="34" height="34"><span>Carp<span class="d">D</span></span></a>
+      <nav>
+        <a href="#datenschutz">Datenschutz</a>
+        <a href="#funktionen">Funktionen</a>
+        <a href="#crews">Crews</a>
+        <a class="knopf klein" href="#test">Testangler werden</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Start -->
+    <div class="start">
+      <div class="breite">
+        <div>
+          <span class="plakette"><i></i> Testphase ab 01.01.2027 · iPhone &amp; Android</span>
+          <h1>Carp<span class="d">D</span></h1>
+          <p class="slogan">
+            <span><span class="d">D</span>ein Gewässer.</span>
+            <span><span class="d">D</span>eine Daten.</span>
+            <span><span class="d">D</span>ein nächster Fisch.</span>
+          </p>
+          <p class="einleitung">Die App nur fürs Karpfenangeln. Wetter, Luftdruck-Trend und Beißindex am Wasser auf einen Blick – Bisse und Fänge in Sekunden eingetragen. Gemacht für die Nacht und nasse Hände.</p>
+          <div class="knoepfe">
+            <a class="knopf" href="#test">Jetzt Testangler werden</a>
+            <a class="knopf leer" href="#funktionen">Alle Funktionen</a>
+          </div>
+          <p class="geraete">Von Karpfenanglern für Karpfenangler · in 10 Sprachen · Gewässer in 13 Ländern</p>
+        </div>
+        <div class="handys" aria-hidden="true">
+          <div class="handy hinten"><img src="bilder/gewaesser.jpg" alt="" width="414" height="900"></div>
+          <div class="handy vorne"><img src="bilder/heute.jpg" alt="" width="414" height="900"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Datenschutz -->
+    <section class="schutz" id="datenschutz">
+      <div class="breite">
+        <div class="ueber">
+          <div class="schild"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#A8BA4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <small><span class="d">D</span>eine Daten</small>
+          <h2>Deine Spots bleiben geheim.</h2>
+          <p>Ein Spot ist das Wertvollste, was ein Karpfenangler hat. Darum ist CarpD von Grund auf so gebaut, dass er bei dir bleibt.</p>
+        </div>
+        <div class="raster">
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg></div><h3>Zuerst auf deinem Handy</h3><p>Fänge, Spots, Fotos und Notizen werden auf deinem Handy gespeichert. Ohne Konto geht nichts davon an einen Server.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3>Jeder Fang ist privat</h3><p>Du entscheidest bei jedem Fang, ob und mit wem du ihn teilst. Standard ist immer: privat.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></div><h3>Keine Werbung, kein Tracking</h3><p>Keine Werbe-Netzwerke, keine Analyse-Tools, kein Verkauf von Daten. Auch nicht auf dieser Webseite.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M3 3h18v14H3z"/><path d="m3 17 5-5 4 4 3-3 6 6"/><circle cx="8.5" cy="7.5" r="1.5"/></svg></div><h3>Foto-Schutz</h3><p>Fotos für deine Crew ohne Standortdaten – und mit dem Finger kannst du Ufer, Bäume und Häuser im Hintergrund unscharf machen.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg></div><h3>Teilen mit Zeitversatz</h3><p>Fänge erst nach Session-Ende oder 3, 7 oder 14 Tage später zeigen – wenn du längst woanders sitzt.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></div><h3>Server in Deutschland</h3><p>Wenn du freiwillig ein Konto nutzt, liegen deine Daten in Frankfurt am Main. Konto löschen löscht alles – sofort.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Funktionen -->
+    <section id="funktionen">
+      <div class="breite">
+        <div class="ueber">
+          <small><span class="d">D</span>ein Gewässer</small>
+          <h2>Alles, was du am Wasser brauchst.</h2>
+          <p>Nur fürs Karpfenangeln – ohne Ballast aus anderen Angelarten.</p>
+        </div>
+
+        <div class="gruppe">
+          <p class="gruppe-titel">Am Wasser</p>
+          <div class="raster vier">
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16M16 6v16"/></svg></div><h3>Gewässer-Karte</h3><p>Seen, Weiher, Flüsse und Kanäle in 13 Ländern auf der Satellitenkarte – auch ohne Netz.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><h3>Luftdruck-Trend</h3><p>Steigend, fallend oder stabil – über 3 Tage, 24 und 3 Stunden. Dazu Wind mit Richtungspfeil.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><h3>Beißindex</h3><p>Wann lohnt es sich? Aus Luftdruck, Wetter, Mond und Wassertemperatur – mit der besten Zeit der nächsten 24 Stunden.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></div><h3>Wassertemperatur</h3><p>Geschätzt für dein Gewässer, dazu Sonne, Mondphase und Mondzeiten.</p></div>
+          </div>
+        </div>
+
+        <div class="gruppe">
+          <p class="gruppe-titel">Session &amp; Fangbuch</p>
+          <div class="raster vier">
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h3>Bissprotokoll</h3><p>Ein großer Knopf pro Rute: Biss, Fehlbiss, Fisch verloren – mit Uhrzeit und Wetter.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M2 12s4-6 10-6c4 0 7 3 8 4l2-2v8l-2-2c-1 1-4 4-8 4-6 0-10-6-10-6z"/><circle cx="7" cy="11" r="1"/></svg></div><h3>Fang in Sekunden</h3><p>Gewicht, Art, Rute und Köder antippen. Zeit, Ort und Wetter speichert CarpD automatisch.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><h3>Fangfoto mit Selbstauslöser</h3><p>Countdown mit Piepton und Serienbild – danach einfach das beste Foto aussuchen.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div><h3>Fangbuch &amp; Statistik</h3><p>Größter Fisch, Fänge pro Köder, nach Luftdruck-Trend und Uhrzeit – du siehst, was funktioniert.</p></div>
+          </div>
+        </div>
+
+        <div class="gruppe">
+          <p class="gruppe-titel">Planen</p>
+          <div class="raster vier">
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Kalender <span class="neu">NEU</span></h3><p>Touren fürs ganze Jahr planen, mit Wetter-Vorschau und deinen bisherigen Sessions im Monatsblick.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h5"/></svg></div><h3>Futterrechner <span class="neu">NEU</span></h3><p>Wie viel Futter für deine Tour? Schätzwerte nach Wassertemperatur – und er lernt aus deinen Sessions.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3>Packliste</h3><p>Zum Abhaken, mit eigenen Vorlagen – und Erinnerung, wenn dein Angelschein abläuft.</p></div>
+            <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg></div><h3>Meine Spots</h3><p>Deine Plätze mit Entfernung in Metern oder Wraps (9 bis 13 ft) – und GPS in der Notiz.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Crews -->
+    <section id="crews" style="padding-top:0">
+      <div class="breite">
+        <div class="ueber">
+          <small>Community <span class="neu">NEU</span></small>
+          <h2>Crews – nur deine Kumpels.</h2>
+          <p>Geschlossene Gruppen mit bis zu 20 Anglern. Was darin geteilt wird, sieht niemand sonst. Nichts ist öffentlich.</p>
+        </div>
+        <div class="raster">
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div><h3>Fänge teilen, Petri geben</h3><p>Foto, Art, Gewicht und Gewässer – nie dein Spot, Köder oder deine Montage.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div><h3>Wer ist wann am Wasser?</h3><p>Touren in der Crew zeigen und mit „Ich bin dabei“ zusammen losziehen – Fahrgemeinschaft inklusive.</p></div>
+          <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Einladen nur per Code</h3><p>Chef und Admins laden ein. Melden und Blockieren jederzeit möglich.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rotlicht -->
+    <section class="rot" style="padding-top:0">
+      <div class="breite">
+        <div class="rot-kasten">
+          <div>
+            <h2>Gemacht für die Nacht.</h2>
+            <p>Rotlicht-Modus: die ganze App in Rot auf Schwarz – damit du nachts nicht geblendet wirst und die Nachbarn am Ufer auch nicht. Schaltet auf Wunsch bei Sonnenuntergang von selbst um.</p>
+            <p>Große Knöpfe für nasse Hände, wenig Tippen. Und alles funktioniert auch ohne Netz – fehlendes Wetter holt CarpD später nach.</p>
+          </div>
+          <div class="rot-handy"><img src="bilder/heute.jpg" alt="CarpD im Rotlicht-Modus" width="414" height="900"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Test -->
+    <section id="test" style="padding-top:0">
+      <div class="breite">
+        <div class="test-kasten">
+          <small class="plakette"><i></i> Testangler gesucht</small>
+          <div class="zahl" style="margin-top:20px">200</div>
+          <h2 style="margin-top:6px"><span class="d">D</span>ein nächster Fisch – mit CarpD.</h2>
+          <p style="color:var(--neben);font-size:18px;max-width:640px;margin:0 auto">Teste CarpD ab dem <strong style="color:var(--text)">01.01.2027</strong> auf iPhone oder Android. Als Dankeschön bekommst du <strong style="color:var(--text)">CarpD ein Jahr kostenlos – mit allen Funktionen</strong>.</p>
+          <div class="schritte">
+            <div class="schritt"><b>1</b><h3 style="margin:0 0 4px">Melden</h3><p>Schreib an <a href="mailto:test@carpd.de">test@carpd.de</a>, ob du ein iPhone oder Android hast.</p></div>
+            <div class="schritt"><b>2</b><h3 style="margin:0 0 4px">Einladung</h3><p>Ab 01.01.2027 kommt deine Einladung – über TestFlight (iPhone) oder Google Play (Android).</p></div>
+            <div class="schritt"><b>3</b><h3 style="margin:0 0 4px">Angeln &amp; Feedback</h3><p>Nutze CarpD bei deinen Sessions und sag uns direkt in der App, was gut ist und was fehlt.</p></div>
+          </div>
+          <a class="knopf" href="mailto:test@carpd.de?subject=Ich%20will%20CarpD%20testen&amp;body=Hallo%2C%0A%0Aich%20m%C3%B6chte%20CarpD%20testen.%20Mein%20Handy%3A%20iPhone%20%2F%20Android%0A%0APetri%20Heil!">Jetzt als Testangler melden</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wir -->
+    <section style="padding-top:20px">
+      <div class="breite">
+        <div class="wir">
+          <img src="logo.svg" alt="CarpD-Logo: Karpfen im C" width="140" height="140">
+          <div>
+            <h2 style="margin-top:0">Wer steckt dahinter?</h2>
+            <p>Wir sind Davide und Kresimir – selbst Karpfenangler. Wir kennen die Probleme am Wasser aus eigener Erfahrung und bauen mit CarpD die App, die genau das kann, was man beim Karpfenangeln braucht. Eure Rückmeldungen als Testangler fließen direkt in die App ein.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="breite">
+      <span><strong style="color:var(--text)">Petri Heil!</strong> · Gewässerdaten © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a></span>
+      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="datenschutz.html#konto-loeschen">Konto löschen</a></span>
+    </div>
+  </footer>
+</body>
+</html>
