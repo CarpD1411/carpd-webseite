@@ -65,6 +65,9 @@
 
     /* Abschnitte */
     section { padding: 80px 0; }
+    .video-rahmen { max-width: 980px; margin: 0 auto; border-radius: var(--rund); overflow: hidden; border: 1px solid var(--linie); background: #000; box-shadow: 0 30px 90px rgba(138,154,59,.16); }
+    .video-rahmen video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+    .video-hinweis { text-align: center; color: var(--neben); font-size: 13px; margin: 14px 0 0; }
     .ueber { text-align: center; max-width: 720px; margin: 0 auto 46px; }
     .ueber small { color: var(--oliv-hell); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 13px; }
     h2 { font-size: clamp(32px, 4.5vw, 48px); line-height: 1.08; letter-spacing: -1.2px; margin: 10px 0 14px; font-weight: 900; }
@@ -162,7 +165,7 @@
           <p class="einleitung">Die App nur fürs Karpfenangeln. Wetter, Luftdruck-Trend und Beißindex am Wasser auf einen Blick – Bisse und Fänge in Sekunden eingetragen. Gemacht für die Nacht und nasse Hände.</p>
           <div class="knoepfe">
             <a class="knopf" href="#test">Jetzt Testangler werden</a>
-            <a class="knopf leer" href="#funktionen">Alle Funktionen</a>
+            <a class="knopf leer" href="#video">▶ Video ansehen</a>
           </div>
           <p class="geraete">Von Karpfenanglern für Karpfenangler · in 10 Sprachen · Gewässer in 13 Ländern</p>
         </div>
@@ -172,6 +175,24 @@
         </div>
       </div>
     </div>
+
+    <!-- Video: Rundgang durch die App -->
+    <section id="video" style="padding-bottom:20px">
+      <div class="breite">
+        <div class="ueber">
+          <small>Rundgang</small>
+          <h2>Carp<span class="d">D</span> in 2 Minuten.</h2>
+          <p>Einmal durch die ganze App – von der Gewässer-Karte bis zum Fangbuch.</p>
+        </div>
+        <div class="video-rahmen">
+          <video controls playsinline preload="none" poster="video/carpd-rundgang.jpg">
+            <source src="video/carpd-rundgang.mp4" type="video/mp4">
+            Dein Browser kann das Video nicht abspielen. <a href="video/carpd-rundgang.mp4">Video herunterladen</a>.
+          </video>
+        </div>
+        <p class="video-hinweis">Musik: „Arcadia“ und „Unity“ von Kevin MacLeod (incompetech.com), Lizenz CC BY 4.0 · Demo-Daten</p>
+      </div>
+    </section>
 
     <!-- Datenschutz -->
     <section class="schutz" id="datenschutz">
