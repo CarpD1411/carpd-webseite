@@ -1,0 +1,103 @@
+/* CarpD-Unterseiten (Kostenlos & Pro, Funktionen): dieselben Farben und Bausteine wie die Startseite.
+   Keine fremden Schriften, keine Tracker, keine Cookies. */
+:root {
+  --hg: #0B0B0B; --flaeche: #151515; --flaeche2: #1D1D1D; --linie: #2A2A2A;
+  --text: #F2F2F2; --neben: #A3A3A3; --oliv: #8A9A3B; --oliv-hell: #A8BA4A; --oliv-dunkel: #6B7A2E;
+  --rund: 22px;
+  --schrift: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--hg); color: var(--text); font-family: var(--schrift); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: var(--oliv-hell); }
+.breite { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.schmal { max-width: 860px; }
+.d { color: var(--oliv); }
+
+/* Leiste oben */
+.leiste { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(11,11,11,.72); border-bottom: 1px solid rgba(255,255,255,.06); }
+.leiste .breite { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.marke { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 22px; letter-spacing: -.5px; }
+.marke img { width: 34px; height: 34px; }
+.leiste nav { display: flex; gap: 22px; align-items: center; }
+.leiste nav a { color: var(--neben); text-decoration: none; font-size: 15px; font-weight: 600; }
+.leiste nav a:hover, .leiste nav a.aktiv { color: var(--text); }
+.leiste nav a.knopf { color: #0B0B0B; }
+.knopf { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: 999px; background: var(--oliv); color: #0B0B0B; font-weight: 800; font-size: 17px; text-decoration: none; transition: transform .15s, background .15s; }
+.knopf:hover { background: var(--oliv-hell); transform: translateY(-1px); }
+.knopf.klein { min-height: 40px; padding: 0 18px; font-size: 15px; }
+.knopf.leer { background: transparent; color: var(--text); border: 1.5px solid var(--linie); }
+.knopf.leer:hover { border-color: var(--oliv); background: transparent; }
+
+/* Kopf der Seite */
+.kopf { position: relative; overflow: hidden; padding: 64px 0 24px; text-align: center; }
+.kopf::before { content: ""; position: absolute; inset: -40% -10% auto -10%; height: 700px; background: radial-gradient(circle at 50% 0, rgba(138,154,59,.2), transparent 60%); pointer-events: none; }
+.kopf .breite { position: relative; }
+.kopf small { color: var(--oliv-hell); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 13px; }
+h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.04; letter-spacing: -1.8px; margin: 10px 0 14px; font-weight: 900; }
+.kopf p { color: var(--neben); font-size: 19px; max-width: 640px; margin: 0 auto; }
+.plakette { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(138,154,59,.14); color: var(--oliv-hell); font-weight: 700; font-size: 14px; border: 1px solid rgba(138,154,59,.35); }
+.plakette i { width: 8px; height: 8px; border-radius: 50%; background: var(--oliv-hell); box-shadow: 0 0 0 4px rgba(168,186,74,.25); }
+
+section { padding: 44px 0; }
+h2 { font-size: clamp(26px, 3.6vw, 36px); line-height: 1.1; letter-spacing: -.8px; margin: 0 0 10px; font-weight: 900; }
+h3 { font-size: 19px; margin: 18px 0 6px; letter-spacing: -.2px; }
+p { margin: 0 0 12px; }
+.neben { color: var(--neben); }
+.klein { font-size: 14px; color: var(--neben); }
+
+/* Preis-Karten */
+.preise { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 10px 0 34px; }
+.preis { background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--rund); padding: 26px; }
+.preis.pro { border-color: rgba(138,154,59,.6); background: linear-gradient(180deg, rgba(138,154,59,.12), var(--flaeche) 60%); }
+.preis .name { font-size: 14px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--neben); margin: 0 0 8px; }
+.preis .zahl { font-size: 40px; font-weight: 900; letter-spacing: -1.5px; line-height: 1; margin: 0; }
+.preis .zahl span { font-size: 17px; font-weight: 600; color: var(--neben); letter-spacing: 0; }
+.preis ul { margin: 14px 0 0; padding: 0; list-style: none; color: var(--neben); font-size: 15.5px; }
+.preis li { padding: 5px 0 5px 24px; position: relative; }
+.preis li::before { content: ""; position: absolute; left: 0; top: 11px; width: 14px; height: 14px; border-radius: 50%; background: rgba(138,154,59,.25); box-shadow: inset 0 0 0 2px var(--oliv-hell); }
+
+/* Vergleichstabelle */
+.tabelle { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--rund); overflow: hidden; margin: 0 0 30px; }
+.tabelle th, .tabelle td { padding: 13px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--linie); font-size: 15.5px; }
+.tabelle tr:last-child td { border-bottom: 0; }
+.tabelle th { background: var(--flaeche2); font-size: 13px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--neben); }
+.tabelle th.pro, .tabelle td.pro { background: rgba(138,154,59,.08); }
+.tabelle th.pro { color: var(--oliv-hell); }
+.tabelle td:first-child { color: var(--text); font-weight: 600; width: 44%; }
+.tabelle td:nth-child(2), .tabelle td:nth-child(3) { color: var(--neben); }
+.tabelle td .ja { color: var(--oliv-hell); font-weight: 800; }
+.tabelle td .nein { color: #6b6b6b; }
+.tabelle td small { display: block; color: var(--neben); font-weight: 400; font-size: 13.5px; }
+.tabelle tr.gruppe td { background: var(--flaeche2); color: var(--oliv-hell); font-size: 13px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 800; padding-top: 16px; }
+
+/* Funktionen-Seite */
+.bereich { background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--rund); padding: 28px; margin-bottom: 18px; }
+.bereich h2 { font-size: 26px; margin-bottom: 6px; }
+.bereich .unter { color: var(--oliv-hell); font-weight: 700; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; margin: 0 0 4px; }
+.bereich p { color: var(--neben); font-size: 16.5px; }
+.bereich ul { margin: 6px 0 0; padding-left: 20px; color: var(--neben); font-size: 16px; }
+.bereich li { margin-bottom: 6px; }
+.bereich li b, .bereich p b { color: var(--text); font-weight: 700; }
+.marke-pro { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--oliv); color: #0B0B0B; font-size: 11px; font-weight: 800; vertical-align: middle; letter-spacing: .5px; margin-left: 4px; }
+.marke-frei { display: inline-block; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--linie); color: var(--neben); font-size: 11px; font-weight: 800; vertical-align: middle; letter-spacing: .5px; margin-left: 4px; }
+.inhalt { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
+.inhalt a { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--linie); color: var(--neben); text-decoration: none; font-size: 14px; font-weight: 600; }
+.inhalt a:hover { border-color: var(--oliv); color: var(--text); }
+
+.hinweis { background: rgba(138,154,59,.1); border: 1px solid rgba(138,154,59,.35); border-radius: 16px; padding: 16px 20px; color: var(--text); font-size: 15.5px; }
+.aufruf { text-align: center; padding: 36px 20px; background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--rund); }
+.aufruf h2 { margin-top: 0; }
+
+footer { border-top: 1px solid var(--linie); padding: 34px 0 44px; color: var(--neben); font-size: 14px; margin-top: 30px; }
+footer .breite { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+footer a { color: var(--neben); }
+
+@media (max-width: 760px) {
+  .leiste nav { gap: 14px; }
+  .leiste nav a:not(.knopf) { display: none; }
+  .preise { grid-template-columns: 1fr; }
+  .tabelle th, .tabelle td { padding: 11px 10px; font-size: 14.5px; }
+  .tabelle td:first-child { width: 46%; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
