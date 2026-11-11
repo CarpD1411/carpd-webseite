@@ -52,6 +52,7 @@ p { margin: 0 0 12px; }
 .preis.pro { border-color: rgba(138,154,59,.6); background: linear-gradient(180deg, rgba(138,154,59,.12), var(--flaeche) 60%); }
 .preis .name { font-size: 14px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--neben); margin: 0 0 8px; }
 .preis .zahl { font-size: 40px; font-weight: 900; letter-spacing: -1.5px; line-height: 1; margin: 0; }
+.preis .zahl.monat { font-size: 26px; margin-top: 10px; }
 .preis .zahl span { font-size: 17px; font-weight: 600; color: var(--neben); letter-spacing: 0; }
 .preis ul { margin: 14px 0 0; padding: 0; list-style: none; color: var(--neben); font-size: 15.5px; }
 .preis li { padding: 5px 0 5px 24px; position: relative; }
