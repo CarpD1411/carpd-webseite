@@ -89,6 +89,11 @@
     .gruppe-titel { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 14px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--neben); }
     .gruppe-titel::after { content: ""; flex: 1; height: 1px; background: var(--linie); }
     .raster.vier { grid-template-columns: repeat(4, 1fr); }
+    .karte.route { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; border-color: rgba(138,154,59,.6); background: linear-gradient(135deg, rgba(138,154,59,.16), var(--flaeche) 60%); }
+    .karte.route h3 { margin: 0 0 4px; }
+    .karte.route .text { flex: 1 1 260px; }
+    .karte.route .navis { display: flex; gap: 8px; flex-wrap: wrap; }
+    .karte.route .navis span { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--linie); font-weight: 700; font-size: 14px; color: var(--text); }
     .neu { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--oliv); color: #0B0B0B; font-size: 11px; font-weight: 800; vertical-align: middle; letter-spacing: .5px; }
 
     /* Rotlicht */
@@ -231,6 +236,7 @@
             <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div><h3>Beißindex</h3><p>Wann lohnt es sich? Aus Luftdruck, Wetter, Mond und Wassertemperatur – mit der besten Zeit der nächsten 24 Stunden.</p></div>
             <div class="karte"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></div><h3>Wassertemperatur</h3><p>Geschätzt für dein Gewässer, dazu Sonne, Mondphase und Mondzeiten.</p></div>
           </div>
+          <div class="karte route"><div class="symbol"><svg viewBox="0 0 24 24"><path d="M5 17h14l-1.5-5h-11z"/><path d="M6.5 12 8 7h8l1.5 5"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/></svg></div><div class="text"><h3>Route direkt an dein Gewässer <span class="neu">NEU</span></h3><p>See antippen, „Hinfahren“ drücken – und dein Navi führt dich hin. Auf Wunsch direkt zu deinem Spot.</p></div><div class="navis"><span>Apple Karten</span><span>Google Maps</span></div></div>
         </div>
 
         <div class="gruppe">
