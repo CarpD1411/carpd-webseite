@@ -149,6 +149,18 @@
     .test-kasten { position: relative; overflow: hidden; border-radius: 30px; padding: 56px 44px; text-align: center; background: linear-gradient(135deg, #1b1f0c, #0f0f0f 60%); border: 1px solid rgba(138,154,59,.35); }
     .test-kasten::after { content: ""; position: absolute; inset: auto -20% -60% auto; width: 600px; height: 600px; background: radial-gradient(circle, rgba(138,154,59,.25), transparent 60%); }
     .test-kasten > * { position: relative; z-index: 1; }
+    .warte-kasten { text-align: center; padding: 40px 28px; border-radius: 30px; background: var(--flaeche); border: 1px solid var(--linie); }
+    .warte-form { display: flex; gap: 10px; max-width: 520px; margin: 0 auto; }
+    .warte-form input[type=email] { flex: 1; min-width: 0; min-height: 52px; padding: 0 20px; border-radius: 999px; border: 1.5px solid var(--linie); background: var(--hg); color: var(--text); font-size: 17px; }
+    .warte-form input[type=email]:focus { outline: none; border-color: var(--oliv); }
+    .warte-form button { border: 0; cursor: pointer; font-family: inherit; }
+    .warte-form button:disabled { opacity: .6; cursor: default; }
+    .warte-falle { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .warte-meldung { min-height: 24px; margin: 14px 0 0; font-weight: 700; }
+    .warte-meldung.gut { color: var(--oliv-hell); }
+    .warte-meldung.schlecht { color: #E0342B; }
+    .warte-klein { color: var(--neben); font-size: 14px; margin: 8px 0 0; }
+    @media (max-width: 560px) { .warte-form { flex-direction: column; } }
     .zahl { font-size: clamp(64px, 10vw, 112px); font-weight: 900; letter-spacing: -4px; line-height: 1; color: var(--oliv); }
     .schritte { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 36px 0 30px; text-align: left; }
     .schritt b { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--oliv); color: #0B0B0B; margin-bottom: 10px; }
@@ -355,6 +367,24 @@
       </div>
     </section>
 
+    <!-- Warteliste -->
+    <section id="warteliste" style="padding-top:0">
+      <div class="breite">
+        <div class="warte-kasten">
+          <small class="plakette"><i></i> Start am 01.03.2027</small>
+          <h2 style="margin:16px 0 8px">Sag mir Bescheid, wenn <span class="d">C</span>arpD startet.</h2>
+          <p style="color:var(--neben);margin:0 auto 22px;max-width:560px">Trag deine E-Mail ein – wir schreiben dir am Starttag. Kein Spam, abmelden jederzeit mit einem Klick.</p>
+          <form id="warteForm" class="warte-form" novalidate>
+            <input type="email" name="email" placeholder="deine@email.de" autocomplete="email" required aria-label="E-Mail-Adresse">
+            <input type="text" name="firma" tabindex="-1" autocomplete="off" class="warte-falle" aria-hidden="true">
+            <button class="knopf" type="submit">Eintragen</button>
+          </form>
+          <p id="warteMeldung" class="warte-meldung" role="status"></p>
+          <p class="warte-klein">Mit dem Eintragen bekommst du eine Mail zur Bestätigung. Mehr dazu in der <a href="datenschutz.html#warteliste">Datenschutzerklärung</a>.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Wir -->
     <section style="padding-top:20px">
       <div class="breite">
@@ -375,5 +405,29 @@
       <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a> · <a href="datenschutz.html#konto-loeschen">Konto löschen</a></span>
     </div>
   </footer>
+  <script>
+    (function () {
+      var f = document.getElementById('warteForm'), m = document.getElementById('warteMeldung');
+      if (!f) return;
+      var quelle = (new URLSearchParams(location.search).get('utm_source') || 'webseite').slice(0, 40);
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = f.email.value.trim();
+        m.className = 'warte-meldung';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { m.textContent = 'Bitte prüf deine E-Mail-Adresse.'; m.classList.add('schlecht'); return; }
+        var b = f.querySelector('button'); b.disabled = true; m.textContent = 'Einen Moment …';
+        fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, quelle: quelle, firma: f.firma.value })
+        }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok && d.ok }; }); })
+          .then(function (r) {
+            if (r.ok) { m.textContent = 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).'; m.classList.add('gut'); f.reset(); }
+            else { m.textContent = 'Das hat nicht geklappt. Bitte versuch es später noch einmal.'; m.classList.add('schlecht'); }
+          })
+          .catch(function () { m.textContent = 'Keine Verbindung. Bitte versuch es später noch einmal.'; m.classList.add('schlecht'); })
+          .then(function () { b.disabled = false; });
+      });
+    })();
+  </script>
 </body>
 </html>
