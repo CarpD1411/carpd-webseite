@@ -149,6 +149,21 @@
     .test-kasten { position: relative; overflow: hidden; border-radius: 30px; padding: 56px 44px; text-align: center; background: linear-gradient(135deg, #1b1f0c, #0f0f0f 60%); border: 1px solid rgba(138,154,59,.35); }
     .test-kasten::after { content: ""; position: absolute; inset: auto -20% -60% auto; width: 600px; height: 600px; background: radial-gradient(circle, rgba(138,154,59,.25), transparent 60%); }
     .test-kasten > * { position: relative; z-index: 1; }
+    .test-zu { display: none; }
+    .test-voll .test-offen { display: none; }
+    .test-voll .test-zu { display: block; }
+    .test-form { display: flex; flex-direction: column; gap: 14px; max-width: 520px; margin: 0 auto; }
+    .test-form input[type=email] { min-height: 52px; padding: 0 20px; border-radius: 999px; border: 1.5px solid var(--linie); background: var(--hg); color: var(--text); font-size: 17px; }
+    .test-form input[type=email]:focus { outline: none; border-color: var(--oliv); }
+    .test-handy { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .test-handy input { position: absolute; opacity: 0; }
+    .test-handy span { display: block; min-height: 52px; line-height: 49px; border-radius: 999px; border: 1.5px solid var(--linie); background: var(--hg); font-weight: 700; cursor: pointer; }
+    .test-handy input:checked + span { border-color: var(--oliv); background: rgba(138,154,59,.22); color: var(--text); }
+    .test-handy input:focus-visible + span { outline: 2px solid var(--oliv-hell); outline-offset: 2px; }
+    .test-ok { display: flex; gap: 10px; align-items: flex-start; text-align: left; color: var(--neben); font-size: 14px; cursor: pointer; }
+    .test-ok input { width: 20px; height: 20px; margin-top: 1px; flex: none; accent-color: var(--oliv); }
+    .test-form button { border: 0; cursor: pointer; font-family: inherit; }
+    .test-form button:disabled { opacity: .6; cursor: default; }
     .warte-kasten { text-align: center; padding: 40px 28px; border-radius: 30px; background: var(--flaeche); border: 1px solid var(--linie); }
     .warte-form { display: flex; gap: 10px; max-width: 520px; margin: 0 auto; }
     .warte-form input[type=email] { flex: 1; min-width: 0; min-height: 52px; padding: 0 20px; border-radius: 999px; border: 1.5px solid var(--linie); background: var(--hg); color: var(--text); font-size: 17px; }
@@ -358,11 +373,30 @@
           <h2 style="margin-top:6px"><span class="d">D</span>ein nächster Fisch – mit CarpD.</h2>
           <p style="color:var(--neben);font-size:18px;max-width:640px;margin:0 auto">Teste CarpD ab dem <strong style="color:var(--text)">01.01.2027</strong> auf iPhone oder Android. Als Dankeschön bekommst du <strong style="color:var(--text)">CarpD ein Jahr kostenlos – mit allen Funktionen</strong>.</p>
           <div class="schritte">
-            <div class="schritt"><b>1</b><h3 style="margin:0 0 4px">Melden</h3><p>Schreib an <a href="mailto:test@carpd.de">test@carpd.de</a>, ob du ein iPhone oder Android hast.</p></div>
+            <div class="schritt"><b>1</b><h3 style="margin:0 0 4px">Melden</h3><p>Trag unten deine E-Mail ein, wähl dein Handy und bestätige die Mail von uns.</p></div>
             <div class="schritt"><b>2</b><h3 style="margin:0 0 4px">Einladung</h3><p>Ab 01.01.2027 kommt deine Einladung – über TestFlight (iPhone) oder Google Play (Android).</p></div>
             <div class="schritt"><b>3</b><h3 style="margin:0 0 4px">Angeln &amp; Feedback</h3><p>Nutze CarpD bei deinen Sessions und sag uns direkt in der App, was gut ist und was fehlt.</p></div>
           </div>
-          <a class="knopf" href="mailto:test@carpd.de?subject=Ich%20will%20CarpD%20testen&amp;body=Hallo%2C%0A%0Aich%20m%C3%B6chte%20CarpD%20testen.%20Mein%20Handy%3A%20iPhone%20%2F%20Android%0A%0ATight%20Lines!">Jetzt als Testangler melden</a>
+          <!-- SCHALTER: Wenn 200 Testangler da sind, oben bei <section id="test"> class="test-voll" ergänzen. -->
+          <div class="test-offen">
+            <form id="testForm" class="test-form" novalidate>
+              <input type="email" name="email" placeholder="deine@email.de" autocomplete="email" required aria-label="E-Mail-Adresse">
+              <div class="test-handy" role="radiogroup" aria-label="Dein Handy">
+                <label><input type="radio" name="handy" value="iphone"><span>iPhone</span></label>
+                <label><input type="radio" name="handy" value="android"><span>Android</span></label>
+              </div>
+              <label class="test-ok"><input type="checkbox" name="zustimmung"> <span>Ich habe die <a href="datenschutz.html#testangler">Datenschutzerklärung</a> gelesen und bin einverstanden, dass ihr mich zur Testphase per Mail kontaktiert.</span></label>
+              <input type="text" name="firma" tabindex="-1" autocomplete="off" class="warte-falle" aria-hidden="true">
+              <button class="knopf" type="submit">Jetzt als Testangler melden</button>
+            </form>
+            <p id="testMeldung" class="warte-meldung" role="status"></p>
+            <p class="warte-klein">Du bekommst eine Mail zur Bestätigung. Fragen? <a href="mailto:test@carpd.de">test@carpd.de</a></p>
+          </div>
+          <div class="test-zu">
+            <p style="font-size:20px;font-weight:800;margin:0 0 6px">Testphase voll – danke für euer Interesse!</p>
+            <p style="color:var(--neben);margin:0 0 20px">Alle 200 Plätze sind vergeben. Trag dich in die Warteliste ein, dann sagen wir dir am Starttag Bescheid.</p>
+            <a class="knopf" href="#warteliste">Jetzt vorbestellen</a>
+          </div>
         </div>
       </div>
     </section>
@@ -405,6 +439,34 @@
       <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a> · <a href="datenschutz.html#konto-loeschen">Konto löschen</a></span>
     </div>
   </footer>
+  <script>
+    (function () {
+      var f = document.getElementById('testForm'), m = document.getElementById('testMeldung');
+      if (!f) return;
+      var u = new URLSearchParams(location.search);
+      var quelle = (u.get('utm_source') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);
+      function fehler(t) { m.textContent = t; m.className = 'warte-meldung schlecht'; }
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = f.email.value.trim(), handy = (f.querySelector('input[name=handy]:checked') || {}).value;
+        m.className = 'warte-meldung';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fehler('Bitte prüf deine E-Mail-Adresse.');
+        if (!handy) return fehler('Bitte wähl aus: iPhone oder Android.');
+        if (!f.zustimmung.checked) return fehler('Bitte setz noch das Häkchen beim Datenschutz.');
+        var b = f.querySelector('button'); b.disabled = true; m.textContent = 'Einen Moment …';
+        fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ liste: 'test', email: email, handy: handy, quelle: quelle, medium: medium, firma: f.firma.value })
+        }).then(function (r) { return r.json().then(function (d) { return r.ok && d.ok; }); })
+          .then(function (ok) {
+            if (ok) { m.textContent = 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).'; m.classList.add('gut'); f.reset(); }
+            else fehler('Das hat nicht geklappt. Bitte versuch es später noch einmal.');
+          })
+          .catch(function () { fehler('Keine Verbindung. Bitte versuch es später noch einmal.'); })
+          .then(function () { b.disabled = false; });
+      });
+    })();
+  </script>
   <script>
     (function () {
       var f = document.getElementById('warteForm'), m = document.getElementById('warteMeldung');

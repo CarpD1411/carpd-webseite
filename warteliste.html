@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Warteliste – CarpD</title>
+  <title>Bestätigung – CarpD</title>
   <meta name="robots" content="noindex">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="stil.css">
@@ -11,7 +11,7 @@
 <body>
   <main class="text">
     <p><a href="index.html">← zurück zu CarpD</a></p>
-    <h1 id="titel">Warteliste</h1>
+    <h1 id="titel">Bestätigung</h1>
     <p id="text">Hier landest du nach dem Klick auf den Link in unserer Mail.</p>
     <p><a href="index.html">Zur Startseite</a></p>
   </main>
@@ -20,7 +20,8 @@
       var s = new URLSearchParams(location.search).get('s');
       var t = {
         ok: ['Danke – du bist dabei!', 'Deine E-Mail-Adresse ist bestätigt. Wir schreiben dir, sobald CarpD im App Store und bei Google Play ist (geplant am 01.03.2027). Tight Lines!'],
-        abgemeldet: ['Abgemeldet', 'Deine E-Mail-Adresse ist von der Warteliste gelöscht. Wir schreiben dir nicht mehr.'],
+        testok: ['Danke – du bist Testangler!', 'Deine Anmeldung ist bestätigt. Am 01.01.2027 startet die Testphase – dann bekommst du deine Einladung per Mail (TestFlight fürs iPhone, Google Play für Android). Tight Lines!'],
+        abgemeldet: ['Abgemeldet', 'Deine E-Mail-Adresse ist gelöscht. Wir schreiben dir nicht mehr.'],
         fehler: ['Link ungültig', 'Dieser Link ist abgelaufen oder wurde schon benutzt. Trag dich auf der Startseite einfach noch einmal ein.']
       }[s];
       if (t) { document.getElementById('titel').textContent = t[0]; document.getElementById('text').textContent = t[1]; }
