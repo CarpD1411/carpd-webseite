@@ -377,7 +377,7 @@
             <div class="schritt"><b>2</b><h3 style="margin:0 0 4px">Einladung</h3><p>Ab 01.01.2027 kommt deine Einladung – über TestFlight (iPhone) oder Google Play (Android).</p></div>
             <div class="schritt"><b>3</b><h3 style="margin:0 0 4px">Angeln &amp; Feedback</h3><p>Nutze CarpD bei deinen Sessions und sag uns direkt in der App, was gut ist und was fehlt.</p></div>
           </div>
-          <!-- SCHALTER: Wenn 200 Testangler da sind, oben bei <section id="test"> class="test-voll" ergänzen. -->
+          <!-- Schaltet automatisch um, wenn die Funktion „warteliste“ meldet, dass 200 Testangler bestätigt sind (GRENZE dort). Von Hand: class="test-voll" bei <section id="test">. -->
           <div class="test-offen">
             <form id="testForm" class="test-form" novalidate>
               <input type="email" name="email" placeholder="deine@email.de" autocomplete="email" required aria-label="E-Mail-Adresse">
@@ -443,6 +443,9 @@
     (function () {
       var f = document.getElementById('testForm'), m = document.getElementById('testMeldung');
       if (!f) return;
+      var adresse = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste';
+      function voll() { document.getElementById('test').classList.add('test-voll'); }
+      fetch(adresse + '?stand=1').then(function (r) { return r.json(); }).then(function (d) { if (d && d.voll) voll(); }).catch(function () {});
       var u = new URLSearchParams(location.search);
       var quelle = (u.get('utm_source') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);
       function fehler(t) { m.textContent = t; m.className = 'warte-meldung schlecht'; }
@@ -454,11 +457,12 @@
         if (!handy) return fehler('Bitte wähl aus: iPhone oder Android.');
         if (!f.zustimmung.checked) return fehler('Bitte setz noch das Häkchen beim Datenschutz.');
         var b = f.querySelector('button'); b.disabled = true; m.textContent = 'Einen Moment …';
-        fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste', {
+        fetch(adresse, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ liste: 'test', email: email, handy: handy, quelle: quelle, medium: medium, firma: f.firma.value })
-        }).then(function (r) { return r.json().then(function (d) { return r.ok && d.ok; }); })
+        }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll') voll(); return r.ok && d.ok; }); })
           .then(function (ok) {
+            if (document.getElementById('test').classList.contains('test-voll')) return;
             if (ok) { m.textContent = 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).'; m.classList.add('gut'); f.reset(); }
             else fehler('Das hat nicht geklappt. Bitte versuch es später noch einmal.');
           })
