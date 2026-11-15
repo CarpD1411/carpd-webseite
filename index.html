@@ -160,6 +160,8 @@
     .test-handy span { display: block; min-height: 52px; line-height: 49px; border-radius: 999px; border: 1.5px solid var(--linie); background: var(--hg); font-weight: 700; cursor: pointer; }
     .test-handy input:checked + span { border-color: var(--oliv); background: rgba(138,154,59,.22); color: var(--text); }
     .test-handy input:focus-visible + span { outline: 2px solid var(--oliv-hell); outline-offset: 2px; }
+    .test-hinweis { display: none; margin: -4px 0 0; padding: 10px 14px; border-radius: 14px; background: rgba(138,154,59,.14); color: var(--text); font-size: 14px; text-align: left; }
+    .test-hinweis.an { display: block; }
     .test-ok { display: flex; gap: 10px; align-items: flex-start; text-align: left; color: var(--neben); font-size: 14px; cursor: pointer; }
     .test-ok input { width: 20px; height: 20px; margin-top: 1px; flex: none; accent-color: var(--oliv); }
     .test-form button { border: 0; cursor: pointer; font-family: inherit; }
@@ -385,6 +387,7 @@
                 <label><input type="radio" name="handy" value="iphone"><span>iPhone</span></label>
                 <label><input type="radio" name="handy" value="android"><span>Android</span></label>
               </div>
+              <p class="test-hinweis" id="testHinweis">Android: Bitte die E-Mail deines Google-Kontos angeben (meist @gmail.com) – nur damit kann Google dich für den Test freischalten.</p>
               <label class="test-ok"><input type="checkbox" name="zustimmung"> <span>Ich habe die <a href="datenschutz.html#testangler">Datenschutzerklärung</a> gelesen und bin einverstanden, dass ihr mich zur Testphase per Mail kontaktiert.</span></label>
               <input type="text" name="firma" tabindex="-1" autocomplete="off" class="warte-falle" aria-hidden="true">
               <button class="knopf" type="submit">Jetzt als Testangler melden</button>
@@ -448,6 +451,10 @@
       fetch(adresse + '?stand=1').then(function (r) { return r.json(); }).then(function (d) { if (d && d.voll) voll(); }).catch(function () {});
       var u = new URLSearchParams(location.search);
       var quelle = (u.get('utm_source') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);
+      f.addEventListener('change', function () {
+        var h = f.querySelector('input[name=handy]:checked');
+        document.getElementById('testHinweis').classList.toggle('an', !!h && h.value === 'android');
+      });
       function fehler(t) { m.textContent = t; m.className = 'warte-meldung schlecht'; }
       f.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -463,7 +470,7 @@
         }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll') voll(); return r.ok && d.ok; }); })
           .then(function (ok) {
             if (document.getElementById('test').classList.contains('test-voll')) return;
-            if (ok) { m.textContent = 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).'; m.classList.add('gut'); f.reset(); }
+            if (ok) { m.textContent = 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).'; m.classList.add('gut'); f.reset(); document.getElementById('testHinweis').classList.remove('an'); }
             else fehler('Das hat nicht geklappt. Bitte versuch es später noch einmal.');
           })
           .catch(function () { fehler('Keine Verbindung. Bitte versuch es später noch einmal.'); })
