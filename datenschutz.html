@@ -95,7 +95,7 @@
     <h3>6.4 Dienste, die die App abfragt</h3>
     <p>Für Wetter, Karte und Gewässer fragt CarpD die folgenden Dienste ab. Übertragen werden dabei die Koordinaten des Gewässers, deines Standorts, der Stelle eines Fangs oder des Kartenausschnitts – bei geplanten Touren die Koordinaten des geplanten Gewässers – und technisch bedingt die IP-Adresse deines Handys. Deine Fänge, Fotos und Spots selbst werden nicht übertragen.</p>
     <ul>
-      <li>Wetter: Open-Meteo (Open-Meteo.com, Schweiz)</li>
+      <li>Wetter: Open-Meteo (Open-Meteo.com, Schweiz) – die Koordinaten werden dafür auf etwa 1 km gerundet, damit keine genaue Stelle (z. B. dein Spot) übertragen wird</li>
       <li>Gewässer: Overpass-Server von FOSSGIS e. V. (Deutschland), OpenStreetMap France (Frankreich) und Private.coffee (Österreich) – nur für Gegenden, die nicht im mitgelieferten Gewässer-Paket enthalten sind</li>
       <li>Ortssuche: Geoapify (KEPTAGO LTD, Paphos, Zypern; Server in der EU) – die Anfrage läuft über unseren Server (Supabase, Frankfurt), Geoapify erhält nur den Suchbegriff, nicht deine IP-Adresse oder deinen Standort. Nur wenn das nicht klappt: Nominatim der OpenStreetMap Foundation (Vereinigtes Königreich)</li>
       <li>Ortsnamen für Gewässer ohne Namen (z. B. „See bei Waiblingen“): über den Ortsdienst deines Handys (Apple bzw. Google), zur Not über Nominatim</li>
