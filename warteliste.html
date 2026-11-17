@@ -13,18 +13,73 @@
     <p><a href="index.html">← zurück zu CarpD</a></p>
     <h1 id="titel">Bestätigung</h1>
     <p id="text">Hier landest du nach dem Klick auf den Link in unserer Mail.</p>
+    <p><button id="knopf" class="knopf" hidden></button></p>
+    <p id="meldung" class="klein" role="status"></p>
     <p><a href="index.html">Zur Startseite</a></p>
   </main>
+  <footer>
+    <div class="breite">
+      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a></span>
+    </div>
+  </footer>
   <script>
     (function () {
-      var s = new URLSearchParams(location.search).get('s');
-      var t = {
+      var params = new URLSearchParams(location.search);
+      var titel = document.getElementById('titel');
+      var text = document.getElementById('text');
+      var knopf = document.getElementById('knopf');
+      var meldung = document.getElementById('meldung');
+
+      // Ergebnis-Texte (nach dem Knopfdruck bzw. über ?s= aus alten Links)
+      var ergebnis = {
         ok: ['Danke – du bist dabei!', 'Deine E-Mail-Adresse ist bestätigt. Wir schreiben dir, sobald CarpD im App Store und bei Google Play ist (geplant am 01.03.2027). Tight Lines!'],
         testok: ['Danke – du bist Testangler!', 'Deine Anmeldung ist bestätigt. Am 01.01.2027 startet die Testphase – dann bekommst du deine Einladung per Mail (TestFlight fürs iPhone, Google Play für Android). Tight Lines!'],
         abgemeldet: ['Abgemeldet', 'Deine E-Mail-Adresse ist gelöscht. Wir schreiben dir nicht mehr.'],
         fehler: ['Link ungültig', 'Dieser Link ist abgelaufen oder wurde schon benutzt. Trag dich auf der Startseite einfach noch einmal ein.']
-      }[s];
-      if (t) { document.getElementById('titel').textContent = t[0]; document.getElementById('text').textContent = t[1]; }
+      };
+      function zeigeErgebnis(s) {
+        var t = ergebnis[s] || ergebnis.fehler;
+        titel.textContent = t[0];
+        text.textContent = t[1];
+        knopf.hidden = true;
+        meldung.textContent = '';
+      }
+
+      // Aus der Mail kommt man mit ?b= / ?tb= (bestätigen) bzw. ?x= / ?tx= (abmelden) hierher.
+      // Erst der Knopfdruck ruft den Server – so können Mail-Prüfprogramme nichts auslösen.
+      var frage = {
+        b: ['Fast geschafft!', 'Bestätige mit einem Klick, dass wir dir schreiben dürfen, sobald CarpD startet.', 'Jetzt bestätigen'],
+        tb: ['Fast geschafft!', 'Bestätige deine Anmeldung als Testangler mit einem Klick.', 'Jetzt bestätigen'],
+        x: ['Abmelden', 'Klick auf den Knopf, dann löschen wir deine E-Mail-Adresse von der Warteliste.', 'Jetzt abmelden'],
+        tx: ['Abmelden', 'Klick auf den Knopf, dann löschen wir deine Testangler-Anmeldung.', 'Jetzt abmelden']
+      };
+      var aktion = null, token = null;
+      for (var a in frage) {
+        if (params.get(a)) { aktion = a; token = params.get(a); break; }
+      }
+
+      if (aktion) {
+        var f = frage[aktion];
+        titel.textContent = f[0];
+        text.textContent = f[1];
+        knopf.textContent = f[2];
+        knopf.hidden = false;
+        knopf.addEventListener('click', function () {
+          knopf.disabled = true;
+          meldung.textContent = 'Einen Moment …';
+          fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ aktion: aktion, token: token })
+          }).then(function (r) { return r.json(); })
+            .then(function (d) { zeigeErgebnis(d.s); })
+            .catch(function () {
+              meldung.textContent = 'Keine Verbindung. Bitte versuch es gleich noch einmal.';
+              knopf.disabled = false;
+            });
+        });
+      } else if (params.get('s')) {
+        zeigeErgebnis(params.get('s'));
+      }
     })();
   </script>
 </body>
