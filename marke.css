@@ -1,0 +1,55 @@
+/* CarpD-Marke wie in der App (seit Build 29): „Barlow Semi Condensed“ für Überschriften, Knöpfe, Zahlen und
+   kleine Überschriften – längere Texte bleiben in der Schrift des Geräts. Die Schrift liegt hier auf carpd.de
+   (Ordner schrift/, freie Lizenz OFL) – es wird nichts von fremden Servern geladen.
+   Ecken wie in der App: 16 px. Diese Datei kommt auf jeder Seite NACH den anderen Stilen. */
+
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  src: url("schrift/BarlowSemiCondensed-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  src: url("schrift/BarlowSemiCondensed-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --marke: "Barlow Semi Condensed", "Arial Narrow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --app-rund: 16px;
+}
+
+/* Überschriften und Zahlen */
+h1, h2, h3,
+.zahl, .preis .zahl, .marke, .slogan {
+  font-family: var(--marke);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+h1 { letter-spacing: .2px; }
+.marke { font-weight: 700; letter-spacing: .5px; }
+
+/* Kleine Überschriften in Großbuchstaben (wie „SICHERUNG ALS DATEI“ in der App) */
+.kopf small, .ueber small, .gruppe-titel, .preis .name, .bereich .unter, .tabelle tr.gruppe td {
+  font-family: var(--marke);
+  font-weight: 600;
+  letter-spacing: 1.4px;
+}
+
+/* Knöpfe wie in der App: Marken-Schrift, Ecken statt Pille */
+.knopf, .test-form button, .warte-form button {
+  font-family: var(--marke);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: .2px;
+  border-radius: var(--app-rund);
+}
+.knopf.klein { font-size: 17px; border-radius: 12px; }
+.leiste nav a { font-family: var(--marke); font-weight: 600; font-size: 17px; letter-spacing: .2px; }
+.test-form input[type=email], .warte-form input[type=email], .test-handy span { border-radius: var(--app-rund); }
+.test-handy span { font-family: var(--marke); font-weight: 600; font-size: 18px; }
+
+/* Plaketten und kleine Marken */
+.plakette, .neu, .marke-pro, .marke-frei { font-family: var(--marke); font-weight: 600; letter-spacing: .4px; }
