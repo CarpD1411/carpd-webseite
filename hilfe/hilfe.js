@@ -214,12 +214,18 @@
   // Auf der Startseite steht der Chat oben in der Seite, sonst schwebt er unten rechts
   function chatPlatzieren() {
     var platz = document.getElementById('chatPlatz');
+    if (beobachter) { beobachter.disconnect(); beobachter = null; }
     if (platz) {
       platz.appendChild(chat);
       chat.classList.add('eingebettet');
-      chat.hidden = false; chatKnopf.hidden = true;
+      chat.hidden = false;
       document.getElementById('chatZu').hidden = true;
       chatBegruessen(false);
+      // Knopf unten rechts nur zeigen, wenn der große Chat oben nicht mehr zu sehen ist
+      if ('IntersectionObserver' in window) {
+        beobachter = new IntersectionObserver(function (e) { chatKnopf.hidden = e[0].isIntersecting; }, { threshold: 0.15 });
+        beobachter.observe(chat);
+      } else chatKnopf.hidden = false;
     } else {
       document.body.appendChild(chat);
       chat.classList.remove('eingebettet');
@@ -227,8 +233,9 @@
       document.getElementById('chatZu').hidden = false;
     }
   }
+  var beobachter = null;
   function chatOeffnen() {
-    if (chat.classList.contains('eingebettet')) { feld.focus(); return; }
+    if (chat.classList.contains('eingebettet')) { chat.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(function () { feld.focus({ preventScroll: true }); }, 400); return; }
     chat.hidden = false; chatKnopf.hidden = true; chatKnopf.setAttribute('aria-expanded', 'true');
     chatBegruessen(false);
     setTimeout(function () { feld.focus(); }, 50);
