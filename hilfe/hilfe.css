@@ -135,3 +135,11 @@ section.chat { padding: 0; }
 .bot-zeile img { width: 30px; height: 30px; border-radius: 8px; flex: 0 0 auto; box-shadow: 0 0 0 1px rgba(138,154,59,.3); }
 .bot-zeile .blase { max-width: 100%; }
 .chat-kopf small { white-space: nowrap; }
+
+/* Hinweis „Ich höre zu …“ schwebt über dem Verlauf – verschiebt nichts (vorher sprang der Mikrofon-Knopf nach oben) */
+.chat { position: fixed; }
+.chat.eingebettet { position: relative; }
+.chat-hinweis { position: absolute; left: 12px; right: 12px; bottom: 76px; margin: 0; padding: 10px 12px; border-radius: 12px; background: rgba(17,17,17,.96); border: 1px solid var(--linie); box-shadow: 0 8px 24px rgba(0,0,0,.5); pointer-events: none; z-index: 2; }
+.chat-hinweis[hidden] { display: none; }
+.chat-eingabe .mikro { -webkit-touch-callout: none; }
+.chat-eingabe .mikro svg { pointer-events: none; }
