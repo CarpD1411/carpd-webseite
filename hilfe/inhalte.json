@@ -1,0 +1,2862 @@
+{
+ "version": "2026-11-19",
+ "kontakt": "info@carpd.de",
+ "hinweis": "Zentrale Hilfe-Texte für carpd.de/hilfe und später die App. Nur Einträge mit status \"ok\" werden angezeigt und vom Assistenten benutzt.",
+ "bereiche": [
+  {
+   "id": "karte",
+   "de": "Karte & Gewässer",
+   "en": "Map & waters"
+  },
+  {
+   "id": "wetter",
+   "de": "Wetter, Luftdruck & Mond",
+   "en": "Weather, pressure & moon"
+  },
+  {
+   "id": "session",
+   "de": "Session",
+   "en": "Session"
+  },
+  {
+   "id": "fang",
+   "de": "Fang eintragen",
+   "en": "Logging catches"
+  },
+  {
+   "id": "biss",
+   "de": "Bissprotokoll",
+   "en": "Bite log"
+  },
+  {
+   "id": "fangbuch",
+   "de": "Fangbuch & Statistik",
+   "en": "Catch log & statistics"
+  },
+  {
+   "id": "foto",
+   "de": "Fangfoto & Selbstauslöser",
+   "en": "Catch photo & self-timer"
+  },
+  {
+   "id": "rotlicht",
+   "de": "Rotlicht-Modus",
+   "en": "Red-light mode"
+  },
+  {
+   "id": "offline",
+   "de": "Offline",
+   "en": "Offline"
+  },
+  {
+   "id": "rueckblick",
+   "de": "Jahresrückblick",
+   "en": "Year in review"
+  },
+  {
+   "id": "crews",
+   "de": "Crews",
+   "en": "Crews"
+  },
+  {
+   "id": "planung",
+   "de": "Planung",
+   "en": "Planning"
+  },
+  {
+   "id": "konto",
+   "de": "Konto & Einstellungen",
+   "en": "Account & settings"
+  },
+  {
+   "id": "sprache",
+   "de": "Sprache",
+   "en": "Language"
+  }
+ ],
+ "themen": [
+  {
+   "id": "technik",
+   "de": "Aufbau & Technik",
+   "en": "How it works"
+  },
+  {
+   "id": "server",
+   "de": "Server & Speicherung",
+   "en": "Server & storage"
+  },
+  {
+   "id": "datenschutz",
+   "de": "Datenschutz",
+   "en": "Privacy"
+  },
+  {
+   "id": "statistik",
+   "de": "Statistik & Anonymität",
+   "en": "Statistics & anonymity"
+  },
+  {
+   "id": "abo",
+   "de": "Abo & Kosten",
+   "en": "Subscription & costs"
+  },
+  {
+   "id": "crews",
+   "de": "Crews",
+   "en": "Crews"
+  },
+  {
+   "id": "kritisch",
+   "de": "Kritische Fragen",
+   "en": "Tough questions"
+  }
+ ],
+ "kacheln": [
+  {
+   "id": "anleitung",
+   "ziel": "#/anleitung",
+   "icon": "buch",
+   "de": {
+    "titel": "Anleitung",
+    "text": "CarpD von A bis Z"
+   },
+   "en": {
+    "titel": "Guide",
+    "text": "CarpD from A to Z"
+   }
+  },
+  {
+   "id": "pro",
+   "ziel": "#/pro",
+   "icon": "stern",
+   "de": {
+    "titel": "Kostenlos & Pro",
+    "text": "Was ist frei, was kann Pro?"
+   },
+   "en": {
+    "titel": "Free & Pro",
+    "text": "What’s free, what does Pro add?"
+   }
+  },
+  {
+   "id": "datenschutz",
+   "ziel": "#/faq/datenschutz",
+   "icon": "schloss",
+   "de": {
+    "titel": "Datenschutz einfach erklärt",
+    "text": "Was privat bleibt"
+   },
+   "en": {
+    "titel": "Privacy made simple",
+    "text": "What stays private"
+   }
+  },
+  {
+   "id": "server",
+   "ziel": "#/faq/server",
+   "icon": "wolke",
+   "de": {
+    "titel": "Server & Speicherung",
+    "text": "Wo deine Daten liegen"
+   },
+   "en": {
+    "titel": "Server & storage",
+    "text": "Where your data lives"
+   }
+  },
+  {
+   "id": "crews",
+   "ziel": "#/faq/crews",
+   "icon": "crew",
+   "de": {
+    "titel": "Crews",
+    "text": "Fänge mit Kumpels teilen"
+   },
+   "en": {
+    "titel": "Crews",
+    "text": "Share catches with mates"
+   }
+  },
+  {
+   "id": "abo",
+   "ziel": "#/faq/abo",
+   "icon": "karte",
+   "de": {
+    "titel": "Abo",
+    "text": "Preise, Testphase, Kündigen"
+   },
+   "en": {
+    "titel": "Subscription",
+    "text": "Prices, test phase, cancelling"
+   }
+  }
+ ],
+ "startFaq": [
+  "spots-geschuetzt",
+  "daten-wo",
+  "preis",
+  "offline",
+  "konto-loeschen"
+ ],
+ "anleitung": [
+  {
+   "id": "karte",
+   "bereich": "karte",
+   "status": "ok",
+   "de": {
+    "titel": "Karte & Gewässer finden",
+    "was": "Die Karte zeigt dir Seen, Teiche, Flüsse und Kanäle als Pins – auf iPhone mit Apple Karten, auf Android mit Google Maps, wahlweise als Satellitenbild. Die Gewässer kommen aus OpenStreetMap.",
+    "schritte": [
+     "Tippe unten auf den Tab „Karte“.",
+     "Mit dem Knopf „Zu meinem Standort“ springst du zu dir.",
+     "Über „See oder Ort suchen“ findest du Gewässer und Orte – drücke „Suchen“ auf der Tastatur, um Orte weltweit zu finden.",
+     "Mit dem Listen-Knopf siehst du alle Gewässer im Ausschnitt als Liste.",
+     "Tippe einen Pin an – unten fährt das Gewässer-Fenster hoch."
+    ],
+    "tipp": "Zoome nah genug heran, dann erscheinen die Gewässer. In 13 Ländern sind sie schon fest in der App und auch ohne Netz da."
+   },
+   "en": {
+    "titel": "Map & finding waters",
+    "was": "The map shows lakes, ponds, rivers and canals as pins – Apple Maps on iPhone, Google Maps on Android, optionally as satellite view. The waters come from OpenStreetMap.",
+    "schritte": [
+     "Tap the “Map” tab at the bottom.",
+     "The “To my location” button takes you to where you are.",
+     "Use “Search lake or place” to find waters and places – press “Search” on the keyboard to find places worldwide.",
+     "The list button shows all waters in view as a list.",
+     "Tap a pin – the water panel slides up from the bottom."
+    ],
+    "tipp": "Zoom in close enough and the waters appear. In 13 countries they are built into the app and work without signal."
+   }
+  },
+  {
+   "id": "gewaesser-details",
+   "bereich": "karte",
+   "status": "ok",
+   "de": {
+    "titel": "Gewässer-Details",
+    "was": "Das Fenster zu einem Gewässer zeigt dir das Wetter jetzt, den Beißindex, den Luftdruck mit Trend, die nächsten 24 Stunden, Wetter für mehrere Tage, Sonne und Mond – und deine eigenen Fotos vom Gewässer.",
+    "schritte": [
+     "Pin auf der Karte antippen.",
+     "Nach oben wischen für mehr Infos.",
+     "„Session starten“ startet direkt hier eine Session.",
+     "„Hinfahren“ öffnet die Navigation mit Apple Karten oder Google Maps.",
+     "Unter „Meine Fotos“ hältst du Zugang, Parkplatz oder deinen Platz fest."
+    ],
+    "tipp": "Die Angaben zum Gewässer stammen aus OpenStreetMap und sind ohne Gewähr – es gilt immer dein Erlaubnisschein."
+   },
+   "en": {
+    "titel": "Water details",
+    "was": "The panel for a water shows the current weather, the bite index, air pressure with trend, the next 24 hours, a multi-day forecast, sun and moon – and your own photos of the water.",
+    "schritte": [
+     "Tap a pin on the map.",
+     "Swipe up for more information.",
+     "“Start session” starts a session right here.",
+     "“Drive there” opens navigation in Apple Maps or Google Maps.",
+     "Under “My photos” you can save the access path, parking spot or your swim."
+    ],
+    "tipp": "Water information comes from OpenStreetMap and is provided without guarantee – your fishing permit always applies."
+   }
+  },
+  {
+   "id": "gewaesser-eintragen",
+   "bereich": "karte",
+   "status": "ok",
+   "de": {
+    "titel": "Gewässer selbst eintragen",
+    "was": "Fehlt ein See auf der Karte, trägst du ihn selbst ein. Er funktioniert dann wie jedes andere Gewässer – mit Wetter, Sessions und Spots – und bleibt privat auf deinem Handy.",
+    "schritte": [
+     "Auf der Karte an die Stelle des Sees gehen.",
+     "„Hier ein Gewässer eintragen“ antippen.",
+     "Name, Art und ungefähre Größe wählen.",
+     "Speichern."
+    ],
+    "tipp": "Gewässer ohne Namen kannst du über „Namen geben“ selbst benennen – auf Wunsch auch für deine Crew sichtbar."
+   },
+   "en": {
+    "titel": "Adding a water yourself",
+    "was": "If a lake is missing from the map, add it yourself. It then works like any other water – with weather, sessions and swims – and stays private on your phone.",
+    "schritte": [
+     "Move the map to where the lake is.",
+     "Tap “Add a water here”.",
+     "Choose a name, type and approximate size.",
+     "Save."
+    ],
+    "tipp": "You can name waters without a name using “Give it a name” – optionally visible to your crew."
+   }
+  },
+  {
+   "id": "spots",
+   "bereich": "karte",
+   "status": "ok",
+   "de": {
+    "titel": "Spots",
+    "was": "Im Spotbuch hältst du deine besten Stellen fest: Tiefe, Boden, Entfernung (auch in Wraps), Peilpunkt, Futterplan, Notiz und deinen Standplatz. Alles bleibt privat auf deinem Handy.",
+    "schritte": [
+     "Mehr → Meine Spots → „Neuer Spot“.",
+     "Namen und Gewässer wählen, dann Tiefe, Boden und Entfernung eintragen.",
+     "„Meine Position übernehmen“ speichert deinen Standplatz.",
+     "In einer Session legst du eine Rute auf einen Spot – Fänge an dieser Rute landen dann beim Spot."
+    ],
+    "tipp": "Ein Wrap ist einmal hin und zurück um die Wickelstäbe. CarpD rechnet Wraps in Meter um. Ohne Pro hast du 3 Spots, mit Pro unbegrenzt."
+   },
+   "en": {
+    "titel": "Swims",
+    "was": "In your swim book you save your best spots: depth, bottom, distance (also in wraps), marker point, feeding plan, note and your peg position. Everything stays private on your phone.",
+    "schritte": [
+     "More → My swims → “New swim”.",
+     "Choose a name and water, then enter depth, bottom and distance.",
+     "“Use my position” saves where you sit.",
+     "In a session you assign a rod to a swim – catches on that rod are then listed with the swim."
+    ],
+    "tipp": "One wrap is once there and back around the distance sticks. CarpD converts wraps to metres. Without Pro you get 3 swims, with Pro unlimited."
+   }
+  },
+  {
+   "id": "heute",
+   "bereich": "wetter",
+   "status": "ok",
+   "de": {
+    "titel": "Der Tab „Heute“",
+    "was": "„Heute“ zeigt dir auf einen Blick, was am Wasser wichtig ist: Gewässer in deiner Nähe, Wetter jetzt mit Wind, Beißindex, Luftdruck mit Trend, die nächsten 24 Stunden, das Wetter für mehrere Tage, die geschätzte Wassertemperatur sowie Sonne und Mond.",
+    "schritte": [
+     "App öffnen – „Heute“ ist der erste Tab.",
+     "Oben siehst du das nächste Gewässer oder „Du bist am Wasser“.",
+     "Mit „Anderes Gewässer wählen“ schaust du dir ein anderes Gewässer an.",
+     "Nach unten scrollen für Luftdruck, Stunden- und Tagesvorhersage."
+    ],
+    "tipp": "„Session hier starten“ oben startet direkt eine Session am angezeigten Gewässer."
+   },
+   "en": {
+    "titel": "The “Today” tab",
+    "was": "“Today” shows what matters at the water at a glance: waters near you, current weather with wind, bite index, air pressure with trend, the next 24 hours, a multi-day forecast, the estimated water temperature, and sun and moon.",
+    "schritte": [
+     "Open the app – “Today” is the first tab.",
+     "At the top you see the nearest water or “You are at the water”.",
+     "Use “Choose another water” to look at a different water.",
+     "Scroll down for air pressure, hourly and daily forecasts."
+    ],
+    "tipp": "“Start session here” at the top starts a session at the water shown."
+   }
+  },
+  {
+   "id": "luftdruck",
+   "bereich": "wetter",
+   "status": "ok",
+   "de": {
+    "titel": "Luftdruck & Trend",
+    "was": "CarpD zeigt den Luftdruck mit Kurve und Trend: steigend, fallend oder stabil – dazu die Änderung in hPa über 3 Tage, 24 Stunden und 3 Stunden. Viele Karpfenangler achten genau darauf.",
+    "schritte": [
+     "Auf „Heute“ oder im Gewässer-Fenster zur Kachel „Luftdruck“ scrollen.",
+     "Die Kurve zeigt die letzten Tage, darunter stehen die Änderungen.",
+     "Bei jedem Fang speichert CarpD Luftdruck und Trend automatisch mit."
+    ],
+    "tipp": "Ohne Pro siehst du den Luftdruck der letzten 24 Stunden, mit Pro den Trend über 3 Tage."
+   },
+   "en": {
+    "titel": "Air pressure & trend",
+    "was": "CarpD shows air pressure with a curve and trend: rising, falling or stable – plus the change in hPa over 3 days, 24 hours and 3 hours. Many carp anglers watch this closely.",
+    "schritte": [
+     "On “Today” or in the water panel, scroll to the “Air pressure” tile.",
+     "The curve shows the last few days, the changes are listed below.",
+     "With every catch CarpD saves the pressure and trend automatically."
+    ],
+    "tipp": "Without Pro you see the pressure of the last 24 hours, with Pro the 3-day trend."
+   }
+  },
+  {
+   "id": "mond-sonne",
+   "bereich": "wetter",
+   "status": "ok",
+   "de": {
+    "titel": "Wind, Mond & Sonne",
+    "was": "Zum Wetter gehören Wind mit Richtung, Wolken und Regen, Sonnenauf- und -untergang sowie Mondphase, Mondauf- und -untergang. Sonne und Mond rechnet CarpD selbst aus – auch ohne Netz.",
+    "schritte": [
+     "Auf „Heute“ oder im Gewässer-Fenster nach unten scrollen.",
+     "Die Kacheln „Sonne“ und „Mond“ zeigen Zeiten und Mondphase.",
+     "Am Wasser erkennt CarpD dein Ufer und zeigt, ob der Wind auf dein Ufer weht."
+    ],
+    "tipp": "Liegt CarpD beim Ufer falsch, wähle selbst, an welchem Ufer du sitzt."
+   },
+   "en": {
+    "titel": "Wind, moon & sun",
+    "was": "The weather includes wind with direction, clouds and rain, sunrise and sunset, plus moon phase, moonrise and moonset. CarpD calculates sun and moon itself – even without signal.",
+    "schritte": [
+     "Scroll down on “Today” or in the water panel.",
+     "The “Sun” and “Moon” tiles show times and moon phase.",
+     "At the water CarpD detects your bank and shows whether the wind blows onto your bank."
+    ],
+    "tipp": "If CarpD gets your bank wrong, choose which bank you are sitting on."
+   }
+  },
+  {
+   "id": "beissindex",
+   "bereich": "wetter",
+   "status": "ok",
+   "de": {
+    "titel": "Beißindex",
+    "was": "Der Beißindex schätzt für jede Stunde von 0 bis 100, wie gut die Bedingungen sind, dass Karpfen fressen. CarpD bewertet sechs Faktoren: Luftdruck-Trend, Wassertemperatur, Tageszeit, Wind, Wolken & Regen und Mond.",
+    "schritte": [
+     "Auf „Heute“ oder im Gewässer-Fenster die Kachel „Beißindex“ ansehen.",
+     "Das „i“ erklärt, wie der Wert entsteht.",
+     "Ab 5 echten Sessions am Wasser passt sich der Beißindex an deine Bisse an."
+    ],
+    "tipp": "Der Beißindex ist eine Schätzung aus Faustregeln – keine Garantie. Ohne Pro siehst du den Wert für jetzt, mit Pro die beste Zeit der nächsten 24 Stunden."
+   },
+   "en": {
+    "titel": "Bite index",
+    "was": "The bite index estimates for every hour, from 0 to 100, how good the conditions are for carp to feed. CarpD rates six factors: pressure trend, water temperature, time of day, wind, clouds & rain, and moon.",
+    "schritte": [
+     "Look at the “Bite index” tile on “Today” or in the water panel.",
+     "The “i” explains how the value is calculated.",
+     "After 5 real sessions at the water the bite index adapts to your bites."
+    ],
+    "tipp": "The bite index is an estimate based on rules of thumb – no guarantee. Without Pro you see the current value, with Pro the best time of the next 24 hours."
+   }
+  },
+  {
+   "id": "warnungen",
+   "bereich": "wetter",
+   "status": "ok",
+   "de": {
+    "titel": "Wetter-Warnungen & Erinnerungen",
+    "was": "CarpD kann dich warnen: vor Gewitter und Sturm, bei einem Luftdruck-Umschwung, bevor Regen einsetzt und rund um Sonnenauf- und -untergang. Dazu kommen Erinnerungen vor einer Tour und bevor ein Schein abläuft. Die Hinweise plant das Handy selbst – ohne Server.",
+    "schritte": [
+     "Mehr → Einstellungen → Benachrichtigungen.",
+     "Wählen, ob die Warnungen nur in einer Session oder immer kommen sollen.",
+     "Die gewünschten Hinweise einschalten.",
+     "Mit „Test-Hinweis senden“ prüfst du, ob alles klappt."
+    ],
+    "tipp": "Die Gewitter- und Sturmwarnung gibt es kostenlos – Carbonruten leiten Strom! Luftdruck-, Regen- und Sonnenzeit-Hinweise sowie Tour- und Schein-Erinnerungen gibt es mit Pro."
+   },
+   "en": {
+    "titel": "Weather warnings & reminders",
+    "was": "CarpD can warn you: about thunderstorms and gales, a pressure change, before rain starts and around sunrise and sunset. There are also reminders before a trip and before a licence expires. Your phone schedules these itself – no server needed.",
+    "schritte": [
+     "More → Settings → Notifications.",
+     "Choose whether warnings come only during a session or always.",
+     "Switch on the alerts you want.",
+     "Use “Send test alert” to check that everything works."
+    ],
+    "tipp": "The thunderstorm and gale warning is free – carbon rods conduct electricity! Pressure, rain and sun-time alerts and trip and licence reminders come with Pro."
+   }
+  },
+  {
+   "id": "session-starten",
+   "bereich": "session",
+   "status": "ok",
+   "de": {
+    "titel": "Session starten",
+    "was": "Eine Session ist deine Zeit am Wasser. CarpD schlägt dir per Standort das nächste Gewässer vor, du wählst die Anzahl der Ruten und los geht's.",
+    "schritte": [
+     "Tab „Session“ → „Session starten“ (oder „Session hier starten“ auf „Heute“ bzw. im Gewässer-Fenster).",
+     "Gewässer aus der Liste wählen – das nächste steht oben.",
+     "„Wie viele Ruten?“ antippen.",
+     "„Session starten“ drücken."
+    ],
+    "tipp": "Ohne Pro hast du 2 Ruten pro Session, mit Pro 4. Über „Spot wählen“ legst du jede Rute auf einen Spot aus deinem Spotbuch."
+   },
+   "en": {
+    "titel": "Starting a session",
+    "was": "A session is your time at the water. CarpD suggests the nearest water based on your location, you pick the number of rods and off you go.",
+    "schritte": [
+     "“Session” tab → “Start session” (or “Start session here” on “Today” or in the water panel).",
+     "Choose the water from the list – the nearest is at the top.",
+     "Tap “How many rods?”.",
+     "Press “Start session”."
+    ],
+    "tipp": "Without Pro you have 2 rods per session, with Pro 4. Use “Choose swim” to assign each rod to a swim from your swim book."
+   }
+  },
+  {
+   "id": "session-beenden",
+   "bereich": "session",
+   "status": "ok",
+   "de": {
+    "titel": "Session beenden & Zusammenfassung",
+    "was": "Am Ende siehst du die Zusammenfassung: Dauer, Ruten, Fänge, Bisse und deinen größten Fisch. Vergisst du das Beenden, fragt CarpD nach, wann du aufgehört hast – damit Dauer und Statistik stimmen.",
+    "schritte": [
+     "Im Tab „Session“ ganz nach unten scrollen.",
+     "„Session beenden“ → „Ja, beenden“.",
+     "Die Zusammenfassung ansehen und „Fertig“ tippen."
+    ],
+    "tipp": "Alles landet automatisch im Fangbuch unter „Sessions“. Dort kannst du eine Session später bearbeiten."
+   },
+   "en": {
+    "titel": "Ending a session & summary",
+    "was": "At the end you get a summary: duration, rods, catches, bites and your biggest fish. If you forget to end it, CarpD asks when you stopped – so duration and statistics are right.",
+    "schritte": [
+     "Scroll to the bottom of the “Session” tab.",
+     "“End session” → “Yes, end it”.",
+     "Look at the summary and tap “Done”."
+    ],
+    "tipp": "Everything goes into your catch log under “Sessions” automatically. You can edit a session there later."
+   }
+  },
+  {
+   "id": "session-nachtragen",
+   "bereich": "session",
+   "status": "ok",
+   "de": {
+    "titel": "Session nachtragen",
+    "was": "Warst du ohne App am Wasser, trägst du die Session hinterher ein – mit Gewässer, Start und Ende. Danach kannst du Fänge und Bisse dazu nachtragen.",
+    "schritte": [
+     "Fangbuch → „Sessions“ → „Session nachtragen“.",
+     "Gewässer, Start und Ende wählen.",
+     "„Session speichern“.",
+     "Fänge mit „Fang nachtragen“ und Bisse mit „Biss nachtragen“ ergänzen."
+    ],
+    "tipp": "Ohne Pro kannst du 10 Fänge kostenlos nachtragen, mit Pro unbegrenzt."
+   },
+   "en": {
+    "titel": "Adding a past session",
+    "was": "If you were at the water without the app, add the session afterwards – with water, start and end. Then you can add catches and bites to it.",
+    "schritte": [
+     "Catch log → “Sessions” → “Add past session”.",
+     "Choose water, start and end.",
+     "“Save session”.",
+     "Add catches with “Add past catch” and bites with “Add bite”."
+    ],
+    "tipp": "Without Pro you can add 10 past catches for free, with Pro unlimited."
+   }
+  },
+  {
+   "id": "fang-eintragen",
+   "bereich": "fang",
+   "status": "ok",
+   "de": {
+    "titel": "Fang eintragen",
+    "was": "Einen Fang trägst du in Sekunden ein: Gewicht, Art, Rute, Köder – auf Wunsch Montage und Notiz. Zeit, Ort und Wetter speichert CarpD automatisch.",
+    "schritte": [
+     "In der Session bei der Rute „Fang“ antippen (oder unten „Fang eintragen“).",
+     "Gewicht mit −1 / −0,1 / +0,1 / +1 einstellen.",
+     "Art wählen: Spiegler, Schuppi, Zeiler, Leder, Graskarpfen oder Sonstige.",
+     "Köder antippen oder eintippen.",
+     "„Speichern & Foto“, „Speichern & Foto wählen“ oder „Nur speichern“."
+    ],
+    "tipp": "Bei „Wann?“ stellst du mit „vor 5 Min.“ usw. schnell ein, wenn du erst nach dem Versorgen des Fisches einträgst."
+   },
+   "en": {
+    "titel": "Logging a catch",
+    "was": "You log a catch in seconds: weight, species, rod, bait – optionally rig and note. CarpD saves time, location and weather automatically.",
+    "schritte": [
+     "In the session, tap “Catch” on the rod (or “Log catch” at the bottom).",
+     "Set the weight with −1 / −0.1 / +0.1 / +1.",
+     "Choose the species: mirror, common, linear, leather, grass carp or other.",
+     "Tap or type the bait.",
+     "“Save & photo”, “Save & choose photo” or “Save only”."
+    ],
+    "tipp": "Under “When?” use “5 min ago” etc. if you log the catch after taking care of the fish."
+   }
+  },
+  {
+   "id": "sichtbarkeit",
+   "bereich": "fang",
+   "status": "ok",
+   "de": {
+    "titel": "Sichtbarkeit: Privat, Statistik, Öffentlich",
+    "was": "Jeder Fang hat eine Sichtbarkeit. Standard ist „Privat“: nur du siehst ihn. „Statistik“ zählt anonym für die Gewässer-Statistik, aber nur, wenn du „Anonyme Statistik“ eingeschaltet hast.",
+    "schritte": [
+     "Im Fang-Fenster nach unten scrollen bis „Sichtbarkeit“.",
+     "„Privat“, „Statistik“ oder „Öffentlich“ wählen.",
+     "Ob überhaupt etwas geteilt wird, entscheidest du unter Mehr → Anonyme Statistik."
+    ],
+    "tipp": "Solange „Anonyme Statistik“ aus ist, bleibt alles auf deinem Handy – egal, was beim Fang steht."
+   },
+   "en": {
+    "titel": "Visibility: private, statistics, public",
+    "was": "Every catch has a visibility. The default is “Private”: only you can see it. “Statistics” counts anonymously towards water statistics, but only if you have switched on “Anonymous statistics”.",
+    "schritte": [
+     "Scroll down in the catch form to “Visibility”.",
+     "Choose “Private”, “Statistics” or “Public”.",
+     "Whether anything is shared at all is up to you under More → Anonymous statistics."
+    ],
+    "tipp": "As long as “Anonymous statistics” is off, everything stays on your phone – whatever the catch says."
+   }
+  },
+  {
+   "id": "bissprotokoll",
+   "bereich": "biss",
+   "status": "ok",
+   "de": {
+    "titel": "Bissprotokoll",
+    "was": "Jede Rute hat in der Session drei große Knöpfe: „Fang“, „Fehlbiss“ und „Verloren“. Ein Tipp – und der Biss steht mit Uhrzeit in der Zeitleiste.",
+    "schritte": [
+     "Session starten.",
+     "Bei der Rute „Fehlbiss“ oder „Verloren“ antippen – bei einem Fisch „Fang“.",
+     "Ein Fehltipp? Unten erscheint kurz „Rückgängig“.",
+     "Vergessene Bisse über „Biss nachtragen“ in der Zeitleiste eintragen."
+    ],
+    "tipp": "Die Knöpfe sind groß gemacht für die Nacht und nasse Hände. Aus deinen Bissen lernt später der Beißindex."
+   },
+   "en": {
+    "titel": "Bite log",
+    "was": "In a session every rod has three big buttons: “Catch”, “Missed bite” and “Lost”. One tap – and the bite is in the timeline with its time.",
+    "schritte": [
+     "Start a session.",
+     "Tap “Missed bite” or “Lost” on the rod – “Catch” if you land a fish.",
+     "Wrong tap? “Undo” shows up briefly at the bottom.",
+     "Add forgotten bites with “Add bite” in the timeline."
+    ],
+    "tipp": "The buttons are big for the night and wet hands. Later the bite index learns from your bites."
+   }
+  },
+  {
+   "id": "fangbuch",
+   "bereich": "fangbuch",
+   "status": "ok",
+   "de": {
+    "titel": "Fangbuch",
+    "was": "Im Fangbuch stehen alle Fänge und Sessions, nach Monaten sortiert. Ein Fang zeigt Foto, Gewässer, Datum, Köder, Montage, Rute, Wetter beim Fang und Notiz.",
+    "schritte": [
+     "Tab „Fangbuch“ → „Fänge“ oder „Sessions“.",
+     "Mit „Filter“ nach Jahr, Gewässer oder Art filtern.",
+     "Einen Fang antippen für alle Details.",
+     "„Bearbeiten“ oder „Fang löschen“ ganz unten."
+    ],
+    "tipp": "Ohne Pro siehst du alle Fänge in der Liste – Foto, Wetter und alle Details gibt es für Fänge der letzten 30 Tage, ältere mit Pro."
+   },
+   "en": {
+    "titel": "Catch log",
+    "was": "The catch log holds all catches and sessions, sorted by month. A catch shows photo, water, date, bait, rig, rod, weather at the time of the catch and note.",
+    "schritte": [
+     "“Catch log” tab → “Catches” or “Sessions”.",
+     "Use “Filter” to filter by year, water or species.",
+     "Tap a catch for all details.",
+     "“Edit” or “Delete catch” at the bottom."
+    ],
+    "tipp": "Without Pro you see all catches in the list – photo, weather and all details are available for catches from the last 30 days, older ones with Pro."
+   }
+  },
+  {
+   "id": "statistik",
+   "bereich": "fangbuch",
+   "status": "ok",
+   "de": {
+    "titel": "Statistik",
+    "was": "Die Statistik zeigt Anzahl der Fänge und Sessions und deinen größten Fisch. Mit Pro kommt die ausführliche Auswertung: Fänge pro Köder, pro Montage, nach Luftdruck-Trend, nach Uhrzeit, nach Wassertemperatur und nach Wind zum Ufer.",
+    "schritte": [
+     "Tab „Fangbuch“ → „Statistik“.",
+     "Nach unten scrollen für die Auswertungen.",
+     "Oben öffnet der Knopf den Jahresrückblick."
+    ],
+    "tipp": "Je mehr Fänge du einträgst, desto aussagekräftiger wird die Statistik – auch nachgetragene Fänge zählen."
+   },
+   "en": {
+    "titel": "Statistics",
+    "was": "Statistics show the number of catches and sessions and your biggest fish. With Pro you get the detailed analysis: catches per bait, per rig, by pressure trend, by time of day, by water temperature and by wind towards your bank.",
+    "schritte": [
+     "“Catch log” tab → “Statistics”.",
+     "Scroll down for the analyses.",
+     "The button at the top opens your year in review."
+    ],
+    "tipp": "The more catches you log, the more meaningful the statistics – past catches you add count too."
+   }
+  },
+  {
+   "id": "profil",
+   "bereich": "fangbuch",
+   "status": "ok",
+   "de": {
+    "titel": "Profil & Rekorde",
+    "was": "Im Profil kannst du freiwillig Name, Foto, Geburtsjahr und Geschlecht angeben. Dazu siehst du deine Zahlen und Rekorde: größter Fisch, längste Session, meiste Fänge in einer Session und größter Fisch je Art.",
+    "schritte": [
+     "Mehr → ganz oben auf dein Profil tippen.",
+     "Angaben eintragen – alles ist freiwillig.",
+     "„Name auf Bildern zeigen“ setzt deinen Namen ins Wasserzeichen und auf den Jahresrückblick."
+    ],
+    "tipp": "Die Profilangaben bleiben auf deinem Handy."
+   },
+   "en": {
+    "titel": "Profile & records",
+    "was": "In your profile you can optionally enter name, photo, year of birth and gender. You also see your numbers and records: biggest fish, longest session, most catches in one session and biggest fish per species.",
+    "schritte": [
+     "More → tap your profile at the very top.",
+     "Fill in what you like – everything is optional.",
+     "“Show name on pictures” puts your name in the watermark and on your year in review."
+    ],
+    "tipp": "Profile details stay on your phone."
+   }
+  },
+  {
+   "id": "selbstausloeser",
+   "bereich": "foto",
+   "status": "ok",
+   "de": {
+    "titel": "Fangfoto mit Selbstauslöser",
+    "was": "Allein am Wasser? Handy hinstellen, Selbstauslöser mit 3, 5 oder 10 Sekunden starten, Fisch präsentieren. Ein Piepton zählt herunter, dann macht CarpD eine Serie von 5 Fotos – und du wählst das beste aus.",
+    "schritte": [
+     "Beim Fang „Speichern & Foto“ antippen.",
+     "Sofort, 3 s, 5 s oder 10 s wählen.",
+     "Auslöser drücken und Fisch präsentieren.",
+     "Aus den 5 Fotos „Bestes Foto wählen“ → „Dieses Foto nehmen“."
+    ],
+    "tipp": "„Sofort“ macht ein einzelnes Foto wie die normale Kamera – das geht auch ohne Pro. Selbstauslöser und Serienbild gibt es mit Pro."
+   },
+   "en": {
+    "titel": "Catch photo with self-timer",
+    "was": "Alone at the water? Set up your phone, start the self-timer with 3, 5 or 10 seconds and present the fish. A beep counts down, then CarpD takes a burst of 5 photos – and you pick the best one.",
+    "schritte": [
+     "Tap “Save & photo” when logging a catch.",
+     "Choose instant, 3 s, 5 s or 10 s.",
+     "Press the shutter and present the fish.",
+     "From the 5 photos “Choose best photo” → “Use this photo”."
+    ],
+    "tipp": "“Instant” takes a single photo like the normal camera – available without Pro. Self-timer and burst come with Pro."
+   }
+  },
+  {
+   "id": "foto-teilen",
+   "bereich": "foto",
+   "status": "ok",
+   "de": {
+    "titel": "Fangfoto teilen & Wasserzeichen",
+    "was": "Aus jedem Fang machst du ein Bild zum Teilen – mit CarpD-Wasserzeichen und auf Wunsch mit Gewicht. Das geteilte Bild enthält keinen Standort, dein Spot bleibt geheim.",
+    "schritte": [
+     "Fang im Fangbuch öffnen.",
+     "„Wasserzeichen an/aus“ und „Gewicht an/aus“ wählen.",
+     "„Foto teilen“ antippen und App wählen (WhatsApp, Instagram …)."
+    ],
+    "tipp": "Das Wasserzeichen abschalten geht mit Pro."
+   },
+   "en": {
+    "titel": "Sharing catch photos & watermark",
+    "was": "Turn any catch into a picture to share – with the CarpD watermark and optionally the weight. The shared picture contains no location, your swim stays secret.",
+    "schritte": [
+     "Open the catch in your catch log.",
+     "Choose “Watermark on/off” and “Weight on/off”.",
+     "Tap “Share photo” and pick an app (WhatsApp, Instagram …)."
+    ],
+    "tipp": "Switching off the watermark comes with Pro."
+   }
+  },
+  {
+   "id": "rotlicht",
+   "bereich": "rotlicht",
+   "status": "ok",
+   "de": {
+    "titel": "Rotlicht-Modus",
+    "was": "Nachts schaltet CarpD die ganze App auf Rot auf Schwarz. Das blendet nicht und deine Augen bleiben an die Dunkelheit gewöhnt. Karte und Fotos werden abgedunkelt und rot eingefärbt.",
+    "schritte": [
+     "Schnell an/aus: Mond-Knopf oben rechts in der Kopfzeile.",
+     "Dauerhaft: Mehr → Einstellungen → Rotlicht.",
+     "„Aus“, „Nachts“ (automatisch von Sonnenuntergang bis -aufgang) oder „Immer“ wählen."
+    ],
+    "tipp": "„Nachts“ wird für deinen Standort berechnet – auch ohne Netz. Rotlicht ist kostenlos."
+   },
+   "en": {
+    "titel": "Red-light mode",
+    "was": "At night CarpD switches the whole app to red on black. It doesn’t dazzle and your eyes stay used to the dark. Map and photos are dimmed and tinted red.",
+    "schritte": [
+     "Quick on/off: moon button at the top right of the header.",
+     "Permanently: More → Settings → Red light.",
+     "Choose “Off”, “At night” (automatically from sunset to sunrise) or “Always”."
+    ],
+    "tipp": "“At night” is calculated for your location – even without signal. Red light is free."
+   }
+  },
+  {
+   "id": "offline",
+   "bereich": "offline",
+   "status": "ok",
+   "de": {
+    "titel": "Ohne Netz am Wasser",
+    "was": "CarpD funktioniert ohne Netz: Sessions, Bisse, Fänge, Fotos, Fangbuch, Spots und Scheine liegen auf deinem Handy. Die Gewässer von 13 Ländern sind fest in der App. Fehlt beim Eintragen das Wetter, lädt CarpD es nach, sobald du wieder Netz hast.",
+    "schritte": [
+     "Einfach ganz normal benutzen.",
+     "Beim Fang steht dann „Wird nachgeladen, sobald du Netz hast“.",
+     "Der Beißindex zeigt ohne Netz die letzte geladene Vorhersage mit Uhrzeit."
+    ],
+    "tipp": "Für Wetter, Ortssuche und Gewässer außerhalb der 13 Länder braucht CarpD Netz. Wetter wird für Fänge der letzten 3 Monate nachgeladen."
+   },
+   "en": {
+    "titel": "No signal at the water",
+    "was": "CarpD works without signal: sessions, bites, catches, photos, catch log, swims and licences are on your phone. Waters for 13 countries are built in. If the weather is missing when you log a catch, CarpD fetches it once you have signal again.",
+    "schritte": [
+     "Just use it as normal.",
+     "The catch then shows “Will be loaded once you have signal”.",
+     "Without signal the bite index shows the last loaded forecast with its time."
+    ],
+    "tipp": "Weather, place search and waters outside the 13 countries need signal. Weather is filled in for catches from the last 3 months."
+   }
+  },
+  {
+   "id": "rueckblick",
+   "bereich": "rueckblick",
+   "status": "ok",
+   "de": {
+    "titel": "Jahresrückblick",
+    "was": "Dein Karpfenjahr auf einen Blick: Anzahl Karpfen, größter Fisch, deine Fänge des Jahres, Gesamtgewicht, Stunden am Wasser, Sessions, Bisse, Lieblingsköder, bester Monat, beste Uhrzeit und welcher Luftdruck meist herrschte – als Bild zum Teilen.",
+    "schritte": [
+     "Fangbuch → „Statistik“ → „Jahresrückblick“.",
+     "Durchscrollen.",
+     "„Als Bild teilen“ antippen."
+    ],
+    "tipp": "Noch wenig Fänge? Mit „Beispieldaten anlegen“ siehst du, wie es aussieht – und löschst sie danach wieder."
+   },
+   "en": {
+    "titel": "Year in review",
+    "was": "Your carp year at a glance: number of carp, biggest fish, your catches of the year, total weight, hours at the water, sessions, bites, favourite bait, best month, best time of day and the usual air pressure – as a picture to share.",
+    "schritte": [
+     "Catch log → “Statistics” → “Year in review”.",
+     "Scroll through.",
+     "Tap “Share as picture”."
+    ],
+    "tipp": "Only a few catches yet? “Create example data” shows you what it looks like – then delete it again."
+   }
+  },
+  {
+   "id": "crew-gruenden",
+   "bereich": "crews",
+   "status": "ok",
+   "de": {
+    "titel": "Crew gründen oder beitreten",
+    "was": "Eine Crew ist eine geschlossene Gruppe mit höchstens 20 Mitgliedern – nur die Mitglieder sehen, was darin geteilt wird. Dafür brauchst du ein Konto mit Spitznamen.",
+    "schritte": [
+     "Mehr → Meine Crews.",
+     "„Crew gründen“ und Namen eingeben – oder „Mit Code beitreten“.",
+     "Als Chef oder Admin: „Kumpels einladen“ → Einladungs-Code erstellen und verschicken. Der Code gilt 7 Tage.",
+     "Vor dem ersten Mal den Crew-Regeln zustimmen."
+    ],
+    "tipp": "Beitreten geht kostenlos, Crews gründen mit Pro. Der Chef kann Mitglieder zu Admins machen; Admins dürfen einladen und normale Mitglieder entfernen."
+   },
+   "en": {
+    "titel": "Founding or joining a crew",
+    "was": "A crew is a closed group with up to 20 members – only members see what is shared in it. You need an account with a nickname.",
+    "schritte": [
+     "More → My crews.",
+     "“Found crew” and enter a name – or “Join with code”.",
+     "As boss or admin: “Invite mates” → create an invite code and send it. The code is valid for 7 days.",
+     "Agree to the crew rules the first time."
+    ],
+    "tipp": "Joining is free, founding a crew comes with Pro. The boss can make members admins; admins can invite and remove normal members."
+   }
+  },
+  {
+   "id": "crew-teilen",
+   "bereich": "crews",
+   "status": "ok",
+   "de": {
+    "titel": "Fänge in der Crew teilen",
+    "was": "Teilst du einen Fang, sieht deine Crew Foto, Art, Gewicht, Gewässer und Tag – nie deinen Spot, Köder oder Notizen. Du bestimmst, ab wann: sofort, nach Session-Ende oder nach 3, 7 oder 14 Tagen.",
+    "schritte": [
+     "Beim Fang „In Crew“ wählen oder später im Fang teilen.",
+     "Crew und Zeitpunkt wählen.",
+     "Die Crew bekommt eine kurze Nachricht, sobald der Fang sichtbar ist.",
+     "Im Fangbuch-Tab „Crew“ siehst du die Fänge deiner Crews und gibst „Tight Lines“."
+    ],
+    "tipp": "Mit Pro macht der Foto-Schutz den Hintergrund unscharf, damit niemand deinen Spot erkennt. Ohne Pro kannst du 3 Fänge pro Monat teilen."
+   },
+   "en": {
+    "titel": "Sharing catches in a crew",
+    "was": "When you share a catch, your crew sees photo, species, weight, water and day – never your swim, bait or notes. You decide when: immediately, after the session ends, or after 3, 7 or 14 days.",
+    "schritte": [
+     "Choose “In crew” when logging, or share later from the catch.",
+     "Pick the crew and the timing.",
+     "The crew gets a short notification as soon as the catch is visible.",
+     "In the catch log’s “Crew” tab you see your crews’ catches and give “Tight Lines”."
+    ],
+    "tipp": "With Pro the photo protection blurs the background so nobody recognises your swim. Without Pro you can share 3 catches per month."
+   }
+  },
+  {
+   "id": "crew-touren",
+   "bereich": "crews",
+   "status": "ok",
+   "de": {
+    "titel": "Touren in der Crew zeigen",
+    "was": "Plane eine Tour und zeig sie deiner Crew – vielleicht kommt jemand mit. Die Crew sieht nur Gewässer und Tage, nie Spot, Notiz, Packliste oder Futter.",
+    "schritte": [
+     "Tour im Session-Planer öffnen.",
+     "„In Crew zeigen“ antippen.",
+     "Mitglieder tippen „Ich bin dabei“."
+    ],
+    "tipp": "Touren in der Crew zeigen geht mit Pro."
+   },
+   "en": {
+    "titel": "Showing trips to your crew",
+    "was": "Plan a trip and show it to your crew – maybe someone will join. The crew only sees the water and the days, never swim, note, kit list or bait.",
+    "schritte": [
+     "Open the trip in the session planner.",
+     "Tap “Show in crew”.",
+     "Members tap “I’m in”."
+    ],
+    "tipp": "Showing trips to a crew comes with Pro."
+   }
+  },
+  {
+   "id": "crew-melden",
+   "bereich": "crews",
+   "status": "ok",
+   "de": {
+    "titel": "Melden, blockieren, zurückziehen",
+    "was": "Siehst du etwas, das nicht in die Crew gehört, meldest du den Fang oder blockierst die Person. Eigene geteilte Fänge kannst du jederzeit zurückziehen.",
+    "schritte": [
+     "Beim Fang auf ⋯ tippen.",
+     "„Fang melden“ und Grund wählen – oder Person blockieren.",
+     "Eigenen Fang: „Aus der Crew zurückziehen“."
+    ],
+    "tipp": "Gemeldete Inhalte prüft das CarpD-Team innerhalb von 24 Stunden. Wer blockiert wird, merkt davon nichts."
+   },
+   "en": {
+    "titel": "Reporting, blocking, withdrawing",
+    "was": "If you see something that doesn’t belong in the crew, report the catch or block the person. You can withdraw your own shared catches at any time.",
+    "schritte": [
+     "Tap ⋯ on the catch.",
+     "“Report catch” and choose a reason – or block the person.",
+     "Your own catch: “Withdraw from crew”."
+    ],
+    "tipp": "The CarpD team reviews reports within 24 hours. A blocked person is not notified."
+   }
+  },
+  {
+   "id": "planer",
+   "bereich": "planung",
+   "status": "ok",
+   "de": {
+    "titel": "Session-Planer & Touren",
+    "was": "Im Session-Planer planst du Touren mit Gewässer, Termin und Wetter-Vorschau: Luftdruck beim Start mit den 3 Tagen davor, Wetter für jeden Tag und Mond beim Start. Im Kalender siehst du deine Touren, Sessions und Crew-Touren.",
+    "schritte": [
+     "Mehr → Session-Planer.",
+     "„Tour planen“ oder einen Tag im Kalender antippen.",
+     "Gewässer, Von und Bis wählen und speichern.",
+     "Am Tourtag: „Session jetzt starten“."
+    ],
+    "tipp": "Die Vorhersage gibt es etwa 2 Wochen vor der Tour. Ohne Pro kannst du 1 Tour planen, mit Pro unbegrenzt – dazu den Kalender mit Monatsansicht."
+   },
+   "en": {
+    "titel": "Session planner & trips",
+    "was": "In the session planner you plan trips with water, dates and weather preview: pressure at the start with the 3 days before, weather for each day and moon at the start. The calendar shows your trips, sessions and crew trips.",
+    "schritte": [
+     "More → Session planner.",
+     "“Plan trip” or tap a day in the calendar.",
+     "Choose water, from and to, and save.",
+     "On the day: “Start session now”."
+    ],
+    "tipp": "The forecast is available about 2 weeks before the trip. Without Pro you can plan 1 trip, with Pro unlimited – plus the monthly calendar."
+   }
+  },
+  {
+   "id": "futterrechner",
+   "bereich": "planung",
+   "status": "ok",
+   "de": {
+    "titel": "Futterrechner",
+    "was": "Der Futterrechner schätzt, wie viel Boilies, Partikel und Hakenköder du für deine Session brauchst – nach Dauer, Wassertemperatur, Ruten, Futterplätzen, Gewässer, Methode und Karpfenbestand. Die Mengen kannst du in die Packliste übernehmen.",
+    "schritte": [
+     "In einer Tour „Futter berechnen“ antippen (oder Mehr → Futterrechner).",
+     "Dauer, Ruten, Futterplätze und Gewässer einstellen.",
+     "Mengen ansehen.",
+     "„In die Packliste“ antippen."
+    ],
+    "tipp": "Das sind Startwerte aus der Erfahrung von Karpfenanglern – es gilt die Gewässerordnung bzw. dein Erlaubnisschein. Ohne Pro kannst du den Rechner einmal ausprobieren."
+   },
+   "en": {
+    "titel": "Bait calculator",
+    "was": "The bait calculator estimates how many boilies, particles and hookbaits you need for your session – by duration, water temperature, rods, baited spots, water, method and carp stock. You can add the amounts to your kit list.",
+    "schritte": [
+     "Tap “Calculate bait” in a trip (or More → Bait calculator).",
+     "Set duration, rods, baited spots and water.",
+     "Look at the amounts.",
+     "Tap “Add to kit list”."
+    ],
+    "tipp": "These are starting values from carp anglers’ experience – your water’s rules and permit apply. Without Pro you can try the calculator once."
+   }
+  },
+  {
+   "id": "packliste",
+   "bereich": "planung",
+   "status": "ok",
+   "de": {
+    "titel": "Packliste",
+    "was": "Wähle aus einer großen Auswahl, was du für deine Session wirklich brauchst, und hake beim Packen ab. Deine Auswahl speicherst du als Vorlage.",
+    "schritte": [
+     "Mehr → Packliste.",
+     "„1. Auswählen“: antippen, was mit soll.",
+     "„Packliste erstellen“.",
+     "„2. Packliste“: beim Packen abhaken. „Neu packen“ entfernt alle Haken."
+    ],
+    "tipp": "Ohne Pro hast du 1 Vorlage, mit Pro mehrere."
+   },
+   "en": {
+    "titel": "Kit list",
+    "was": "Pick what you really need for your session from a large selection and tick it off while packing. Save your selection as a template.",
+    "schritte": [
+     "More → Kit list.",
+     "“1. Select”: tap what you want to take.",
+     "“Create kit list”.",
+     "“2. Kit list”: tick off while packing. “Pack again” clears all ticks."
+    ],
+    "tipp": "Without Pro you get 1 template, with Pro several."
+   }
+  },
+  {
+   "id": "scheine",
+   "bereich": "planung",
+   "status": "ok",
+   "de": {
+    "titel": "Meine Scheine",
+    "was": "Angelschein und Erlaubnisscheine immer dabei – als Foto mit Gültigkeit, auch ohne Netz. CarpD erinnert dich, bevor ein Schein abläuft, und der Planer warnt, wenn er zur Tour nicht mehr gilt.",
+    "schritte": [
+     "Mehr → Meine Scheine → „Schein hinzufügen“.",
+     "Art, Bezeichnung und Gültigkeit eintragen.",
+     "„Foto des Scheins aufnehmen“."
+    ],
+    "tipp": "Das Foto ersetzt nicht das Original – bei Kontrollen gilt der echte Schein. Ohne Pro 1 Schein, mit Pro mehrere."
+   },
+   "en": {
+    "titel": "My licences",
+    "was": "Your fishing licence and permits always with you – as a photo with validity, even without signal. CarpD reminds you before a licence expires, and the planner warns you if it won’t be valid for a trip.",
+    "schritte": [
+     "More → My licences → “Add licence”.",
+     "Enter type, name and validity.",
+     "“Take photo of licence”."
+    ],
+    "tipp": "The photo does not replace the original – during checks the real licence applies. Without Pro 1 licence, with Pro several."
+   }
+  },
+  {
+   "id": "konto",
+   "bereich": "konto",
+   "status": "ok",
+   "de": {
+    "titel": "Konto",
+    "was": "Ein Konto ist freiwillig. Du brauchst es nur für Crews und die Cloud-Sicherung. Anmelden geht mit Apple, Google oder einem Code per E-Mail – ein Passwort gibt es nicht.",
+    "schritte": [
+     "Mehr → Konto.",
+     "„Mit Apple anmelden“, „Mit Google anmelden“ oder „Mit E-Mail anmelden“.",
+     "Spitznamen wählen.",
+     "Abmelden oder „Konto löschen“ ganz unten."
+    ],
+    "tipp": "Ohne Konto funktioniert alles andere in CarpD ganz normal. Andere sehen nur deinen Spitznamen und dein Profilbild – deinen echten Namen nur, wenn du es erlaubst."
+   },
+   "en": {
+    "titel": "Account",
+    "was": "An account is optional. You only need it for crews and cloud backup. Sign in with Apple, Google or a code by e-mail – there is no password.",
+    "schritte": [
+     "More → Account.",
+     "“Sign in with Apple”, “Sign in with Google” or “Sign in with e-mail”.",
+     "Choose a nickname.",
+     "Sign out or “Delete account” at the bottom."
+    ],
+    "tipp": "Without an account everything else in CarpD works as normal. Others only see your nickname and profile picture – your real name only if you allow it."
+   }
+  },
+  {
+   "id": "cloud",
+   "bereich": "konto",
+   "status": "ok",
+   "de": {
+    "titel": "Cloud-Sicherung",
+    "was": "Mit Konto und Pro sichert CarpD alles automatisch: einmal am Tag und nach jeder Session – Fänge, Sessions, Spots, Scheine und Fotos. Nur du kommst an deine Sicherung, die letzten 3 bleiben gespeichert.",
+    "schritte": [
+     "Mehr → Datensicherung.",
+     "Bei Bedarf „Nur im WLAN sichern“ einschalten.",
+     "„Jetzt sichern“ für eine Sicherung sofort.",
+     "Auf einem neuen Handy: anmelden → „Aus der Cloud wiederherstellen“."
+    ],
+    "tipp": "Findet CarpD nach dem Anmelden eine Sicherung, fragt es nach – und sichert auf dem neuen Handy erst automatisch, wenn du sie geladen hast. So wird nichts überschrieben."
+   },
+   "en": {
+    "titel": "Cloud backup",
+    "was": "With an account and Pro, CarpD backs up everything automatically: once a day and after every session – catches, sessions, swims, licences and photos. Only you can access your backup; the last 3 are kept.",
+    "schritte": [
+     "More → Backup.",
+     "Switch on “Back up on Wi-Fi only” if you like.",
+     "“Back up now” for an immediate backup.",
+     "On a new phone: sign in → “Restore from cloud”."
+    ],
+    "tipp": "If CarpD finds a backup after you sign in, it asks you – and only starts backing up on the new phone once you’ve restored it. That way nothing is overwritten."
+   }
+  },
+  {
+   "id": "sicherung-datei",
+   "bereich": "konto",
+   "status": "ok",
+   "de": {
+    "titel": "Sicherung als Datei",
+    "was": "Ohne Konto sicherst du alles als Datei: Fänge, Fotos, Sessions, Spots, Scheine, Touren und Einstellungen. Damit nimmst du alles auf ein neues Handy mit.",
+    "schritte": [
+     "Mehr → Datensicherung → „Sicherung erstellen“.",
+     "Datei speichern, z. B. in „Dateien“ (iCloud Drive), Google Drive oder per AirDrop.",
+     "Auf dem neuen Handy: „Sicherung laden“ → Datei wählen → „Ersetzen“.",
+     "CarpD einmal ganz schließen und neu öffnen."
+    ],
+    "tipp": "Die Datei enthält auch deine Spots – gib sie nicht weiter. Hast du die falsche geladen, holt „Stand vor dem letzten Laden zurückholen“ den alten Stand zurück. Die Sicherung als Datei ist kostenlos."
+   },
+   "en": {
+    "titel": "Backup as a file",
+    "was": "Without an account you back up everything as a file: catches, photos, sessions, swims, licences, trips and settings. That’s how you take everything to a new phone.",
+    "schritte": [
+     "More → Backup → “Create backup”.",
+     "Save the file, e.g. in “Files” (iCloud Drive), Google Drive or via AirDrop.",
+     "On the new phone: “Load backup” → pick the file → “Replace”.",
+     "Close CarpD completely once and open it again."
+    ],
+    "tipp": "The file also contains your swims – don’t pass it on. Loaded the wrong one? “Restore state before last load” brings the previous state back. Backup as a file is free."
+   }
+  },
+  {
+   "id": "anonyme-statistik",
+   "bereich": "konto",
+   "status": "ok",
+   "de": {
+    "titel": "Anonyme Statistik",
+    "was": "Freiwillig kannst du Fänge anonym teilen. Daraus entstehen Gewässer-Statistiken und ein Beißindex, der aus den Fängen vieler Angler lernt. Geteilt werden Gewässer (nie dein Spot), Datum und Stunde, Fischart, Gewicht, Köder und das Wetter.",
+    "schritte": [
+     "Mehr → Anonyme Statistik.",
+     "„Ja, anonym teilen“ oder „Nein, alles bleibt auf dem Handy“.",
+     "Jeden Fang kannst du einzeln auf „Privat“ stellen.",
+     "„Meine Daten vom Server löschen“ entfernt alles auf einmal."
+    ],
+    "tipp": "Nie geteilt werden Name, Mailadresse, dein genauer Standort, Fotos, Notizen und die Montage. Ein Gewässer bekommt erst eine Statistik, wenn dort mindestens 5 Angler etwas gemeldet haben."
+   },
+   "en": {
+    "titel": "Anonymous statistics",
+    "was": "You can choose to share catches anonymously. This builds water statistics and a bite index that learns from many anglers’ catches. Shared are the water (never your swim), date and hour, species, weight, bait and the weather.",
+    "schritte": [
+     "More → Anonymous statistics.",
+     "“Yes, share anonymously” or “No, everything stays on the phone”.",
+     "You can set any catch to “Private” individually.",
+     "“Delete my data from the server” removes everything at once."
+    ],
+    "tipp": "Never shared: name, e-mail, your exact location, photos, notes and rig. A water only gets statistics once at least 5 anglers have reported there."
+   }
+  },
+  {
+   "id": "einstellungen",
+   "bereich": "konto",
+   "status": "ok",
+   "de": {
+    "titel": "Einstellungen: Design, Einheiten, Heimatland",
+    "was": "Unter Einstellungen wählst du Sprache, Einheiten (kg oder lb, m oder ft, °C oder °F, km/h oder mph), Design (Dunkel, Hell, Wie Handy), Rotlicht, Benachrichtigungen und dein Heimatland.",
+    "schritte": [
+     "Mehr → Einstellungen.",
+     "Gewünschte Einstellung antippen und wählen."
+    ],
+    "tipp": "Gewässer in deinem Heimatland sind kostenlos, andere Länder gibt es mit Pro. Das Heimatland wird beim ersten Start aus dem Handy übernommen und lässt sich genau einmal ändern."
+   },
+   "en": {
+    "titel": "Settings: design, units, home country",
+    "was": "In settings you choose language, units (kg or lb, m or ft, °C or °F, km/h or mph), design (dark, light, like phone), red light, notifications and your home country.",
+    "schritte": [
+     "More → Settings.",
+     "Tap a setting and choose."
+    ],
+    "tipp": "Waters in your home country are free, other countries come with Pro. The home country is taken from your phone on first launch and can be changed exactly once."
+   }
+  },
+  {
+   "id": "sprache",
+   "bereich": "sprache",
+   "status": "ok",
+   "de": {
+    "titel": "Sprache",
+    "was": "CarpD gibt es in 10 Sprachen: Deutsch, Englisch, Französisch, Italienisch, Polnisch, Tschechisch, Slowakisch, Slowenisch, Ungarisch und Kroatisch. Standard ist die Sprache deines Handys.",
+    "schritte": [
+     "Mehr → Einstellungen → Sprache.",
+     "„Wie Handy“ oder eine Sprache wählen."
+    ],
+    "tipp": "Die Einheiten stellst du unabhängig von der Sprache ein."
+   },
+   "en": {
+    "titel": "Language",
+    "was": "CarpD is available in 10 languages: German, English, French, Italian, Polish, Czech, Slovak, Slovenian, Hungarian and Croatian. By default it uses your phone’s language.",
+    "schritte": [
+     "More → Settings → Language.",
+     "Choose “Like phone” or a language."
+    ],
+    "tipp": "Units are set independently of the language."
+   }
+  }
+ ],
+ "vergleich": {
+  "status": "ok",
+  "preise": {
+   "de": "CarpD Pro: 49,99 € im Jahr (4,17 € im Monat) oder 5,99 € im Monat. Bis zum Start am 01.03.2027 ist für alle Tester alles frei.",
+   "en": "CarpD Pro: €49.99 per year (€4.17 a month) or €5.99 per month. Until the launch on 1 March 2027 everything is free for all testers."
+  },
+  "gruppen": [
+   {
+    "de": "Karte & Wetter",
+    "en": "Map & weather",
+    "zeilen": [
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Karte mit Gewässern im Heimatland",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Map with waters in your home country",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Gewässer in allen 13 Ländern",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Waters in all 13 countries",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Wetter jetzt, Wind, Sonne & Mond",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Current weather, wind, sun & moon",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Wettervorhersage",
+       "frei": "7 Tage",
+       "pro": "14 Tage"
+      },
+      "en": {
+       "funktion": "Weather forecast",
+       "frei": "7 days",
+       "pro": "14 days"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Luftdruck",
+       "frei": "24 Stunden",
+       "pro": "Trend über 3 Tage"
+      },
+      "en": {
+       "funktion": "Air pressure",
+       "frei": "24 hours",
+       "pro": "3-day trend"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Wassertemperatur & Wind zum Ufer",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Water temperature & wind towards your bank",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Beißindex",
+       "frei": "Wert für jetzt",
+       "pro": "mit bester Zeit (24 Std.)"
+      },
+      "en": {
+       "funktion": "Bite index",
+       "frei": "current value",
+       "pro": "with best time (24 h)"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Gewitter- und Sturmwarnung",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Thunderstorm and gale warning",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Luftdruck-, Regen- und Sonnenzeit-Hinweise",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Pressure, rain and sun-time alerts",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Rotlicht-Modus",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Red-light mode",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     }
+    ]
+   },
+   {
+    "de": "Am Wasser",
+    "en": "At the water",
+    "zeilen": [
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Ruten pro Session",
+       "frei": "2",
+       "pro": "4"
+      },
+      "en": {
+       "funktion": "Rods per session",
+       "frei": "2",
+       "pro": "4"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Bissprotokoll",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Bite log",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Fang eintragen mit Wetter",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Log catches with weather",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Fangfoto",
+       "frei": "Sofort-Foto",
+       "pro": "Selbstauslöser & Serienbild"
+      },
+      "en": {
+       "funktion": "Catch photo",
+       "frei": "instant photo",
+       "pro": "self-timer & burst"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Wasserzeichen abschalten",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Switch off watermark",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Spots",
+       "frei": "3",
+       "pro": "unbegrenzt"
+      },
+      "en": {
+       "funktion": "Swims",
+       "frei": "3",
+       "pro": "unlimited"
+      }
+     }
+    ]
+   },
+   {
+    "de": "Fangbuch & Statistik",
+    "en": "Catch log & statistics",
+    "zeilen": [
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Fangbuch",
+       "frei": "alle Fänge, Details der letzten 30 Tage",
+       "pro": "alle Details"
+      },
+      "en": {
+       "funktion": "Catch log",
+       "frei": "all catches, details for the last 30 days",
+       "pro": "all details"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Fänge nachtragen",
+       "frei": "10",
+       "pro": "unbegrenzt"
+      },
+      "en": {
+       "funktion": "Add past catches",
+       "frei": "10",
+       "pro": "unlimited"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Statistik",
+       "frei": "Fänge, Sessions, größter Fisch",
+       "pro": "ausführliche Auswertung"
+      },
+      "en": {
+       "funktion": "Statistics",
+       "frei": "catches, sessions, biggest fish",
+       "pro": "detailed analysis"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Jahresrückblick",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Year in review",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     }
+    ]
+   },
+   {
+    "de": "Planung",
+    "en": "Planning",
+    "zeilen": [
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Touren planen",
+       "frei": "1",
+       "pro": "unbegrenzt"
+      },
+      "en": {
+       "funktion": "Plan trips",
+       "frei": "1",
+       "pro": "unlimited"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Kalender mit Monatsansicht",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Monthly calendar",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Futterrechner",
+       "frei": "1× ausprobieren",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Bait calculator",
+       "frei": "try once",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Packliste",
+       "frei": "1 Vorlage",
+       "pro": "mehrere Vorlagen"
+      },
+      "en": {
+       "funktion": "Kit list",
+       "frei": "1 template",
+       "pro": "several templates"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Scheine",
+       "frei": "1",
+       "pro": "mehrere"
+      },
+      "en": {
+       "funktion": "Licences",
+       "frei": "1",
+       "pro": "several"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Erinnerungen an Touren und Scheine",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Reminders for trips and licences",
+       "frei": "–",
+       "pro": "✓"
+      }
+     }
+    ]
+   },
+   {
+    "de": "Crews & Daten",
+    "en": "Crews & data",
+    "zeilen": [
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Konto (Apple, Google, E-Mail)",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Account (Apple, Google, e-mail)",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Crew beitreten",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Join a crew",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Crew gründen",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Found a crew",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Fänge in Crews teilen",
+       "frei": "3 pro Monat",
+       "pro": "unbegrenzt"
+      },
+      "en": {
+       "funktion": "Share catches in crews",
+       "frei": "3 per month",
+       "pro": "unlimited"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Foto-Schutz für Crew-Fotos",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Photo protection for crew photos",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Touren in der Crew zeigen",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Show trips in the crew",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Sicherung als Datei",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Backup as a file",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Cloud-Sicherung (mit Konto)",
+       "frei": "–",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Cloud backup (with account)",
+       "frei": "–",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "Anonyme Statistik (freiwillig)",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "Anonymous statistics (optional)",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     },
+     {
+      "status": "ok",
+      "de": {
+       "funktion": "10 Sprachen",
+       "frei": "✓",
+       "pro": "✓"
+      },
+      "en": {
+       "funktion": "10 languages",
+       "frei": "✓",
+       "pro": "✓"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "faq": [
+  {
+   "id": "was-ist-carpd",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "heute",
+    "fang-eintragen"
+   ],
+   "de": {
+    "f": "Was ist CarpD?",
+    "a": "CarpD ist eine App nur fürs Karpfenangeln. Am Wasser hast du sofort Wetter, Luftdruck-Trend, Wind, Mond und Beißindex, und Bisse und Fänge trägst du in Sekunden ein. Zeit, Ort und Wetter speichert die App automatisch."
+   },
+   "en": {
+    "f": "What is CarpD?",
+    "a": "CarpD is an app just for carp fishing. At the water you instantly get weather, pressure trend, wind, moon and bite index, and you log bites and catches in seconds. The app saves time, location and weather automatically."
+   }
+  },
+  {
+   "id": "iphone-android",
+   "thema": "technik",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Gibt es CarpD für iPhone und Android?",
+    "a": "Ja, CarpD gibt es für iPhone und Android. Der offizielle Start ist am 01.03.2027 – bis dahin läuft die Testphase."
+   },
+   "en": {
+    "f": "Is CarpD available for iPhone and Android?",
+    "a": "Yes, CarpD is available for iPhone and Android. The official launch is on 1 March 2027 – until then the test phase is running."
+   }
+  },
+  {
+   "id": "wer-dahinter",
+   "thema": "technik",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Wer steckt hinter CarpD?",
+    "a": "CarpD wird von der workping GbR aus Fellbach gemacht – das sind Davide Marino und Kresimir Kamensek, selbst Karpfenangler. Kontakt: info@carpd.de."
+   },
+   "en": {
+    "f": "Who is behind CarpD?",
+    "a": "CarpD is made by workping GbR from Fellbach, Germany – that’s Davide Marino and Kresimir Kamensek, carp anglers themselves. Contact: info@carpd.de."
+   }
+  },
+  {
+   "id": "wetter-quelle",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "heute",
+    "luftdruck"
+   ],
+   "de": {
+    "f": "Woher kommen die Wetterdaten?",
+    "a": "Das Wetter kommt von Open-Meteo, einem Wetterdienst aus der Schweiz. CarpD rundet die Koordinaten dafür auf etwa 1 km, damit keine genaue Stelle wie dein Spot übertragen wird. Sonne und Mond rechnet die App selbst aus."
+   },
+   "en": {
+    "f": "Where does the weather data come from?",
+    "a": "The weather comes from Open-Meteo, a weather service from Switzerland. CarpD rounds the coordinates to about 1 km, so no exact spot like your swim is sent. The app calculates sun and moon itself."
+   }
+  },
+  {
+   "id": "karten-quelle",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "karte"
+   ],
+   "de": {
+    "f": "Woher kommen Karte und Gewässer?",
+    "a": "Die Karte ist Apple Karten auf dem iPhone und Google Maps auf Android. Die Gewässer stammen aus OpenStreetMap. Für 13 Länder sind sie schon in der App, für andere Gegenden fragt CarpD die OpenStreetMap-Server ab."
+   },
+   "en": {
+    "f": "Where do the map and waters come from?",
+    "a": "The map is Apple Maps on iPhone and Google Maps on Android. The waters come from OpenStreetMap. For 13 countries they are built into the app; for other areas CarpD queries the OpenStreetMap servers."
+   }
+  },
+  {
+   "id": "laender",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "karte",
+    "einstellungen"
+   ],
+   "de": {
+    "f": "Welche Länder sind dabei?",
+    "a": "Fest in der App sind die Gewässer von Deutschland, Österreich, der Schweiz, Frankreich, Italien, Kroatien, Slowenien, Tschechien, Polen, der Slowakei, Ungarn, Großbritannien und Irland. Dein Heimatland ist kostenlos, die anderen Länder gibt es mit Pro."
+   },
+   "en": {
+    "f": "Which countries are included?",
+    "a": "Built into the app are the waters of Germany, Austria, Switzerland, France, Italy, Croatia, Slovenia, Czechia, Poland, Slovakia, Hungary, the United Kingdom and Ireland. Your home country is free, the other countries come with Pro."
+   }
+  },
+  {
+   "id": "see-fehlt",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "gewaesser-eintragen"
+   ],
+   "de": {
+    "f": "Mein See fehlt auf der Karte – was tun?",
+    "a": "Trag ihn einfach selbst ein: auf der Karte an die Stelle gehen und „Hier ein Gewässer eintragen“ antippen. Er funktioniert dann wie jedes andere Gewässer und bleibt privat auf deinem Handy."
+   },
+   "en": {
+    "f": "My lake is missing from the map – what can I do?",
+    "a": "Just add it yourself: move the map to the spot and tap “Add a water here”. It then works like any other water and stays private on your phone."
+   }
+  },
+  {
+   "id": "gewaesserregeln",
+   "thema": "technik",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "gewaesser-details"
+   ],
+   "de": {
+    "f": "Sagt mir CarpD, ob ich an einem Gewässer angeln darf?",
+    "a": "Nein. Die Gewässerangaben stammen aus OpenStreetMap und sind ohne Gewähr. Ob, wann und wie du angeln darfst, steht in deinem Erlaubnisschein und in den Regeln vor Ort."
+   },
+   "en": {
+    "f": "Does CarpD tell me whether I’m allowed to fish a water?",
+    "a": "No. Water information comes from OpenStreetMap and is provided without guarantee. Whether, when and how you may fish is set by your permit and the local rules."
+   }
+  },
+  {
+   "id": "sprachen",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "sprache"
+   ],
+   "de": {
+    "f": "In welchen Sprachen gibt es CarpD?",
+    "a": "In 10 Sprachen: Deutsch, Englisch, Französisch, Italienisch, Polnisch, Tschechisch, Slowakisch, Slowenisch, Ungarisch und Kroatisch. Du stellst sie unter Mehr → Einstellungen → Sprache ein."
+   },
+   "en": {
+    "f": "Which languages is CarpD available in?",
+    "a": "In 10 languages: German, English, French, Italian, Polish, Czech, Slovak, Slovenian, Hungarian and Croatian. Set it under More → Settings → Language."
+   }
+  },
+  {
+   "id": "einheiten",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "einstellungen"
+   ],
+   "de": {
+    "f": "Kann ich in Pfund statt Kilo eintragen?",
+    "a": "Ja. Unter Mehr → Einstellungen → Einheiten wählst du kg oder lb, Meter oder Fuß, °C oder °F und km/h oder mph. Deine Werte werden immer genau gespeichert und nur für die Anzeige umgerechnet."
+   },
+   "en": {
+    "f": "Can I use pounds instead of kilos?",
+    "a": "Yes. Under More → Settings → Units choose kg or lb, metres or feet, °C or °F and km/h or mph. Your values are always stored exactly and only converted for display."
+   }
+  },
+  {
+   "id": "beissindex-genau",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "beissindex"
+   ],
+   "de": {
+    "f": "Wie genau ist der Beißindex?",
+    "a": "Der Beißindex ist eine Schätzung aus Faustregeln: Luftdruck-Trend, Wassertemperatur, Tageszeit, Wind, Wolken & Regen und Mond. Ab 5 Sessions passt er sich an deine eigenen Bisse an. Eine Garantie ist er nicht – Karpfen halten sich nicht immer an Regeln."
+   },
+   "en": {
+    "f": "How accurate is the bite index?",
+    "a": "The bite index is an estimate based on rules of thumb: pressure trend, water temperature, time of day, wind, clouds & rain and moon. After 5 sessions it adapts to your own bites. It’s no guarantee – carp don’t always follow the rules."
+   }
+  },
+  {
+   "id": "wassertemperatur",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "heute"
+   ],
+   "de": {
+    "f": "Woher kennt CarpD die Wassertemperatur?",
+    "a": "Sie ist grob geschätzt – aus der Lufttemperatur der letzten Wochen und der Größe des Gewässers. Sie kann einige Grad abweichen, gemessen wird nichts."
+   },
+   "en": {
+    "f": "How does CarpD know the water temperature?",
+    "a": "It’s a rough estimate – from the air temperature of the last few weeks and the size of the water. It can be a few degrees off; nothing is measured."
+   }
+  },
+  {
+   "id": "ruten",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "session-starten"
+   ],
+   "de": {
+    "f": "Wie viele Ruten kann ich in einer Session nutzen?",
+    "a": "Ohne Pro 2 Ruten, mit Pro 4. Jede Rute bekommt eigene Knöpfe für Fang, Fehlbiss und Verloren."
+   },
+   "en": {
+    "f": "How many rods can I use in a session?",
+    "a": "2 rods without Pro, 4 with Pro. Each rod gets its own buttons for catch, missed bite and lost."
+   }
+  },
+  {
+   "id": "import",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "session-nachtragen"
+   ],
+   "de": {
+    "f": "Kann ich alte Fänge aus einer anderen App übernehmen?",
+    "a": "Einen Import aus anderen Apps gibt es nicht. Du kannst alte Fänge aber von Hand nachtragen – ohne Pro 10 Fänge, mit Pro unbegrenzt."
+   },
+   "en": {
+    "f": "Can I import old catches from another app?",
+    "a": "There’s no import from other apps. But you can add past catches by hand – 10 without Pro, unlimited with Pro."
+   }
+  },
+  {
+   "id": "fehler-melden",
+   "thema": "technik",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Ich habe einen Fehler gefunden – wie melde ich ihn?",
+    "a": "Unter Mehr → „Feedback & Fehler melden“ öffnet sich deine Mail-App mit einer fertigen Nachricht an uns. App-Version, System-Version und Sprache stehen schon drin, du schreibst nur noch, was passiert ist."
+   },
+   "en": {
+    "f": "I found a bug – how do I report it?",
+    "a": "Under More → “Feedback & report a bug” your mail app opens with a ready message to us. App version, system version and language are already included – you just describe what happened."
+   }
+  },
+  {
+   "id": "daten-wo",
+   "thema": "server",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "konto"
+   ],
+   "de": {
+    "f": "Wo liegen meine Daten?",
+    "a": "Alles, was du einträgst, liegt auf deinem Handy. Nur wenn du ein Konto nutzt (Crews, Cloud-Sicherung) oder die anonyme Statistik einschaltest, kommt etwas auf unseren Server: Supabase im Rechenzentrum in Frankfurt am Main, Deutschland."
+   },
+   "en": {
+    "f": "Where is my data stored?",
+    "a": "Everything you enter is stored on your phone. Only if you use an account (crews, cloud backup) or switch on anonymous statistics does anything go to our server: Supabase in a data centre in Frankfurt am Main, Germany."
+   }
+  },
+  {
+   "id": "server-usa",
+   "thema": "server",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [],
+   "de": {
+    "f": "Supabase ist eine US-Firma – sind meine Daten in den USA?",
+    "a": "Die Daten liegen im Rechenzentrum in Frankfurt. Mit Supabase haben wir einen Vertrag zur Auftragsverarbeitung, und für mögliche Zugriffe aus den USA gelten die Standardvertragsklauseln der EU-Kommission. Die Details stehen in der Datenschutzerklärung."
+   },
+   "en": {
+    "f": "Supabase is a US company – is my data in the USA?",
+    "a": "The data is stored in the Frankfurt data centre. We have a data processing agreement with Supabase, and the EU Commission’s standard contractual clauses apply to any access from the USA. Details are in the privacy policy."
+   }
+  },
+  {
+   "id": "offline",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "offline"
+   ],
+   "de": {
+    "f": "Funktioniert CarpD ohne Netz?",
+    "a": "Ja. Sessions, Bisse, Fänge, Fotos, Fangbuch, Spots und Scheine funktionieren ohne Netz, und die Gewässer von 13 Ländern sind in der App. Fehlt beim Fang das Wetter, lädt CarpD es nach, sobald du wieder Netz hast."
+   },
+   "en": {
+    "f": "Does CarpD work without signal?",
+    "a": "Yes. Sessions, bites, catches, photos, catch log, swims and licences work without signal, and the waters of 13 countries are in the app. If the weather is missing for a catch, CarpD fetches it once you have signal again."
+   }
+  },
+  {
+   "id": "was-braucht-netz",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "offline"
+   ],
+   "de": {
+    "f": "Wofür braucht CarpD trotzdem Internet?",
+    "a": "Für das aktuelle Wetter und die Vorhersage, die Ortssuche, Gewässer außerhalb der 13 Länder, die Karte selbst sowie für Crews und die Cloud-Sicherung."
+   },
+   "en": {
+    "f": "What does CarpD still need internet for?",
+    "a": "For current weather and forecasts, place search, waters outside the 13 countries, the map itself, and for crews and cloud backup."
+   }
+  },
+  {
+   "id": "sync",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "cloud"
+   ],
+   "de": {
+    "f": "Werden meine Daten zwischen zwei Handys abgeglichen?",
+    "a": "Ein laufender Abgleich zwischen zwei Handys findet nicht statt. Mit Konto und Pro sichert CarpD alles in die Cloud, und auf einem anderen Handy holst du diese Sicherung mit „Aus der Cloud wiederherstellen“."
+   },
+   "en": {
+    "f": "Is my data synced between two phones?",
+    "a": "There is no live sync between two phones. With an account and Pro, CarpD backs up everything to the cloud, and on another phone you get that backup with “Restore from cloud”."
+   }
+  },
+  {
+   "id": "backup",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "cloud",
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Wie sichere ich meine Fänge?",
+    "a": "Zwei Wege: Mit Konto und Pro läuft die Cloud-Sicherung automatisch einmal am Tag und nach jeder Session. Oder kostenlos unter Mehr → Datensicherung → „Sicherung erstellen“ als Datei, die du z. B. in iCloud Drive oder Google Drive speicherst."
+   },
+   "en": {
+    "f": "How do I back up my catches?",
+    "a": "Two ways: with an account and Pro, cloud backup runs automatically once a day and after every session. Or for free under More → Backup → “Create backup” as a file you save e.g. in iCloud Drive or Google Drive."
+   }
+  },
+  {
+   "id": "erinnerung-sicherung",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Erinnert mich CarpD ans Sichern?",
+    "a": "Ja, wenn du es einschaltest: nach 30 Tagen ohne Sicherung abends um 19 Uhr, danach jede Woche, bis du sicherst."
+   },
+   "en": {
+    "f": "Does CarpD remind me to back up?",
+    "a": "Yes, if you switch it on: after 30 days without a backup at 7 pm, then every week until you back up."
+   }
+  },
+  {
+   "id": "handywechsel",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "cloud",
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Ich bekomme ein neues Handy – wie nehme ich alles mit?",
+    "a": "Mit Cloud-Sicherung: auf dem neuen Handy anmelden und „Aus der Cloud wiederherstellen“. Ohne Konto: auf dem alten Handy eine Sicherung als Datei erstellen und auf dem neuen unter Datensicherung → „Sicherung laden“ öffnen. Danach CarpD einmal ganz schließen und neu öffnen."
+   },
+   "en": {
+    "f": "I’m getting a new phone – how do I take everything with me?",
+    "a": "With cloud backup: sign in on the new phone and tap “Restore from cloud”. Without an account: create a backup file on the old phone and open it on the new one under Backup → “Load backup”. Then close CarpD completely once and reopen it."
+   }
+  },
+  {
+   "id": "handy-kaputt",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "cloud",
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Was passiert mit meinen Fängen, wenn das Handy kaputtgeht?",
+    "a": "Dann sind nur die Daten zurückzuholen, die gesichert sind – über die Cloud-Sicherung oder deine letzte Sicherungsdatei. Deshalb: regelmäßig sichern."
+   },
+   "en": {
+    "f": "What happens to my catches if my phone breaks?",
+    "a": "Then you can only get back what was backed up – from the cloud backup or your latest backup file. So: back up regularly."
+   }
+  },
+  {
+   "id": "app-loeschen",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Was passiert, wenn ich die App lösche?",
+    "a": "Dann werden alle CarpD-Daten vom Handy entfernt. Sichere vorher, wenn du sie behalten willst."
+   },
+   "en": {
+    "f": "What happens if I delete the app?",
+    "a": "Then all CarpD data is removed from the phone. Back up first if you want to keep it."
+   }
+  },
+  {
+   "id": "konto-noetig",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "konto"
+   ],
+   "de": {
+    "f": "Brauche ich ein Konto?",
+    "a": "Nein. CarpD funktioniert ohne Konto. Ein Konto brauchst du nur für Crews und die Cloud-Sicherung."
+   },
+   "en": {
+    "f": "Do I need an account?",
+    "a": "No. CarpD works without an account. You only need one for crews and cloud backup."
+   }
+  },
+  {
+   "id": "login",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "konto"
+   ],
+   "de": {
+    "f": "Wie melde ich mich an?",
+    "a": "Mit Apple, mit Google oder mit einem Code, den wir dir per E-Mail schicken. Ein Passwort gibt es nicht. Danach wählst du einen Spitznamen."
+   },
+   "en": {
+    "f": "How do I sign in?",
+    "a": "With Apple, with Google, or with a code we send you by e-mail. There is no password. Then you choose a nickname."
+   }
+  },
+  {
+   "id": "konto-loeschen",
+   "thema": "server",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "konto"
+   ],
+   "de": {
+    "f": "Wie lösche ich mein Konto?",
+    "a": "In der App unter Mehr → Konto → „Konto löschen“. Dein Konto und alles, was daran hängt, wird sofort vom Server gelöscht – auch Cloud-Sicherungen und in Crews Geteiltes. Auf deinem Handy bleibt alles erhalten."
+   },
+   "en": {
+    "f": "How do I delete my account?",
+    "a": "In the app under More → Account → “Delete account”. Your account and everything linked to it is deleted from the server immediately – including cloud backups and what you shared in crews. Everything stays on your phone."
+   }
+  },
+  {
+   "id": "datenexport",
+   "thema": "server",
+   "status": "ok",
+   "links": [
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Kann ich meine Daten exportieren?",
+    "a": "Ja, als Sicherungsdatei mit allen Fängen, Fotos, Sessions, Spots, Scheinen, Touren und Einstellungen – unter Mehr → Datensicherung. Diese Datei liest CarpD wieder ein. Einen Export als Tabelle (z. B. für Excel) gibt es nicht."
+   },
+   "en": {
+    "f": "Can I export my data?",
+    "a": "Yes, as a backup file with all catches, photos, sessions, swims, licences, trips and settings – under More → Backup. CarpD can read this file back in. There is no export as a spreadsheet (e.g. for Excel)."
+   }
+  },
+  {
+   "id": "auskunft",
+   "thema": "server",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [],
+   "de": {
+    "f": "Wie bekomme ich Auskunft über meine Daten auf dem Server?",
+    "a": "Schreib uns an info@carpd.de. Du hast unter anderem das Recht auf Auskunft, Berichtigung und Löschung. Anonym geteilte Statistik-Daten löschst du jederzeit selbst unter Mehr → Anonyme Statistik."
+   },
+   "en": {
+    "f": "How do I get information about my data on the server?",
+    "a": "Write to us at info@carpd.de. Among other things you have the right to access, correction and deletion. You can delete anonymously shared statistics data yourself at any time under More → Anonymous statistics."
+   }
+  },
+  {
+   "id": "was-privat",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "sichtbarkeit"
+   ],
+   "de": {
+    "f": "Was bleibt privat?",
+    "a": "Grundsätzlich alles. Jeder Fang ist standardmäßig „Privat“, Spots, Notizen und Fotos bleiben auf deinem Handy. Was du teilst – in einer Crew oder anonym für die Statistik – entscheidest du selbst."
+   },
+   "en": {
+    "f": "What stays private?",
+    "a": "Basically everything. Every catch is “Private” by default; swims, notes and photos stay on your phone. What you share – in a crew or anonymously for statistics – is up to you."
+   }
+  },
+  {
+   "id": "spots-geschuetzt",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "spots",
+    "crew-teilen"
+   ],
+   "de": {
+    "f": "Sind meine Spots geschützt?",
+    "a": "Ja. Spots und genaue Standorte verlassen dein Handy nie – außer in deiner privaten Cloud-Sicherung, an die nur du kommst. Crews sehen nur den Namen des Gewässers, die anonyme Statistik nur das Gewässer, nie die Stelle am Ufer."
+   },
+   "en": {
+    "f": "Are my swims protected?",
+    "a": "Yes. Swims and exact locations never leave your phone – except in your private cloud backup, which only you can access. Crews only see the name of the water, anonymous statistics only the water, never the spot on the bank."
+   }
+  },
+  {
+   "id": "spots-klauen",
+   "thema": "kritisch",
+   "status": "ok",
+   "links": [
+    "spots-geschuetzt"
+   ],
+   "de": {
+    "f": "Klaut ihr meine Spots?",
+    "a": "Nein. Deine Spots liegen auf deinem Handy und werden nirgends geteilt. Selbst in der Cloud-Sicherung liegen sie in einem privaten Speicher nur für dein Konto – wir schauen sie nicht an und geben sie nicht weiter."
+   },
+   "en": {
+    "f": "Are you stealing my swims?",
+    "a": "No. Your swims are on your phone and aren’t shared anywhere. Even in the cloud backup they sit in private storage just for your account – we don’t look at them and don’t pass them on."
+   }
+  },
+  {
+   "id": "crew-sieht",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "crew-teilen"
+   ],
+   "de": {
+    "f": "Was sieht meine Crew von mir?",
+    "a": "Deinen Spitznamen und – nur wenn du es erlaubst – dein Profilbild und deinen echten Namen. Bei geteilten Fängen: Foto, Art, Gewicht, Gewässername und Tag. Nie deinen Spot, Koordinaten, Köder, Montage oder Notizen."
+   },
+   "en": {
+    "f": "What does my crew see about me?",
+    "a": "Your nickname and – only if you allow it – your profile picture and real name. For shared catches: photo, species, weight, water name and day. Never your swim, coordinates, bait, rig or notes."
+   }
+  },
+  {
+   "id": "crew-fremde",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "crew-gruenden"
+   ],
+   "de": {
+    "f": "Können Fremde meine Crew-Fänge sehen?",
+    "a": "Nein. Was du in einer Crew teilst, sehen nur die Mitglieder dieser Crew – keine anderen Nutzer und nicht die Öffentlichkeit."
+   },
+   "en": {
+    "f": "Can strangers see my crew catches?",
+    "a": "No. What you share in a crew is only visible to that crew’s members – no other users and not the public."
+   }
+  },
+  {
+   "id": "gps-fotos",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "foto-teilen"
+   ],
+   "de": {
+    "f": "Stecken GPS-Daten in meinen geteilten Fotos?",
+    "a": "Nein. Fangfotos, die du über CarpD teilst, enthalten keinen Standort. Fotos für die Crew werden zusätzlich verkleinert und ohne Standort- und Kameradaten gespeichert."
+   },
+   "en": {
+    "f": "Are there GPS data in my shared photos?",
+    "a": "No. Catch photos you share through CarpD contain no location. Photos for your crew are also resized and stored without location and camera data."
+   }
+  },
+  {
+   "id": "foto-schutz",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "crew-teilen"
+   ],
+   "de": {
+    "f": "Kann man auf meinem Foto den Spot erkennen?",
+    "a": "Das kann passieren, wenn Ufer, Bäume oder Häuser zu sehen sind. Mit Pro hilft der Foto-Schutz: Du wählst den Ausschnitt und malst den Hintergrund unscharf, bevor die Crew das Foto sieht. Dein Original bleibt unverändert."
+   },
+   "en": {
+    "f": "Can someone recognise my swim from my photo?",
+    "a": "That can happen if the bank, trees or houses are visible. With Pro the photo protection helps: you choose the crop and blur the background before your crew sees the photo. Your original stays unchanged."
+   }
+  },
+  {
+   "id": "daten-verkauf",
+   "thema": "datenschutz",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [],
+   "de": {
+    "f": "Verkauft ihr meine Daten?",
+    "a": "Nein. Wir geben deine Daten nicht weiter. CarpD finanziert sich über CarpD Pro, nicht über Daten."
+   },
+   "en": {
+    "f": "Do you sell my data?",
+    "a": "No. We don’t pass on your data. CarpD is funded by CarpD Pro, not by data."
+   }
+  },
+  {
+   "id": "werbung-tracking",
+   "thema": "datenschutz",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [],
+   "de": {
+    "f": "Gibt es Werbung oder Tracking?",
+    "a": "Nein, in CarpD gibt es keine Werbung und kein Tracking. Damit wir Fehler finden, meldet die App Abstürze automatisch an Sentry (Speicherung in Frankfurt) – nur technische Angaben, ohne Standorte, Fänge, Spots, Fotos oder Namen."
+   },
+   "en": {
+    "f": "Is there advertising or tracking?",
+    "a": "No, there is no advertising and no tracking in CarpD. To help us find bugs, the app automatically reports crashes to Sentry (stored in Frankfurt) – only technical details, without locations, catches, swims, photos or names."
+   }
+  },
+  {
+   "id": "login-daten",
+   "thema": "datenschutz",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "konto"
+   ],
+   "de": {
+    "f": "Was speichert ihr, wenn ich mich anmelde?",
+    "a": "Eine zufällige Kontonummer, deine E-Mail-Adresse (bei Apple auf Wunsch eine Weiterleitungsadresse), die Art der Anmeldung, Zeitpunkte von Anmeldung und letzter Nutzung und deinen Spitznamen. Deinen echten Namen nur, wenn du ausdrücklich erlaubst, dass andere ihn sehen."
+   },
+   "en": {
+    "f": "What do you store when I sign in?",
+    "a": "A random account number, your e-mail address (with Apple optionally a relay address), the sign-in method, times of sign-in and last use, and your nickname. Your real name only if you explicitly allow others to see it."
+   }
+  },
+  {
+   "id": "standort",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "karte"
+   ],
+   "de": {
+    "f": "Wofür braucht CarpD meinen Standort?",
+    "a": "Nur während du die App benutzt: um dich auf der Karte zu zeigen, das nächste Gewässer vorzuschlagen, Wetter, Sonne und Mond für deinen Ort zu berechnen und die Stelle eines Fangs zu speichern. Der Standort bleibt auf deinem Handy."
+   },
+   "en": {
+    "f": "Why does CarpD need my location?",
+    "a": "Only while you use the app: to show you on the map, suggest the nearest water, calculate weather, sun and moon for your location and save where a catch was made. Your location stays on your phone."
+   }
+  },
+  {
+   "id": "push",
+   "thema": "datenschutz",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "crew-teilen"
+   ],
+   "de": {
+    "f": "Wie funktionieren die Crew-Nachrichten?",
+    "a": "Teilt jemand aus deiner Crew einen Fang, bekommst du eine kurze Nachricht mit Crew-Name, Spitzname und Gewicht. Dafür meldet dein Handy eine Geräte-Adresse bei unserem Server an; verschickt wird über Apple bzw. Google. Abschalten kannst du das unter Mehr → Einstellungen → Benachrichtigungen."
+   },
+   "en": {
+    "f": "How do crew notifications work?",
+    "a": "When someone in your crew shares a catch, you get a short message with crew name, nickname and weight. For this your phone registers a device address with our server; delivery goes through Apple or Google. Switch it off under More → Settings → Notifications."
+   }
+  },
+  {
+   "id": "warnungen-server",
+   "thema": "datenschutz",
+   "status": "ok",
+   "links": [
+    "warnungen"
+   ],
+   "de": {
+    "f": "Laufen die Wetter-Warnungen über euren Server?",
+    "a": "Nein. Wetter-Hinweise und Erinnerungen plant dein Handy selbst. Nur die Crew-Nachrichten kommen über unseren Server."
+   },
+   "en": {
+    "f": "Do the weather warnings go through your server?",
+    "a": "No. Your phone schedules weather alerts and reminders itself. Only crew notifications come through our server."
+   }
+  },
+  {
+   "id": "statistik-was",
+   "thema": "statistik",
+   "status": "ok",
+   "links": [
+    "anonyme-statistik"
+   ],
+   "de": {
+    "f": "Welche Daten fließen in die anonyme Statistik?",
+    "a": "Nur Fänge auf „Statistik“ (oder „Öffentlich“), und nur wenn du die anonyme Statistik eingeschaltet hast: das Gewässer, Datum und Stunde, Fischart, Gewicht, Köder, das Wetter zu der Zeit, die Mondhelligkeit, der Beißindex und die App-Version."
+   },
+   "en": {
+    "f": "What data goes into the anonymous statistics?",
+    "a": "Only catches set to “Statistics” (or “Public”), and only if you’ve switched on anonymous statistics: the water, date and hour, species, weight, bait, the weather at the time, moon brightness, the bite index and the app version."
+   }
+  },
+  {
+   "id": "statistik-nie",
+   "thema": "statistik",
+   "status": "ok",
+   "links": [
+    "anonyme-statistik"
+   ],
+   "de": {
+    "f": "Was wird für die Statistik nie übertragen?",
+    "a": "Dein Name, deine E-Mail-Adresse, dein genauer Standort (also dein Spot), Fotos, Notizen und die Montage."
+   },
+   "en": {
+    "f": "What is never sent for statistics?",
+    "a": "Your name, your e-mail address, your exact location (i.e. your swim), photos, notes and rig."
+   }
+  },
+  {
+   "id": "statistik-anonym",
+   "thema": "statistik",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "anonyme-statistik"
+   ],
+   "de": {
+    "f": "Wie wird die Statistik anonym gehalten?",
+    "a": "Die App meldet sich ohne Namen und Passwort beim Server an und bekommt nur eine zufällige Nummer, damit du deine Daten selbst löschen kannst. Die Nummer verrät nicht, wer du bist. Die IP-Adresse wird nicht zu deinen Fängen gespeichert, und das Ganze ist von deinem Konto getrennt."
+   },
+   "en": {
+    "f": "How are the statistics kept anonymous?",
+    "a": "The app connects to the server without a name or password and only gets a random number, so you can delete your data yourself. The number doesn’t reveal who you are. The IP address is not stored with your catches, and all of this is separate from your account."
+   }
+  },
+  {
+   "id": "kleine-gewaesser",
+   "thema": "statistik",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "anonyme-statistik"
+   ],
+   "de": {
+    "f": "Kann man bei kleinen Gewässern auf mich schließen?",
+    "a": "Dafür gibt es eine Grenze: Statistiken zu einem Gewässer gibt es erst, wenn dort mindestens 5 verschiedene Angler etwas gemeldet haben – und nur zusammengefasst, nie einzelne Fänge. Wer ganz sicher gehen will, lässt die anonyme Statistik einfach aus oder stellt einzelne Fänge auf „Privat“."
+   },
+   "en": {
+    "f": "Could someone identify me on a small water?",
+    "a": "There is a threshold for that: statistics for a water only appear once at least 5 different anglers have reported there – and only in summary, never individual catches. If you want to be completely sure, simply leave anonymous statistics off or set individual catches to “Private”."
+   }
+  },
+  {
+   "id": "statistik-aus",
+   "thema": "statistik",
+   "status": "ok",
+   "links": [
+    "anonyme-statistik"
+   ],
+   "de": {
+    "f": "Kann ich die anonyme Statistik abschalten?",
+    "a": "Ja, jederzeit unter Mehr → Anonyme Statistik. Standardmäßig ist sie aus – solange du nicht zustimmst, bleibt alles auf deinem Handy. Mit „Meine Daten vom Server löschen“ entfernst du alles, was du schon geteilt hast."
+   },
+   "en": {
+    "f": "Can I switch off anonymous statistics?",
+    "a": "Yes, at any time under More → Anonymous statistics. By default it’s off – as long as you don’t agree, everything stays on your phone. “Delete my data from the server” removes everything you’ve already shared."
+   }
+  },
+  {
+   "id": "statistik-privat-fang",
+   "thema": "statistik",
+   "status": "ok",
+   "links": [
+    "sichtbarkeit"
+   ],
+   "de": {
+    "f": "Was passiert, wenn ich einen geteilten Fang auf „Privat“ stelle?",
+    "a": "Dann wird er auch vom Server gelöscht. Dasselbe gilt, wenn du den Fang löschst."
+   },
+   "en": {
+    "f": "What happens if I set a shared catch to “Private”?",
+    "a": "Then it’s also deleted from the server. The same applies if you delete the catch."
+   }
+  },
+  {
+   "id": "beissindex-lernt",
+   "thema": "statistik",
+   "status": "ok",
+   "links": [
+    "beissindex"
+   ],
+   "de": {
+    "f": "Lernt der Beißindex aus meinen Bissen?",
+    "a": "Ja, auf deinem Handy: Nach jeder echten Session am Wasser merkt sich CarpD die Bedingungen Stunde für Stunde und vergleicht sie mit deinen Bissen. Ab 5 Sessions zählen die Faktoren mehr, die bei dir wirklich etwas bewirken."
+   },
+   "en": {
+    "f": "Does the bite index learn from my bites?",
+    "a": "Yes, on your phone: after every real session at the water CarpD remembers the conditions hour by hour and compares them with your bites. After 5 sessions the factors that really matter for you count more."
+   }
+  },
+  {
+   "id": "kostenlos",
+   "thema": "abo",
+   "status": "ok",
+   "links": [
+    "vergleich"
+   ],
+   "de": {
+    "f": "Ist CarpD kostenlos?",
+    "a": "Ja, CarpD gibt es kostenlos – mit Grenzen, z. B. 2 Ruten pro Session, 3 Spots und Wetter für 7 Tage. Mit CarpD Pro fallen die Grenzen weg und Auswertung, Vorhersage und Planung kommen dazu. Die genaue Übersicht steht unter „Kostenlos & Pro“."
+   },
+   "en": {
+    "f": "Is CarpD free?",
+    "a": "Yes, CarpD is free – with limits, e.g. 2 rods per session, 3 swims and a 7-day forecast. CarpD Pro removes the limits and adds analysis, forecasting and planning. The full overview is under “Free & Pro”."
+   }
+  },
+  {
+   "id": "preis",
+   "thema": "abo",
+   "status": "ok",
+   "links": [
+    "vergleich"
+   ],
+   "de": {
+    "f": "Was kostet CarpD Pro?",
+    "a": "49,99 € im Jahr (also 4,17 € im Monat) oder 5,99 € im Monat. Bezahlt wird über den App Store bzw. Google Play."
+   },
+   "en": {
+    "f": "How much is CarpD Pro?",
+    "a": "€49.99 per year (that’s €4.17 a month) or €5.99 per month. Payment goes through the App Store or Google Play."
+   }
+  },
+  {
+   "id": "probezeit",
+   "thema": "abo",
+   "status": "offen",
+   "links": [
+    "vergleich"
+   ],
+   "de": {
+    "f": "Kann ich Pro kostenlos testen?",
+    "a": "Ja, das Jahresabo kannst du 1 Monat gratis testen. Kündigst du vorher, zahlst du nichts."
+   },
+   "en": {
+    "f": "Can I try Pro for free?",
+    "a": "Yes, you can try the yearly plan free for 1 month. Cancel before then and you pay nothing."
+   }
+  },
+  {
+   "id": "kuendigen",
+   "thema": "abo",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Wie kündige ich CarpD Pro?",
+    "a": "Das Abo verlängert sich automatisch und ist jederzeit kündbar – im App Store (iPhone: Einstellungen → dein Name → Abonnements) bzw. bei Google Play (Play Store → Profil → Zahlungen & Abos → Abos)."
+   },
+   "en": {
+    "f": "How do I cancel CarpD Pro?",
+    "a": "The subscription renews automatically and can be cancelled at any time – in the App Store (iPhone: Settings → your name → Subscriptions) or on Google Play (Play Store → profile → Payments & subscriptions → Subscriptions)."
+   }
+  },
+  {
+   "id": "nach-kuendigung",
+   "thema": "abo",
+   "status": "ok",
+   "links": [
+    "fangbuch"
+   ],
+   "de": {
+    "f": "Was passiert mit meinen Daten, wenn ich Pro beende?",
+    "a": "Deine Daten bleiben auf deinem Handy. Es gelten dann wieder die Grenzen der kostenlosen Version – z. B. siehst du ältere Fänge weiter in der Liste, ihre Details aber nur mit Pro."
+   },
+   "en": {
+    "f": "What happens to my data if I stop Pro?",
+    "a": "Your data stays on your phone. The limits of the free version apply again – e.g. you still see older catches in the list, but their details only with Pro."
+   }
+  },
+  {
+   "id": "kaeufe-wiederherstellen",
+   "thema": "abo",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Ich habe ein neues Handy – ist mein Abo weg?",
+    "a": "Nein. Im Fenster „CarpD Pro“ tippst du auf „Käufe wiederherstellen“, dann ist Pro wieder freigeschaltet – mit demselben Apple- bzw. Google-Konto."
+   },
+   "en": {
+    "f": "I have a new phone – is my subscription gone?",
+    "a": "No. In the “CarpD Pro” screen tap “Restore purchases” and Pro is unlocked again – with the same Apple or Google account."
+   }
+  },
+  {
+   "id": "testphase",
+   "thema": "abo",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Was gilt in der Testphase?",
+    "a": "Bis zum Start am 01.03.2027 ist für alle Tester alles frei – du musst nichts kaufen."
+   },
+   "en": {
+    "f": "What applies during the test phase?",
+    "a": "Until the launch on 1 March 2027 everything is free for all testers – you don’t have to buy anything."
+   }
+  },
+  {
+   "id": "gruender",
+   "thema": "abo",
+   "status": "ok",
+   "links": [
+    "konto"
+   ],
+   "de": {
+    "f": "Was ist ein Gründer-Platz?",
+    "a": "Wer vor dem Start am 01.03.2027 ein Konto mit Spitznamen anlegt, bekommt – solange frei – einen der 250 Gründer-Plätze: 1 Jahr CarpD Pro gratis ab dem Start, also bis 01.03.2028. Wie viele Plätze noch frei sind, siehst du unter Mehr → Konto."
+   },
+   "en": {
+    "f": "What is a founder spot?",
+    "a": "Anyone who creates an account with a nickname before the launch on 1 March 2027 gets – while available – one of the 250 founder spots: 1 year of CarpD Pro free from launch, i.e. until 1 March 2028. You can see how many are left under More → Account."
+   }
+  },
+  {
+   "id": "zahlungsdaten",
+   "thema": "abo",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [],
+   "de": {
+    "f": "Seht ihr meine Zahlungsdaten?",
+    "a": "Nein. Die Bezahlung läuft komplett über Apple bzw. Google, deine Kreditkarte o. Ä. erhalten wir nie. Für die Verwaltung der Abos nutzen wir den Dienst RevenueCat."
+   },
+   "en": {
+    "f": "Do you see my payment details?",
+    "a": "No. Payment runs entirely through Apple or Google; we never receive your credit card or similar. We use the RevenueCat service to manage subscriptions."
+   }
+  },
+  {
+   "id": "heimatland",
+   "thema": "abo",
+   "status": "ok",
+   "links": [
+    "einstellungen"
+   ],
+   "de": {
+    "f": "Was bedeutet „Heimatland“?",
+    "a": "Die Gewässer in deinem Heimatland sind kostenlos, andere Länder gibt es mit Pro. Das Heimatland übernimmt CarpD beim ersten Start vom Handy. Stimmt es nicht, kannst du es unter Mehr → Einstellungen genau einmal ändern."
+   },
+   "en": {
+    "f": "What does “home country” mean?",
+    "a": "Waters in your home country are free, other countries come with Pro. CarpD takes the home country from your phone on first launch. If it’s wrong, you can change it exactly once under More → Settings."
+   }
+  },
+  {
+   "id": "crew-kosten",
+   "thema": "abo",
+   "status": "ok",
+   "links": [
+    "crew-gruenden"
+   ],
+   "de": {
+    "f": "Kosten Crews etwas?",
+    "a": "Einer Crew beitreten ist kostenlos, ebenso 3 Fänge pro Monat teilen. Crews gründen, unbegrenzt teilen, Foto-Schutz und Touren in der Crew zeigen gibt es mit Pro."
+   },
+   "en": {
+    "f": "Do crews cost anything?",
+    "a": "Joining a crew is free, as is sharing 3 catches per month. Founding crews, unlimited sharing, photo protection and showing trips in the crew come with Pro."
+   }
+  },
+  {
+   "id": "crew-was",
+   "thema": "crews",
+   "status": "ok",
+   "links": [
+    "crew-gruenden"
+   ],
+   "de": {
+    "f": "Was ist eine Crew?",
+    "a": "Eine geschlossene Gruppe für dich und deine Kumpels mit höchstens 20 Mitgliedern. Ihr teilt Fänge und zeigt euch geplante Touren – nur die Mitglieder sehen, was darin passiert."
+   },
+   "en": {
+    "f": "What is a crew?",
+    "a": "A closed group for you and your mates with up to 20 members. You share catches and show each other planned trips – only members see what happens in it."
+   }
+  },
+  {
+   "id": "crew-einladen",
+   "thema": "crews",
+   "status": "ok",
+   "links": [
+    "crew-gruenden"
+   ],
+   "de": {
+    "f": "Wie lade ich Kumpels in meine Crew ein?",
+    "a": "Als Chef oder Admin: in der Crew „Kumpels einladen“ → „Einladungs-Code erstellen“ und den Code per WhatsApp, SMS oder Mail schicken – oder vorlesen. Der Code gilt 7 Tage. Der Kumpel tippt dann Mehr → Meine Crews → „Mit Code beitreten“."
+   },
+   "en": {
+    "f": "How do I invite mates to my crew?",
+    "a": "As boss or admin: in the crew tap “Invite mates” → “Create invite code” and send the code via WhatsApp, SMS or mail – or read it out. The code is valid for 7 days. Your mate then taps More → My crews → “Join with code”."
+   }
+  },
+  {
+   "id": "crew-wann",
+   "thema": "crews",
+   "status": "ok",
+   "links": [
+    "crew-teilen"
+   ],
+   "de": {
+    "f": "Kann ich einen Fang erst später für die Crew sichtbar machen?",
+    "a": "Ja. Beim Teilen wählst du: sofort, nach Session-Ende oder nach 3, 7 oder 14 Tagen. Vorher sieht den Fang außer dir niemand."
+   },
+   "en": {
+    "f": "Can I make a catch visible to my crew later?",
+    "a": "Yes. When sharing you choose: immediately, after the session ends, or after 3, 7 or 14 days. Until then nobody but you sees the catch."
+   }
+  },
+  {
+   "id": "crew-zurueck",
+   "thema": "crews",
+   "status": "ok",
+   "links": [
+    "crew-melden"
+   ],
+   "de": {
+    "f": "Kann ich einen geteilten Fang wieder zurückholen?",
+    "a": "Ja. Beim Fang in der Crew auf ⋯ → „Aus der Crew zurückziehen“. Er verschwindet dann für alle in dieser Crew, in deinem Fangbuch bleibt er."
+   },
+   "en": {
+    "f": "Can I take back a shared catch?",
+    "a": "Yes. Tap ⋯ on the catch in the crew → “Withdraw from crew”. It disappears for everyone in that crew but stays in your catch log."
+   }
+  },
+  {
+   "id": "crew-verlassen",
+   "thema": "crews",
+   "status": "ok",
+   "links": [
+    "crew-gruenden"
+   ],
+   "de": {
+    "f": "Was passiert, wenn der Chef die Crew verlässt?",
+    "a": "Dann wird ein Admin neuer Chef – gibt es keinen, das Mitglied, das am längsten dabei ist. Ist der Chef allein, wird die Crew gelöscht."
+   },
+   "en": {
+    "f": "What happens if the boss leaves the crew?",
+    "a": "Then an admin becomes the new boss – if there is none, the member who has been there longest. If the boss is alone, the crew is deleted."
+   }
+  },
+  {
+   "id": "crew-regeln",
+   "thema": "crews",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [
+    "crew-melden"
+   ],
+   "de": {
+    "f": "Was ist in Crews verboten?",
+    "a": "Unter anderem Beleidigungen, Belästigung, anstößige Inhalte, Tierquälerei oder unwürdige Fischfotos, Spam und das Verraten fremder Spots. Gemeldete Inhalte prüfen wir innerhalb von 24 Stunden; wer gegen die Regeln verstößt, kann aus Crews und aus CarpD ausgeschlossen werden."
+   },
+   "en": {
+    "f": "What is not allowed in crews?",
+    "a": "Among other things insults, harassment, offensive content, animal cruelty or undignified fish photos, spam and revealing other people’s swims. We review reports within 24 hours; anyone breaking the rules can be excluded from crews and from CarpD."
+   }
+  },
+  {
+   "id": "kwo-alle-angeln",
+   "thema": "kritisch",
+   "status": "ok",
+   "rechtlich": true,
+   "links": [],
+   "de": {
+    "f": "Warum CarpD und nicht eine der großen Angel-Apps?",
+    "a": "Allround-Apps wollen alle Fischarten abdecken. CarpD macht nur Karpfen – dafür gezielt: Bissprotokoll pro Rute, Fang in Sekunden, Luftdruck-Trend, Beißindex, Rotlicht für die Nacht und Spots, die privat bleiben. Probier es einfach kostenlos aus."
+   },
+   "en": {
+    "f": "Why CarpD and not one of the big fishing apps?",
+    "a": "All-round apps try to cover every species. CarpD does carp only – and does it properly: bite log per rod, catches in seconds, pressure trend, bite index, red light for the night and swims that stay private. Just try it for free."
+   }
+  },
+  {
+   "id": "wenn-weg",
+   "thema": "kritisch",
+   "status": "ok",
+   "links": [
+    "sicherung-datei"
+   ],
+   "de": {
+    "f": "Was, wenn es CarpD irgendwann nicht mehr gibt?",
+    "a": "Deine Fänge, Fotos und Spots liegen auf deinem Handy, nicht nur auf unserem Server. Funktionen, die unseren Server brauchen – Crews und Cloud-Sicherung –, würden dann nicht mehr gehen. Mach deshalb ab und zu eine Sicherung als Datei."
+   },
+   "en": {
+    "f": "What if CarpD shuts down one day?",
+    "a": "Your catches, photos and swims are on your phone, not only on our server. Features that need our server – crews and cloud backup – would then stop working. So make a backup file every now and then."
+   }
+  },
+  {
+   "id": "warum-geld",
+   "thema": "kritisch",
+   "status": "ok",
+   "links": [
+    "vergleich"
+   ],
+   "de": {
+    "f": "Warum kostet Pro überhaupt Geld?",
+    "a": "Server, Wetter- und Kartendienste und die Weiterentwicklung kosten Geld. Statt Werbung oder Datenhandel finanziert sich CarpD über Pro – die Grundfunktionen bleiben kostenlos."
+   },
+   "en": {
+    "f": "Why does Pro cost money at all?",
+    "a": "Servers, weather and map services and ongoing development cost money. Instead of ads or selling data, CarpD is funded by Pro – the basic features stay free."
+   }
+  },
+  {
+   "id": "akku",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "warnungen"
+   ],
+   "de": {
+    "f": "Läuft CarpD die ganze Nacht im Hintergrund?",
+    "a": "Nein, das muss es nicht. Wetter-Hinweise plant das Handy im Voraus, sie kommen auch, wenn die App geschlossen ist. Die Vorhersage dafür wird jedes Mal aktualisiert, wenn du CarpD öffnest."
+   },
+   "en": {
+    "f": "Does CarpD run in the background all night?",
+    "a": "No, it doesn’t need to. Your phone schedules weather alerts in advance, and they arrive even when the app is closed. The forecast for them is updated every time you open CarpD."
+   }
+  },
+  {
+   "id": "rotlicht-was",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "rotlicht"
+   ],
+   "de": {
+    "f": "Was bringt der Rotlicht-Modus?",
+    "a": "Die App leuchtet nachts nur rot auf Schwarz. Das blendet nicht, deine Augen bleiben an die Dunkelheit gewöhnt und du störst die Nachbarn am Wasser nicht. Er schaltet sich auf Wunsch bei Sonnenuntergang automatisch ein."
+   },
+   "en": {
+    "f": "What’s the point of red-light mode?",
+    "a": "At night the app only glows red on black. It doesn’t dazzle, your eyes stay used to the dark and you don’t disturb your neighbours at the water. If you like, it switches on automatically at sunset."
+   }
+  },
+  {
+   "id": "selbstausloeser",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "selbstausloeser"
+   ],
+   "de": {
+    "f": "Wie mache ich allein ein Fangfoto?",
+    "a": "Mit dem Selbstauslöser: Handy hinstellen, 3, 5 oder 10 Sekunden wählen, auslösen und Fisch präsentieren. CarpD piept herunter, macht 5 Fotos hintereinander und du wählst das beste. Selbstauslöser und Serienbild gibt es mit Pro."
+   },
+   "en": {
+    "f": "How do I take a catch photo on my own?",
+    "a": "With the self-timer: set up your phone, choose 3, 5 or 10 seconds, press the shutter and present the fish. CarpD beeps down, takes 5 photos in a row and you pick the best. Self-timer and burst come with Pro."
+   }
+  },
+  {
+   "id": "wetter-beim-fang",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "fang-eintragen"
+   ],
+   "de": {
+    "f": "Muss ich das Wetter beim Fang selbst eintragen?",
+    "a": "Nein. CarpD speichert Zeit, Ort und Wetter automatisch – Luftdruck mit Trend, Wind, Luft- und geschätzte Wassertemperatur. Ohne Netz wird das Wetter später nachgeladen."
+   },
+   "en": {
+    "f": "Do I have to enter the weather for a catch myself?",
+    "a": "No. CarpD saves time, location and weather automatically – pressure with trend, wind, air and estimated water temperature. Without signal the weather is filled in later."
+   }
+  }
+ ]
+}
