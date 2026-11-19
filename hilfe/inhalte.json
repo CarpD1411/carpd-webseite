@@ -2516,7 +2516,7 @@
   {
    "id": "probezeit",
    "thema": "abo",
-   "status": "offen",
+   "status": "ok",
    "links": [
     "vergleich"
    ],
