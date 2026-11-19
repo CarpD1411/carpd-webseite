@@ -63,3 +63,6 @@ h1 { letter-spacing: .2px; }
 .vorschau-frage[open] summary::after { content: "–"; }
 .vorschau-frage p { padding: 0 18px 16px; margin: 0; color: var(--neben, #a3a3a3); font-size: 16.5px; }
 .faq-vorschau-knopf { text-align: center; margin-top: 18px; }
+
+/* Sprünge zu Abschnitten (#crews, #funktionen …): Platz für die feste Leiste oben lassen */
+html { scroll-padding-top: 84px; }
