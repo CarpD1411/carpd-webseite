@@ -1,0 +1,137 @@
+/* Hilfe-Center carpd.de/hilfe – baut auf seite.css und marke.css auf (gleiche Farben, Schrift, Ecken). */
+
+.sprachwahl { font-family: var(--marke); font-weight: 600; font-size: 15px; background: transparent; color: var(--text); border: 1.5px solid var(--linie); border-radius: 10px; min-width: 44px; min-height: 36px; cursor: pointer; }
+.sprachwahl:hover { border-color: var(--oliv); }
+@media (max-width: 760px) { .leiste nav a.aktiv { display: inline; } }
+
+/* Kopf mit Suche */
+.hilfe-kopf { padding: 48px 0 20px; text-align: center; position: relative; }
+.hilfe-kopf::before { content: ""; position: absolute; inset: -40% -10% auto -10%; height: 600px; background: radial-gradient(circle at 50% 0, rgba(138,154,59,.2), transparent 60%); pointer-events: none; }
+.hilfe-kopf > * { position: relative; }
+.hilfe-kopf h1 { margin-bottom: 8px; }
+.hilfe-kopf p { color: var(--neben); font-size: 18px; margin: 0 auto 22px; max-width: 560px; }
+.suche { position: relative; max-width: 640px; margin: 0 auto; }
+.suche input { width: 100%; min-height: 60px; border-radius: var(--app-rund); border: 1.5px solid var(--linie); background: var(--flaeche); color: var(--text); font-size: 18px; padding: 0 20px 0 52px; outline: none; }
+.suche input:focus { border-color: var(--oliv); }
+.suche svg { position: absolute; left: 18px; top: 50%; width: 22px; height: 22px; transform: translateY(-50%); color: var(--neben); }
+.ki-start { margin-top: 16px; }
+
+/* Kacheln */
+.kacheln { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 26px 0 10px; }
+.kachel { display: flex; gap: 14px; align-items: center; background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--app-rund); padding: 18px; color: var(--text); text-decoration: none; min-height: 88px; transition: border-color .15s, transform .15s; }
+.kachel:hover { border-color: var(--oliv); transform: translateY(-1px); }
+.kachel .icon { flex: 0 0 46px; height: 46px; border-radius: 12px; background: rgba(138,154,59,.15); color: var(--oliv-hell); display: grid; place-items: center; }
+.kachel .icon svg { width: 24px; height: 24px; }
+.kachel b { display: block; font-family: var(--marke); font-weight: 600; font-size: 20px; line-height: 1.15; }
+.kachel span { color: var(--neben); font-size: 14.5px; }
+
+/* Abschnitte */
+.abschnitt-titel { font-family: var(--marke); font-weight: 600; font-size: 13px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--oliv-hell); margin: 30px 0 10px; }
+.brotkrumen { font-size: 14px; color: var(--neben); margin: 22px 0 4px; }
+.brotkrumen a { color: var(--neben); }
+.seite-titel { font-family: var(--marke); font-weight: 600; font-size: clamp(30px, 5vw, 44px); letter-spacing: 0; line-height: 1.08; margin: 6px 0 12px; }
+
+/* Anleitung */
+.liste { display: grid; gap: 10px; }
+.zeile { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--app-rund); padding: 15px 18px; color: var(--text); text-decoration: none; font-size: 17px; }
+.zeile:hover { border-color: var(--oliv); }
+.zeile small { display: block; color: var(--neben); font-size: 14px; }
+.zeile .pfeil { color: var(--neben); flex: 0 0 auto; }
+.anleitung-seite .was { font-size: 18px; color: var(--text); }
+.schritte { counter-reset: s; list-style: none; padding: 0; margin: 10px 0 18px; }
+.schritte li { counter-increment: s; position: relative; padding: 10px 0 10px 46px; border-bottom: 1px solid var(--linie); font-size: 16.5px; }
+.schritte li::before { content: counter(s); position: absolute; left: 0; top: 8px; width: 32px; height: 32px; border-radius: 50%; background: var(--oliv); color: #0B0B0B; font-family: var(--marke); font-weight: 700; display: grid; place-items: center; }
+.tipp { background: rgba(138,154,59,.1); border: 1px solid rgba(138,154,59,.35); border-radius: var(--app-rund); padding: 14px 18px; font-size: 16px; margin: 0 0 18px; }
+.tipp b { color: var(--oliv-hell); font-family: var(--marke); font-weight: 600; }
+.medien { border: 1.5px dashed var(--linie); border-radius: var(--app-rund); padding: 26px; text-align: center; color: var(--neben); font-size: 14.5px; margin: 0 0 18px; }
+.weiter-nav { display: flex; justify-content: space-between; gap: 10px; margin: 18px 0; }
+.weiter-nav a { flex: 1; }
+
+/* FAQ */
+.themen { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 16px; }
+.themen a { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--linie); color: var(--neben); text-decoration: none; font-size: 14.5px; font-weight: 600; }
+.themen a.aktiv, .themen a:hover { border-color: var(--oliv); color: var(--text); }
+details.frage { background: var(--flaeche); border: 1px solid var(--linie); border-radius: var(--app-rund); margin-bottom: 10px; }
+details.frage summary { cursor: pointer; list-style: none; padding: 16px 48px 16px 18px; font-weight: 650; font-size: 17px; position: relative; }
+details.frage summary::-webkit-details-marker { display: none; }
+details.frage summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; color: var(--oliv-hell); font-family: var(--marke); }
+details.frage[open] summary::after { content: "–"; }
+details.frage .antwort { padding: 0 18px 16px; color: var(--neben); font-size: 16.5px; }
+details.frage .antwort p { margin: 0 0 8px; }
+.mehr-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.mehr-links a { font-size: 14px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--linie); color: var(--oliv-hell); text-decoration: none; }
+.mehr-links a:hover { border-color: var(--oliv); }
+mark { background: rgba(168,186,74,.3); color: var(--text); border-radius: 3px; padding: 0 2px; }
+.leer-hinweis { color: var(--neben); padding: 18px; background: var(--flaeche); border-radius: var(--app-rund); border: 1px solid var(--linie); }
+
+/* Kostenlos & Pro */
+.tabelle .ja { color: var(--oliv-hell); font-weight: 800; }
+.tabelle .nein { color: #6b6b6b; }
+.preis-hinweis { margin-bottom: 18px; }
+
+/* Assistent */
+.chat-knopf { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 30; display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 22px 0 18px; border-radius: 999px; border: 0; background: var(--oliv); color: #0B0B0B; font-family: var(--marke); font-weight: 600; font-size: 19px; cursor: pointer; box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+.chat-knopf svg { width: 24px; height: 24px; }
+.chat-knopf:hover { background: var(--oliv-hell); }
+.chat { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 31; width: min(420px, calc(100vw - 24px)); height: min(640px, calc(100dvh - 100px)); display: flex; flex-direction: column; background: #111; border: 1px solid var(--linie); border-radius: 20px; box-shadow: 0 24px 80px rgba(0,0,0,.7); overflow: hidden; }
+.chat[hidden] { display: none; }
+.chat-kopf { display: flex; align-items: center; gap: 10px; padding: 14px 14px 12px 18px; border-bottom: 1px solid var(--linie); }
+.chat-kopf > div { flex: 1; }
+.chat-kopf strong { display: block; font-family: var(--marke); font-weight: 600; font-size: 21px; }
+.chat-kopf small { color: var(--neben); font-size: 12.5px; }
+.vorlesen-schalter { font-size: 12.5px; color: var(--neben); display: flex; align-items: center; gap: 6px; max-width: 120px; line-height: 1.2; }
+.vorlesen-schalter input { accent-color: var(--oliv); width: 18px; height: 18px; }
+.chat-zu { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--linie); background: transparent; color: var(--text); font-size: 24px; cursor: pointer; }
+.chat-verlauf { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.blase { max-width: 88%; padding: 11px 14px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; }
+.blase.ich { align-self: flex-end; background: var(--oliv); color: #0B0B0B; border-bottom-right-radius: 6px; }
+.blase.bot { align-self: flex-start; background: var(--flaeche2); border: 1px solid var(--linie); border-bottom-left-radius: 6px; }
+.blase.bot .mehr-links { margin-top: 10px; }
+.blase-fuss { display: flex; align-items: center; gap: 8px; margin-top: 8px; color: var(--neben); font-size: 12px; }
+.lautsprecher { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--linie); background: transparent; color: var(--oliv-hell); cursor: pointer; display: grid; place-items: center; }
+.lautsprecher svg { width: 18px; height: 18px; }
+.lautsprecher.spricht { background: var(--oliv); color: #0B0B0B; }
+.tippt { color: var(--neben); font-style: italic; }
+.vorschlaege { display: flex; flex-wrap: wrap; gap: 8px; }
+.vorschlaege button { font-size: 14px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--linie); background: transparent; color: var(--text); cursor: pointer; text-align: left; }
+.vorschlaege button:hover { border-color: var(--oliv); }
+.chat-eingabe { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--linie); }
+.chat-eingabe input[type=text] { flex: 1; min-height: 48px; border-radius: 14px; border: 1.5px solid var(--linie); background: var(--flaeche); color: var(--text); font-size: 16px; padding: 0 14px; outline: none; }
+.chat-eingabe input[type=text]:focus { border-color: var(--oliv); }
+.chat-eingabe button { width: 48px; min-height: 48px; border-radius: 14px; border: 0; background: var(--oliv); color: #0B0B0B; cursor: pointer; display: grid; place-items: center; }
+.chat-eingabe button svg { width: 22px; height: 22px; }
+.chat-eingabe .mikro { background: var(--flaeche2); color: var(--oliv-hell); border: 1.5px solid var(--linie); touch-action: none; user-select: none; -webkit-user-select: none; }
+.chat-eingabe .mikro.hoert { background: #E0342B; color: #fff; border-color: #E0342B; animation: puls 1.1s infinite; }
+@keyframes puls { 0%,100% { box-shadow: 0 0 0 0 rgba(224,52,43,.6); } 50% { box-shadow: 0 0 0 8px rgba(224,52,43,0); } }
+.falle { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.chat-hinweis { margin: 0; padding: 0 14px 12px; font-size: 13px; color: var(--neben); }
+
+@media (max-width: 760px) {
+  .kacheln { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kachel { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px; }
+  .kachel b { font-size: 18px; }
+  .chat { right: 0; bottom: 0; width: 100vw; height: 100dvh; border-radius: 0; border: 0; }
+  .chat-knopf { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 380px) { .kacheln { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .chat-eingabe .mikro.hoert { animation: none; } }
+@media print { .chat, .chat-knopf, .leiste, footer { display: none !important; } }
+
+/* Startseite: Chat oben, groß und übersichtlich */
+.chat.eingebettet { position: relative; right: auto; bottom: auto; z-index: 1; width: 100%; height: 470px; margin: 4px 0 6px; text-align: left; border-radius: var(--app-rund); box-shadow: 0 20px 60px rgba(0,0,0,.45), 0 0 0 1px rgba(138,154,59,.25); }
+.chat.eingebettet .chat-verlauf { padding: 18px; }
+.such-titel { margin-top: 26px; text-align: left; }
+@media (max-width: 760px) {
+  .chat.eingebettet { position: relative; width: 100%; height: 440px; border: 1px solid var(--linie); border-radius: var(--app-rund); }
+}
+.chat-knopf[hidden], .chat-zu[hidden] { display: none; }
+section.chat { padding: 0; }
+
+/* App-Icon im Chat */
+.chat-icon { width: 44px; height: 44px; border-radius: 11px; flex: 0 0 auto; box-shadow: 0 0 0 1px rgba(138,154,59,.35); }
+.chat-knopf-icon { width: 36px; height: 36px; border-radius: 9px; margin-left: -8px; }
+.chat-knopf { padding-left: 14px; }
+.bot-zeile { display: flex; align-items: flex-end; gap: 8px; align-self: flex-start; max-width: 94%; }
+.bot-zeile img { width: 30px; height: 30px; border-radius: 8px; flex: 0 0 auto; box-shadow: 0 0 0 1px rgba(138,154,59,.3); }
+.bot-zeile .blase { max-width: 100%; }
+.chat-kopf small { white-space: nowrap; }

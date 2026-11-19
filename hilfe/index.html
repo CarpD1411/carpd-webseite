@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hilfe & FAQ – CarpD</title>
+  <meta name="description" content="Hilfe zu CarpD, der App nur fürs Karpfenangeln: Anleitung von A bis Z, Kostenlos & Pro, Datenschutz einfach erklärt, Crews, Abo und über 70 Fragen mit Antwort. Mit KI-Assistent „Frag CarpD“.">
+  <meta property="og:title" content="CarpD – Hilfe & FAQ">
+  <meta property="og:description" content="Anleitung, Kostenlos & Pro, Datenschutz und über 70 Fragen – plus KI-Assistent „Frag CarpD“.">
+  <meta property="og:image" content="https://carpd.de/vorschau.png">
+  <meta property="og:url" content="https://carpd.de/hilfe/">
+  <link rel="canonical" href="https://carpd.de/hilfe/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CarpD">
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../seite.css">
+  <link rel="stylesheet" href="../marke.css">
+  <link rel="stylesheet" href="hilfe.css">
+</head>
+<body>
+  <header class="leiste">
+    <div class="breite">
+      <a class="marke" href="../index.html"><img src="../logo.svg" alt="" width="34" height="34"><span>Carp<span class="d">D</span></span></a>
+      <nav>
+        <a href="../funktionen.html" data-de="Funktionen" data-en="Features">Funktionen</a>
+        <a href="../preise.html" data-de="Kostenlos &amp; Pro" data-en="Free &amp; Pro">Kostenlos &amp; Pro</a>
+        <a class="aktiv" href="./" data-de="Hilfe &amp; FAQ" data-en="Help &amp; FAQ">Hilfe &amp; FAQ</a>
+        <button class="sprachwahl" id="sprachwahl" type="button" aria-label="Sprache wechseln / switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt" tabindex="-1">
+    <noscript><div class="breite schmal" style="padding:40px 20px">Die Hilfe braucht JavaScript. Schreib uns sonst an <a href="mailto:info@carpd.de">info@carpd.de</a>.</div></noscript>
+  </main>
+
+  <footer>
+    <div class="breite">
+      <span><strong style="color:var(--text)">Tight Lines!</strong> · <a href="../funktionen.html" data-de="Funktionen" data-en="Features">Funktionen</a> · <a href="../preise.html" data-de="Kostenlos &amp; Pro" data-en="Free &amp; Pro">Kostenlos &amp; Pro</a> · <a href="./" data-de="Hilfe &amp; FAQ" data-en="Help &amp; FAQ">Hilfe &amp; FAQ</a> · Gewässerdaten © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a></span>
+      <span><a href="../impressum.html" data-de="Impressum" data-en="Imprint">Impressum</a> · <a href="../datenschutz.html" data-de="Datenschutz" data-en="Privacy">Datenschutz</a> · <a href="../nutzungsbedingungen.html" data-de="Nutzungsbedingungen" data-en="Terms">Nutzungsbedingungen</a></span>
+    </div>
+  </footer>
+
+  <!-- KI-Assistent „Frag CarpD“ -->
+  <button class="chat-knopf" id="chatKnopf" type="button" aria-expanded="false" aria-controls="chat">
+    <img class="chat-knopf-icon" src="../apple-touch-icon.png" alt="" width="36" height="36">
+    <span data-de="Frag CarpD" data-en="Ask CarpD">Frag CarpD</span>
+  </button>
+  <section class="chat" id="chat" role="dialog" aria-modal="false" aria-labelledby="chatTitel" hidden>
+    <div class="chat-kopf">
+      <img class="chat-icon" src="../apple-touch-icon.png" alt="" width="44" height="44">
+      <div>
+        <strong id="chatTitel" data-de="Frag CarpD" data-en="Ask CarpD">Frag CarpD</strong>
+        <small data-de="KI-Antwort, ohne Gewähr" data-en="AI answer, no guarantee">KI-Antwort, ohne Gewähr</small>
+      </div>
+      <label class="vorlesen-schalter" id="vorlesenSchalter" hidden><input type="checkbox" id="autoVorlesen"> <span data-de="Vorlesen" data-en="Read aloud">Vorlesen</span></label>
+      <button class="chat-zu" id="chatZu" type="button" aria-label="Schließen">×</button>
+    </div>
+    <div class="chat-verlauf" id="chatVerlauf" aria-live="polite"></div>
+    <form class="chat-eingabe" id="chatForm" autocomplete="off">
+      <input type="text" name="website" class="falle" tabindex="-1" aria-hidden="true">
+      <input type="text" id="chatFeld" maxlength="300" required data-de-ph="Deine Frage zu CarpD …" data-en-ph="Your question about CarpD …" placeholder="Deine Frage zu CarpD …" aria-label="Frage">
+      <button type="button" class="mikro" id="mikro" hidden aria-label="Gedrückt halten zum Sprechen" data-de-label="Gedrückt halten zum Sprechen" data-en-label="Hold to talk">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z" fill="currentColor"/></svg>
+      </button>
+      <button type="submit" class="senden" aria-label="Senden">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10l12.6 2-12.6 2z" fill="currentColor"/></svg>
+      </button>
+    </form>
+    <p class="chat-hinweis" id="hoerHinweis" hidden></p>
+  </section>
+
+  <script src="hilfe.js"></script>
+</body>
+</html>

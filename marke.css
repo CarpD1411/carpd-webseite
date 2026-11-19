@@ -53,3 +53,13 @@ h1 { letter-spacing: .2px; }
 
 /* Plaketten und kleine Marken */
 .plakette, .neu, .marke-pro, .marke-frei { font-family: var(--marke); font-weight: 600; letter-spacing: .4px; }
+
+/* Startseite: FAQ-Vorschau (Hilfe & FAQ) */
+.faq-vorschau { max-width: 820px; margin: 0 auto; }
+.vorschau-frage { background: var(--flaeche, #1a1a1a); border: 1px solid var(--linie, #2a2a2a); border-radius: var(--app-rund); margin-bottom: 10px; }
+.vorschau-frage summary { cursor: pointer; list-style: none; padding: 16px 48px 16px 18px; font-weight: 650; font-size: 17px; position: relative; }
+.vorschau-frage summary::-webkit-details-marker { display: none; }
+.vorschau-frage summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 24px; color: #A8BA4A; font-family: var(--marke); }
+.vorschau-frage[open] summary::after { content: "–"; }
+.vorschau-frage p { padding: 0 18px 16px; margin: 0; color: var(--neben, #a3a3a3); font-size: 16.5px; }
+.faq-vorschau-knopf { text-align: center; margin-top: 18px; }
