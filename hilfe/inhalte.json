@@ -2536,11 +2536,11 @@
    "links": [],
    "de": {
     "f": "Wie kündige ich CarpD Pro?",
-    "a": "Das Abo verlängert sich automatisch und ist jederzeit kündbar – im App Store (iPhone: Einstellungen → dein Name → Abonnements) bzw. bei Google Play (Play Store → Profil → Zahlungen & Abos → Abos)."
+    "a": "Das Abo verlängert sich automatisch und ist jederzeit kündbar – im App Store (iPhone: Einstellungen → dein Name → Abonnements) bzw. bei Google Play (Play Store → Profil → Zahlungen & Abos → Abos). Nach dem Ende von Pro sichert CarpD nicht mehr in die Cloud – vorhandene Cloud-Sicherungen kannst du aber weiter laden oder löschen (Mehr → Datensicherung). Alles auf deinem Handy bleibt."
    },
    "en": {
     "f": "How do I cancel CarpD Pro?",
-    "a": "The subscription renews automatically and can be cancelled at any time – in the App Store (iPhone: Settings → your name → Subscriptions) or on Google Play (Play Store → profile → Payments & subscriptions → Subscriptions)."
+    "a": "The subscription renews automatically and can be cancelled at any time – in the App Store (iPhone: Settings → your name → Subscriptions) or on Google Play (Play Store → profile → Payments & subscriptions → Subscriptions). Once Pro ends, CarpD no longer backs up to the cloud – but you can still restore or delete your existing cloud backups (More → Backup). Everything on your phone stays."
    }
   },
   {
