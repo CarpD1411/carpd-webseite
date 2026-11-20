@@ -7,6 +7,8 @@
   'use strict';
 
   var SERVER = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/swift-processor';
+  // Eigene Stimme (ElevenLabs) über unseren Server – mit Grenzen; bei jedem Fehler liest die Stimme des Geräts vor
+  var STIMME = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/vorlesen';
   var main = document.getElementById('inhalt');
   var daten = null;
   var sprache = startSprache();
@@ -256,14 +258,15 @@
     t('beispiele').forEach(function (b) { var k = document.createElement('button'); k.type = 'button'; k.textContent = b; k.addEventListener('click', function () { fragen_(b); }); v.appendChild(k); });
     verlauf.appendChild(v);
   }
-  function blase(wer, text, links, mitLautsprecher) {
+  function blase(wer, text, links, mitLautsprecher, zeichen, antwortSprache) {
     var b = document.createElement('div'); b.className = 'blase ' + wer;
     b.innerHTML = esc(text).replace(/\n/g, '<br>');
     if (wer === 'bot' && links && links.length) b.insertAdjacentHTML('beforeend', linkLeiste(links));
-    if (wer === 'bot' && mitLautsprecher && 'speechSynthesis' in window) {
+    if (wer === 'bot' && mitLautsprecher && ('speechSynthesis' in window || zeichen)) {
       var fuss = document.createElement('div'); fuss.className = 'blase-fuss';
       var l = document.createElement('button'); l.type = 'button'; l.className = 'lautsprecher'; l.setAttribute('aria-label', t('vorlesen'));
       l.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      l._zeichen = zeichen || ''; l._sprache = antwortSprache || '';
       l.addEventListener('click', function () { if (l.classList.contains('spricht')) stillsein(); else vorlesen(text, l); });
       fuss.appendChild(l); fuss.insertAdjacentHTML('beforeend', '<span>' + esc(sprache === 'de' ? 'KI-Antwort, ohne Gewähr' : 'AI answer, no guarantee') + '</span>');
       b.appendChild(fuss);
@@ -334,7 +337,7 @@
       .catch(function () { return lokaleAntwort(q); })
       .then(function (d) {
         denkt._huelle.remove();
-        var b = blase('bot', d.antwort || (t('fehler') + daten.kontakt), d.links || [], true);
+        var b = blase('bot', d.antwort || (t('fehler') + daten.kontakt), d.links || [], true, d.antwort && d.zeichen, fs);
         if (!d.limit) { gespraech.push({ role: 'user', content: q }); gespraech.push({ role: 'assistant', content: d.antwort || '' }); }
         if (document.getElementById('autoVorlesen').checked && b._lautsprecher) vorlesen(d.antwort, b._lautsprecher);
         wartet = false;
@@ -360,20 +363,51 @@
     function punkte(v) { return (v.localService ? 8 : 0) + (gut.test(v.name) ? 4 : 0) + (land.test(v.lang) ? 2 : 0); } // Stimmen auf dem Gerät zuerst – Online-Stimmen schicken den Text an Google o. Ä.
     return passend[0];
   }
-  var aktiverKnopf = null;
+  var aktiverKnopf = null, ton = null, tonAbbruch = null;
+  function fertig(knopf) { knopf.classList.remove('spricht'); knopf.setAttribute('aria-label', t('vorlesen')); }
   function vorlesen(text, knopf) {
-    if (!('speechSynthesis' in window)) return;
     stillsein();
+    if (!knopf._zeichen) return geraetVorlesen(text, knopf);
+    // Eigene Stimme versuchen; klappt etwas nicht (Grenze erreicht, kein Netz, Dienst aus): Stimme des Geräts
+    aktiverKnopf = knopf; knopf.classList.add('spricht'); knopf.setAttribute('aria-label', t('stopp'));
+    var abbruch = tonAbbruch = window.AbortController ? new AbortController() : null;
+    // Abspieler schon jetzt (noch beim Tippen) anlegen – sonst blockiert das iPhone den Ton, der später vom Server kommt
+    var spieler = ton = new Audio();
+    try { var leer = spieler.play(); if (leer && leer.catch) leer.catch(function () {}); } catch (e) {}
+    var zuGeraet = function () { if (aktiverKnopf === knopf && knopf.classList.contains('spricht')) geraetVorlesen(text, knopf); };
+    fetch(STIMME, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: abbruch ? abbruch.signal : undefined,
+      body: JSON.stringify({ text: text, sprache: knopf._sprache || sprache, zeichen: knopf._zeichen }) })
+      .then(function (r) { if (!r.ok) throw new Error('stimme'); return r.blob(); })
+      .then(function (blob) {
+        if (abbruch && abbruch.signal.aborted) return;
+        if (ton !== spieler) return; // inzwischen gestoppt oder etwas anderes vorgelesen
+        var url = URL.createObjectURL(blob);
+        spieler.onended = function () { URL.revokeObjectURL(url); fertig(knopf); };
+        spieler.onerror = function () { URL.revokeObjectURL(url); zuGeraet(); };
+        spieler.src = url;
+        var p = spieler.play();
+        if (p && p.catch) p.catch(function () { URL.revokeObjectURL(url); zuGeraet(); });
+      })
+      .catch(function () { if (!(abbruch && abbruch.signal.aborted)) zuGeraet(); });
+  }
+  function geraetVorlesen(text, knopf) {
+    if (!('speechSynthesis' in window)) { fertig(knopf); return; }
+    speechSynthesis.cancel();
     var lang = frageSprache(text) || sprache;
     var u = new SpeechSynthesisUtterance(text.replace(/\n+/g, ' '));
     var s = besteStimme(lang); if (s) u.voice = s;
     u.lang = s ? s.lang : (lang === 'de' ? 'de-DE' : 'en-GB');
     u.rate = 0.95; u.pitch = 1;
     aktiverKnopf = knopf; knopf.classList.add('spricht'); knopf.setAttribute('aria-label', t('stopp'));
-    u.onend = u.onerror = function () { knopf.classList.remove('spricht'); knopf.setAttribute('aria-label', t('vorlesen')); };
+    u.onend = u.onerror = function () { fertig(knopf); };
     speechSynthesis.speak(u);
   }
-  function stillsein() { if ('speechSynthesis' in window) speechSynthesis.cancel(); if (aktiverKnopf) aktiverKnopf.classList.remove('spricht'); }
+  function stillsein() {
+    if (tonAbbruch) { tonAbbruch.abort(); tonAbbruch = null; }
+    if (ton) { ton.onended = ton.onerror = null; ton.pause(); ton = null; }
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+    if (aktiverKnopf) fertig(aktiverKnopf);
+  }
 
   // ---------- Spracheingabe: gedrückt halten zum Sprechen ----------
   var Erkennung = window.SpeechRecognition || window.webkitSpeechRecognition;
