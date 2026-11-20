@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gründerpreis – CarpD</title>
+  <meta name="description" content="CarpD Pro zum Gründerpreis: 39,99 € im Jahr (regulär 49,99 € ab dem Start) – solange dein Abo läuft. Nur für die Warteliste, nur bis zum Launch.">
+  <link rel="canonical" href="https://carpd.de/gruender/">
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../seite.css">
+  <link rel="stylesheet" href="../marke.css">
+  <link rel="stylesheet" href="../gruender.css">
+  <style>
+    .sprache { display: inline-flex; border: 1.5px solid var(--linie); border-radius: 12px; overflow: hidden; }
+    .sprache a { padding: 8px 14px; font-weight: 600; font-size: 15px; color: var(--neben); text-decoration: none; }
+    .sprache a[aria-current="true"] { background: var(--schein); color: var(--oliv-hell); }
+    .gruender { padding-top: 40px; }
+  </style>
+</head>
+<body class="unterseite-schein">
+  <header class="leiste">
+    <div class="breite">
+      <a class="marke" href="../index.html"><img src="../logo.svg" alt="" width="36" height="36"><span>Carp<span class="d">D</span></span></a>
+      <nav>
+        <span class="sprache" aria-label="Sprache / Language">
+          <a href="?lang=de" data-sp="de">DE</a><a href="?lang=en" data-sp="en">EN</a>
+        </span>
+        <button class="mond" type="button" data-rotlicht aria-pressed="false" title="Rotlicht-Modus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Rotlicht</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="gruender" id="gruender" data-vorn="ja">
+      <noscript><div class="breite"><p>Bitte JavaScript einschalten. / Please enable JavaScript.</p></div></noscript>
+    </section>
+  </main>
+
+  <footer>
+    <div class="breite">
+      <span><strong style="color:var(--text)">Tight Lines!</strong> · <a href="../index.html">carpd.de</a></span>
+      <span><a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a> · <a href="../nutzungsbedingungen.html">Nutzungsbedingungen</a></span>
+    </div>
+  </footer>
+
+  <script src="../gruender.js"></script>
+  <script>
+    (function () {
+      // Sprache: ?lang=en, sonst Englisch nur bei englischem Handy/Browser
+      var q = new URLSearchParams(location.search).get('lang');
+      var sp = q === 'en' || q === 'de' ? q : (/^en\b/i.test(navigator.language || '') ? 'en' : 'de');
+      document.documentElement.lang = sp;
+      if (sp === 'en') document.title = 'Founder price – CarpD';
+      // Sprachwahl behält die übrigen Link-Zusätze (z. B. ?kanal=messe)
+      document.querySelectorAll('.sprache a').forEach(function (a) {
+        var u = new URLSearchParams(location.search); u.set('lang', a.getAttribute('data-sp'));
+        a.href = '?' + u.toString();
+        a.setAttribute('aria-current', a.getAttribute('data-sp') === sp ? 'true' : 'false');
+      });
+      CarpDGruender.starten({ sprache: sp, pfad: '../', offen: true });
+    })();
+  </script>
+  <script src="../rotlicht.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+/* CarpD-Gründerpreis (gruender.js) – passt auf Startseite (Variablen --ufer/--schilf) und Unterseiten (--flaeche/--neben) */
+.gruender { --gp-flaeche: var(--ufer, var(--flaeche, #14150F)); --gp-neben: var(--schilf, var(--neben, #A3A3A3)); --gp-hg: var(--nacht, var(--hg, #0B0B0B));
+  padding: 72px 0; scroll-margin-top: 80px;
+  background: radial-gradient(ellipse 45% 60% at 85% 30%, var(--schein-leise), transparent 70%); }
+.gruender[data-vorn="ja"] { background: radial-gradient(ellipse 50% 70% at 15% 35%, var(--schein), transparent 70%), radial-gradient(ellipse 40% 60% at 90% 80%, var(--schein-leise), transparent 70%); }
+.gp { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+.gp-marke { font-family: var(--marke); font-weight: 600; font-size: 18px; letter-spacing: .6px; text-transform: uppercase; color: var(--oliv-hell); margin: 0 0 10px; }
+.gp h2 { font-size: clamp(30px, 4vw, 44px); margin: 0; }
+.gruender[data-vorn="nein"] .gp h2 { font-size: clamp(26px, 3.2vw, 36px); }
+.gp-einleitung { color: var(--gp-neben); font-size: 18px; margin: 14px 0 0; }
+.gp-preis { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; margin: 26px 0 0; }
+.gp-alt { font-family: var(--marke); font-weight: 600; font-size: 30px; color: var(--gp-neben); text-decoration-thickness: 2px; }
+.gp-neu { font-family: var(--marke); font-weight: 700; font-size: clamp(54px, 7vw, 80px); line-height: .9; color: var(--oliv); text-shadow: 0 0 50px var(--schein-stark); }
+.gp-jahr { font-family: var(--marke); font-weight: 600; font-size: 22px; color: var(--text); }
+.gp-unter { font-size: 14px; color: var(--gp-neben); margin: 8px 0 0; }
+.gp-punkte { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; }
+.gp-punkte li { position: relative; padding-left: 32px; font-weight: 600; }
+.gp-punkte li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--schein); box-shadow: inset 0 0 0 2px var(--oliv); }
+.gp-punkte li::after { content: ""; position: absolute; left: 6px; top: 8px; width: 4px; height: 8px; border: solid var(--oliv-hell); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.gp-bedingungen { margin-top: 20px; border: 0; }
+.gp-bedingungen summary { font-family: var(--schrift); font-weight: 600; font-size: 15px; color: var(--gp-neben); text-decoration: underline; text-underline-offset: 3px; padding: 6px 0; cursor: pointer; list-style: none; }
+.gp-bedingungen summary::-webkit-details-marker { display: none; }
+.gp-bedingungen summary::after { content: none; }
+.gp-bedingungen h3 { font-size: 20px; margin: 12px 0 6px; }
+.gp-bedingungen ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; color: var(--gp-neben); }
+.gp-bedingungen li { margin: 0 0 6px; }
+.gp-seite { display: flex; flex-direction: column; gap: 14px; }
+.gp-oeffnen { align-self: flex-start; }
+.gp-form[hidden], .gp-oeffnen[hidden] { display: none; }
+.gp-form input[type=text], .gp-form input[type=email] { min-height: 56px; padding: 0 18px; border-radius: 14px; border: 1.5px solid var(--linie); background: var(--gp-hg); color: var(--text); font-size: 18px; font-family: inherit; }
+.gp-form input[type=text]:focus, .gp-form input[type=email]:focus { outline: none; border-color: var(--oliv); box-shadow: 0 0 0 4px var(--schein); }
+.gp-frei { font-weight: 400; color: var(--gp-neben); }
+.gp-klein { margin: 0; font-size: 14px; color: var(--gp-neben); }
+.gp-aus { text-align: center; color: var(--gp-neben); }
+/* Formular-Grundstil auch auf Unterseiten (auf der Startseite steht er schon in index.html) */
+.gp .formular { border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 16px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--oliv) 10%, var(--gp-flaeche)), var(--gp-flaeche) 50%);
+  border: 1px solid color-mix(in srgb, var(--oliv) 30%, var(--linie)); }
+.gp .formular h3 { font-size: 28px; margin: 0; }
+.gp .formular label.feld { font-weight: 600; font-size: 16px; display: flex; flex-direction: column; gap: 8px; }
+.gp .formular fieldset { border: 0; margin: 0; padding: 0; }
+.gp .formular legend { font-weight: 600; font-size: 16px; margin-bottom: 8px; padding: 0; }
+.gp .handy-wahl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gp .handy-wahl label { position: relative; }
+.gp .handy-wahl input { position: absolute; opacity: 0; }
+.gp .handy-wahl span { display: block; text-align: center; min-height: 56px; line-height: 52px; border-radius: 14px; border: 1.5px solid var(--linie); background: var(--gp-hg); font-family: var(--marke); font-weight: 600; font-size: 20px; cursor: pointer; }
+.gp .handy-wahl input:checked + span { border-color: var(--oliv); color: var(--oliv-hell); background: var(--schein); }
+.gp .handy-wahl input:focus-visible + span { outline: 2px solid var(--oliv-hell); outline-offset: 2px; }
+.gp .zustimmung { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--gp-neben); cursor: pointer; }
+.gp .zustimmung input { width: 22px; height: 22px; margin: 1px 0 0; flex: none; accent-color: var(--oliv); }
+.gp .meldung { min-height: 24px; margin: 0; font-weight: 600; }
+.gp .meldung.gut { color: var(--oliv-hell); }
+.gp .meldung.schlecht { color: #E0342B; }
+.gp .falle { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+@media (max-width: 860px) {
+  .gp { grid-template-columns: 1fr; gap: 32px; }
+  .gruender { padding: 56px 0; }
+  .gp .formular { padding: 20px; }
+  .gp-oeffnen { align-self: stretch; }
+}

@@ -12,6 +12,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://carpd.de/">
   <link rel="canonical" href="https://carpd.de/">
+  <link rel="alternate" hreflang="de" href="https://carpd.de/">
+  <link rel="alternate" hreflang="en-GB" href="https://carpd.de/uk/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:site_name" content="CarpD">
@@ -393,6 +395,7 @@
       .schalter::after, .mond svg, .wegweiser a::before { transition: background-color var(--farbe) ease; }
     }
   </style>
+  <link rel="stylesheet" href="gruender.css">
 </head>
 <body>
 
@@ -404,6 +407,7 @@
         <a href="preise.html">Kostenlos &amp; Pro</a>
         <a href="#crews">Crews</a>
         <a href="hilfe/">Hilfe &amp; FAQ</a>
+        <a href="uk/" hreflang="en-GB" lang="en" title="English (UK)">EN</a>
         <button class="mond" type="button" data-rotlicht aria-pressed="false" title="Rotlicht-Modus">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Rotlicht</span>
         </button>
@@ -615,7 +619,7 @@
         </div>
         <details><summary>Sind meine Spots geschützt?</summary><p>Ja. Spots und genaue Standorte verlassen dein Handy nie – außer in deiner privaten Cloud-Sicherung, an die nur du kommst. Crews sehen nur den Namen des Gewässers, die anonyme Statistik nur das Gewässer, nie die Stelle am Ufer.</p></details>
         <details><summary>Wo liegen meine Daten?</summary><p>Alles, was du einträgst, liegt auf deinem Handy. Nur wenn du ein Konto nutzt (Crews, Cloud-Sicherung) oder die anonyme Statistik einschaltest, kommt etwas auf unseren Server: Supabase im Rechenzentrum in Frankfurt am Main, Deutschland.</p></details>
-        <details><summary>Was kostet CarpD Pro?</summary><p>49,99 € im Jahr (also 4,17 € im Monat) oder 5,99 € im Monat. Bezahlt wird über den App Store bzw. Google Play.</p></details>
+        <details><summary>Was kostet CarpD Pro?</summary><p>49,99 € im Jahr (also 4,17 € im Monat) oder 5,99 € im Monat. Bezahlt wird über den App Store bzw. Google Play. Wer sich vor dem Start in die Warteliste einträgt, bekommt den <a href="#gruender">Gründerpreis</a> von 39,99 € im Jahr.</p></details>
         <details><summary>Funktioniert CarpD ohne Netz?</summary><p>Ja. Sessions, Bisse, Fänge, Fotos, Fangbuch, Spots und Scheine funktionieren ohne Netz, und die Gewässer von 13 Ländern sind in der App. Fehlt beim Fang das Wetter, lädt CarpD es nach, sobald du wieder Netz hast.</p></details>
         <details><summary>Wie lösche ich mein Konto?</summary><p>In der App unter Mehr → Konto → „Konto löschen“. Dein Konto und alles, was daran hängt, wird sofort vom Server gelöscht – auch Cloud-Sicherungen und in Crews Geteiltes. Auf deinem Handy bleibt alles erhalten.</p></details>
         <p style="margin-top:32px"><a class="knopf rand" href="hilfe/">Alle Fragen ansehen</a></p>
@@ -659,26 +663,17 @@
 
           <div class="formular test-zu">
             <h3>Testphase voll – danke für euer Interesse!</h3>
-            <p class="leise" style="margin:0">Alle 200 Plätze sind vergeben. Trag dich in die Warteliste ein, dann sagen wir dir am Starttag Bescheid.</p>
-            <a class="knopf" href="#warteliste">Jetzt vorbestellen</a>
+            <p class="leise" style="margin:0">Alle 200 Plätze sind vergeben. Sichere dir jetzt den Gründerpreis.</p>
+            <a class="knopf" href="#gruender">Gründerpreis sichern</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Warteliste -->
-    <section class="warte getoent-rechts" id="warteliste">
-      <div class="breite">
-        <h2>Sag mir Bescheid, wenn Carp<span class="d">D</span> startet.</h2>
-        <p class="leise gross" style="margin-top:22px">Start am 1. März 2027. Trag deine E-Mail ein, und wir schreiben dir am Starttag. Kein Spam, abmelden jederzeit mit einem Klick.</p>
-        <form id="warteForm" novalidate>
-          <input type="email" name="email" placeholder="deine@email.de" autocomplete="email" required aria-label="E-Mail-Adresse">
-          <input type="text" name="firma" tabindex="-1" autocomplete="off" class="falle" aria-hidden="true">
-          <button class="knopf" type="submit">Eintragen</button>
-        </form>
-        <p id="warteMeldung" class="meldung" role="status" style="margin-top:14px"></p>
-        <p class="klein-text">Mit dem Eintragen bekommst du eine Mail zur Bestätigung. Mehr dazu in der <a href="datenschutz.html#warteliste">Datenschutzerklärung</a>.</p>
-      </div>
+    <!-- Gründerpreis (Warteliste). Inhalt, Preise und Fristen kommen aus gruender.js – dort ändern. -->
+    <section class="gruender" id="gruender" data-vorn="nein">
+      <span id="warteliste"></span>
+      <noscript><div class="breite"><p>Gründerpreis sichern: Bitte JavaScript einschalten oder <a href="gruender/">carpd.de/gruender</a> öffnen.</p></div></noscript>
     </section>
 
     <!-- Wir -->
@@ -703,14 +698,15 @@
         <a href="datenschutz.html">Datenschutz</a>
         <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a>
         <a href="datenschutz.html#konto-loeschen">Konto löschen</a>
+        <a href="uk/" hreflang="en-GB" lang="en">English</a>
       </nav>
     </div>
   </footer>
 
   <script>
-    // VORSCHAU = true: es wird nichts an den Server geschickt. Auf carpd.de: false.
-    // Zum Ansehen der „Testphase voll“-Ansicht in der Vorschau: index.html?voll
-    var VORSCHAU = false;
+    // VORSCHAU: überall außer auf carpd.de (z. B. Vorschau auf dem Mac) wird nichts an den Server geschickt.
+    // Zum Ansehen der „Testphase voll“-Ansicht in der Vorschau: index.html?voll (Gründerpreis-Wechsel: ?datum=2027-01-02)
+    var VORSCHAU = !/(^|\.)carpd\.de$/.test(location.hostname);
     var ADRESSE = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste';
 
     // Rotlicht-Schalter: Kopfzeile und Abschnitt schalten gemeinsam
@@ -747,7 +743,8 @@
       if (VORSCHAU) { if (/[?&]voll/.test(location.search)) voll(); }
       else fetch(ADRESSE + '?stand=1').then(function (r) { return r.json(); }).then(function (d) { if (d && d.voll) voll(); }).catch(function () {});
       var u = new URLSearchParams(location.search);
-      var quelle = (u.get('utm_source') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);
+      var kanal = (u.get('kanal') || '').toLowerCase().slice(0, 20);
+      var quelle = (u.get('utm_source') || (kanal && kanal !== 'landingpage' ? kanal : '') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);
       f.addEventListener('change', function () {
         var h = f.querySelector('input[name=handy]:checked');
         document.getElementById('testHinweis').classList.toggle('an', !!h && h.value === 'android');
@@ -762,7 +759,7 @@
         var b = f.querySelector('button'); b.disabled = true; m.className = 'meldung'; m.textContent = 'Einen Moment …';
         fetch(ADRESSE, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ liste: 'test', email: email, handy: handy, quelle: quelle, medium: medium, firma: f.firma.value })
+          body: JSON.stringify({ liste: 'test', email: email, handy: handy, quelle: quelle, medium: medium, kanal: kanal, firma: f.firma.value })
         }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll') voll(); return r.ok && d.ok; }); })
           .then(function (ok) {
             if (test.classList.contains('voll')) return;
@@ -774,28 +771,6 @@
       });
     })();
 
-    // Warteliste
-    (function () {
-      var f = document.getElementById('warteForm'), m = document.getElementById('warteMeldung');
-      var quelle = (new URLSearchParams(location.search).get('utm_source') || 'webseite').slice(0, 40);
-      f.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var email = f.email.value.trim();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return meldung(m, 'Bitte prüf deine E-Mail-Adresse.');
-        if (VORSCHAU) return meldung(m, VORSCHAU_TEXT, true);
-        var b = f.querySelector('button'); b.disabled = true; m.className = 'meldung'; m.textContent = 'Einen Moment …';
-        fetch(ADRESSE, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, quelle: quelle, firma: f.firma.value })
-        }).then(function (r) { return r.json().then(function (d) { return r.ok && d.ok; }); })
-          .then(function (ok) {
-            if (ok) { meldung(m, 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).', true); f.reset(); }
-            else meldung(m, 'Das hat nicht geklappt. Bitte versuch es später noch einmal.');
-          })
-          .catch(function () { meldung(m, 'Keine Verbindung. Bitte versuch es später noch einmal.'); })
-          .then(function () { b.disabled = false; });
-      });
-    })();
   </script>
 <script>
   // Wer weniger Bewegung möchte (Einstellung im System): Film anhalten, Standbild zeigen
@@ -803,5 +778,7 @@
     var f = document.querySelector('.handy-film video'); if (f) { f.removeAttribute('autoplay'); f.pause(); }
   }
 </script>
+<script src="gruender.js"></script>
+<script>CarpDGruender.starten({ sprache: 'de' });</script>
 </body>
 </html>

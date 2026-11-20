@@ -8,6 +8,7 @@
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="seite.css">
   <link rel="stylesheet" href="marke.css">
+  <style>.gruender-nr { font-family: var(--marke); font-weight: 600; font-size: 24px; color: var(--neben); margin: 18px 0; } .gruender-nr b { font-weight: 700; font-size: 64px; color: var(--oliv); margin-left: 8px; }</style>
 </head>
 <body class="unterseite-schein">
   <header class="leiste">
@@ -54,18 +55,44 @@
         abgemeldet: ['Abgemeldet', 'Deine E-Mail-Adresse ist gelöscht. Wir schreiben dir nicht mehr.'],
         fehler: ['Link ungültig', 'Dieser Link ist abgelaufen oder wurde schon benutzt. Trag dich auf der Startseite einfach noch einmal ein.']
       };
-      function zeigeErgebnis(s) {
+      // Englisch, wenn der Link aus einer englischen Mail kommt (&l=en)
+      var en = params.get('l') === 'en';
+      if (en) {
+        document.documentElement.lang = 'en';
+        ergebnis = {
+          ok: ['Thanks – you are in!', 'Your email address is confirmed and your founder price is reserved. We will email you at launch on 1 March 2027. Tight Lines!'],
+          testok: ['Thanks – you are a test angler!', 'Your sign-up is confirmed. The test phase starts on 1 January 2027 – then you will get your invitation by email.'],
+          abgemeldet: ['Unsubscribed', 'Your email address has been deleted. We will not email you again.'],
+          fehler: ['Link invalid', 'This link has expired or has already been used. Simply sign up again on carpd.de.']
+        };
+      } else {
+        ergebnis.ok = ['Danke – du bist dabei!', 'Deine E-Mail-Adresse ist bestätigt und dein Gründerpreis reserviert. Wir schreiben dir zum Start am 01.03.2027. Tight Lines!'];
+      }
+      function zeigeErgebnis(s, nr) {
         var t = ergebnis[s] || ergebnis.fehler;
         titel.textContent = t[0];
         text.textContent = t[1];
+        // Gründer-Nummer (seit Gründerpreis, SQL 035) groß zeigen
+        if (nr && (s === 'ok' || s === 'testok')) {
+          var n = document.createElement('p');
+          n.className = 'gruender-nr';
+          n.innerHTML = (en ? 'Founder no. ' : 'Gründer Nr. ') + '<b></b>';
+          n.querySelector('b').textContent = nr;
+          text.parentNode.insertBefore(n, text.nextSibling);
+        }
         knopf.hidden = true;
         meldung.textContent = '';
       }
 
       // Aus der Mail kommt man mit ?b= / ?tb= (bestätigen) bzw. ?x= / ?tx= (abmelden) hierher.
       // Erst der Knopfdruck ruft den Server – so können Mail-Prüfprogramme nichts auslösen.
-      var frage = {
-        b: ['Fast geschafft!', 'Bestätige mit einem Klick, dass wir dir schreiben dürfen, sobald CarpD startet.', 'Jetzt bestätigen'],
+      var frage = en ? {
+        b: ['Almost done!', 'Confirm with one click to reserve your founder price.', 'Confirm now'],
+        tb: ['Almost done!', 'Confirm your test angler sign-up with one click.', 'Confirm now'],
+        x: ['Unsubscribe', 'Click the button and we will delete your email address from the waiting list.', 'Unsubscribe now'],
+        tx: ['Unsubscribe', 'Click the button and we will delete your test angler sign-up.', 'Unsubscribe now']
+      } : {
+        b: ['Fast geschafft!', 'Bestätige mit einem Klick, dann ist dein Platz auf der Warteliste (und dein Gründerpreis) gesichert.', 'Jetzt bestätigen'],
         tb: ['Fast geschafft!', 'Bestätige deine Anmeldung als Testangler mit einem Klick.', 'Jetzt bestätigen'],
         x: ['Abmelden', 'Klick auf den Knopf, dann löschen wir deine E-Mail-Adresse von der Warteliste.', 'Jetzt abmelden'],
         tx: ['Abmelden', 'Klick auf den Knopf, dann löschen wir deine Testangler-Anmeldung.', 'Jetzt abmelden']
@@ -83,14 +110,14 @@
         knopf.hidden = false;
         knopf.addEventListener('click', function () {
           knopf.disabled = true;
-          meldung.textContent = 'Einen Moment …';
+          meldung.textContent = en ? 'One moment …' : 'Einen Moment …';
           fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ aktion: aktion, token: token })
           }).then(function (r) { return r.json(); })
-            .then(function (d) { zeigeErgebnis(d.s); })
+            .then(function (d) { zeigeErgebnis(d.s, d.nr); })
             .catch(function () {
-              meldung.textContent = 'Keine Verbindung. Bitte versuch es gleich noch einmal.';
+              meldung.textContent = en ? 'No connection. Please try again in a moment.' : 'Keine Verbindung. Bitte versuch es gleich noch einmal.';
               knopf.disabled = false;
             });
         });
