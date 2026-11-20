@@ -389,6 +389,16 @@
     // iPhone/iPad spielen Ton nur, wenn er beim Antippen startet. Darum jetzt (noch beim Tippen) einen winzigen stillen
     // Ton abspielen – das gibt diesen Abspieler frei – und die Geräte-Stimme mit einem leeren Satz freigeben (Rückfall).
     var spieler = ton = bereit || tonFreigeben();
+    // Schon einmal vorgelesen? Dann den gemerkten Ton sofort abspielen – ohne Server, ohne Wartezeit, zählt nicht
+    if (knopf._ton) {
+      spieler._echt = true;
+      spieler.onended = function () { fertig(knopf); };
+      spieler.onerror = function () { geraetVorlesen(text, knopf); };
+      spieler.src = knopf._ton;
+      var nochmal = spieler.play();
+      if (nochmal && nochmal.catch) nochmal.catch(function () { geraetVorlesen(text, knopf); });
+      return;
+    }
     // Kommt die Stimme nicht in 8 Sekunden, liest das Gerät vor
     var zuLang = setTimeout(function () { if (ton === spieler && !spieler._echt) { if (abbruch) abbruch.abort(); zuGeraet(); } }, 8000);
     var zuGeraet = function () { if (aktiverKnopf === knopf && knopf.classList.contains('spricht')) geraetVorlesen(text, knopf); };
@@ -400,12 +410,12 @@
         clearTimeout(zuLang);
         if (ton !== spieler) return; // inzwischen gestoppt oder etwas anderes vorgelesen
         spieler._echt = true;
-        var url = URL.createObjectURL(blob);
-        spieler.onended = function () { URL.revokeObjectURL(url); fertig(knopf); };
-        spieler.onerror = function () { URL.revokeObjectURL(url); zuGeraet(); };
+        var url = knopf._ton = URL.createObjectURL(blob); // gemerkt für nochmal Abspielen
+        spieler.onended = function () { fertig(knopf); };
+        spieler.onerror = function () { zuGeraet(); };
         spieler.src = url;
         var p = spieler.play();
-        if (p && p.catch) p.catch(function () { URL.revokeObjectURL(url); zuGeraet(); });
+        if (p && p.catch) p.catch(function () { zuGeraet(); });
       })
       .catch(function () { clearTimeout(zuLang); if (!(abbruch && abbruch.signal.aborted)) zuGeraet(); });
   }
