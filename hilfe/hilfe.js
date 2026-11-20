@@ -370,52 +370,50 @@
     function punkte(v) { return (v.localService ? 8 : 0) + (gut.test(v.name) ? 4 : 0) + (land.test(v.lang) ? 2 : 0); } // Stimmen auf dem Gerät zuerst – Online-Stimmen schicken den Text an Google o. Ä.
     return passend[0];
   }
-  var aktiverKnopf = null, ton = null, tonAbbruch = null;
+  var aktiverKnopf = null, ton = null, tonAbbruch = null, lauf = 0, spielerFest = null;
   function fertig(knopf) { knopf.classList.remove('spricht'); knopf.setAttribute('aria-label', t('vorlesen')); }
-  // Muss direkt beim Antippen laufen (Knopf 🔊 oder Absenden der Frage): gibt auf iPhone/iPad Ton und Geräte-Stimme frei
+  // Muss direkt beim Antippen laufen (Knopf 🔊 oder Absenden der Frage): gibt auf iPhone/iPad Ton und Geräte-Stimme frei.
+  // Immer DERSELBE Abspieler für die ganze Seite – ein einmal freigegebener bleibt frei (neue blockt Safari manchmal).
   function tonFreigeben() {
-    var a = new Audio(STILL);
-    a.setAttribute('playsinline', '');
+    if (!spielerFest) { spielerFest = new Audio(); spielerFest.setAttribute('playsinline', ''); }
+    var a = spielerFest;
+    a.onended = a.onerror = null;
+    a.src = STILL;
     try { var leer = a.play(); if (leer && leer.catch) leer.catch(function () {}); } catch (e) {}
     try { if ('speechSynthesis' in window) { var frei = new SpeechSynthesisUtterance(' '); frei.volume = 0; speechSynthesis.speak(frei); } } catch (e) {}
     return a;
   }
+  function abspielen(spieler, url, knopf, beiFehler) {
+    spieler.onended = function () { fertig(knopf); };
+    spieler.onerror = beiFehler;
+    spieler.src = url;
+    var p = spieler.play();
+    if (p && p.catch) p.catch(beiFehler);
+  }
   function vorlesen(text, knopf, bereit) {
     stillsein();
     if (!knopf._zeichen) return geraetVorlesen(text, knopf);
-    // Eigene Stimme versuchen; klappt etwas nicht (Grenze erreicht, kein Netz, Dienst aus): Stimme des Geräts
+    var meinLauf = ++lauf;
     aktiverKnopf = knopf; knopf.classList.add('spricht'); knopf.setAttribute('aria-label', t('stopp'));
-    var abbruch = tonAbbruch = window.AbortController ? new AbortController() : null;
-    // iPhone/iPad spielen Ton nur, wenn er beim Antippen startet. Darum jetzt (noch beim Tippen) einen winzigen stillen
-    // Ton abspielen – das gibt diesen Abspieler frei – und die Geräte-Stimme mit einem leeren Satz freigeben (Rückfall).
     var spieler = ton = bereit || tonFreigeben();
+    var zuGeraet = function () { if (meinLauf === lauf && aktiverKnopf === knopf && knopf.classList.contains('spricht')) { if (ton) ton.pause(); geraetVorlesen(text, knopf); } };
     // Schon einmal vorgelesen? Dann den gemerkten Ton sofort abspielen – ohne Server, ohne Wartezeit, zählt nicht
-    if (knopf._ton) {
-      spieler._echt = true;
-      spieler.onended = function () { fertig(knopf); };
-      spieler.onerror = function () { geraetVorlesen(text, knopf); };
-      spieler.src = knopf._ton;
-      var nochmal = spieler.play();
-      if (nochmal && nochmal.catch) nochmal.catch(function () { geraetVorlesen(text, knopf); });
-      return;
-    }
+    if (knopf._ton) return abspielen(spieler, knopf._ton, knopf, zuGeraet);
+    // Eigene Stimme vom Server; klappt etwas nicht (Grenze, kein Netz, Dienst aus): Stimme des Geräts
+    var abbruch = tonAbbruch = window.AbortController ? new AbortController() : null;
+    var angekommen = false;
     // Kommt die Stimme nicht in 8 Sekunden, liest das Gerät vor
-    var zuLang = setTimeout(function () { if (ton === spieler && !spieler._echt) { if (abbruch) abbruch.abort(); zuGeraet(); } }, 8000);
-    var zuGeraet = function () { if (aktiverKnopf === knopf && knopf.classList.contains('spricht')) geraetVorlesen(text, knopf); };
+    var zuLang = setTimeout(function () { if (meinLauf === lauf && !angekommen) { if (abbruch) abbruch.abort(); zuGeraet(); } }, 8000);
     fetch(STIMME, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: abbruch ? abbruch.signal : undefined,
       body: JSON.stringify({ text: text, sprache: knopf._sprache || sprache, zeichen: knopf._zeichen }) })
       .then(function (r) { if (!r.ok) throw new Error('stimme'); return r.blob(); })
       .then(function (blob) {
-        if (abbruch && abbruch.signal.aborted) return;
         clearTimeout(zuLang);
-        if (ton !== spieler) return; // inzwischen gestoppt oder etwas anderes vorgelesen
-        spieler._echt = true;
-        var url = knopf._ton = URL.createObjectURL(blob); // gemerkt für nochmal Abspielen
-        spieler.onended = function () { fertig(knopf); };
-        spieler.onerror = function () { zuGeraet(); };
-        spieler.src = url;
-        var p = spieler.play();
-        if (p && p.catch) p.catch(function () { zuGeraet(); });
+        if (abbruch && abbruch.signal.aborted) return;
+        knopf._ton = URL.createObjectURL(blob); // gemerkt für nochmal Abspielen
+        if (meinLauf !== lauf) return; // inzwischen gestoppt oder etwas anderes vorgelesen
+        angekommen = true;
+        abspielen(spieler, knopf._ton, knopf, zuGeraet);
       })
       .catch(function () { clearTimeout(zuLang); if (!(abbruch && abbruch.signal.aborted)) zuGeraet(); });
   }
@@ -432,6 +430,7 @@
     speechSynthesis.speak(u);
   }
   function stillsein() {
+    lauf++;
     if (tonAbbruch) { tonAbbruch.abort(); tonAbbruch = null; }
     if (ton) { ton.onended = ton.onerror = null; ton.pause(); ton = null; }
     if ('speechSynthesis' in window) speechSynthesis.cancel();
