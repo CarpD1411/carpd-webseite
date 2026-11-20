@@ -9,6 +9,8 @@
   var SERVER = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/swift-processor';
   // Eigene Stimme (Google Cloud Text-to-Speech, Stimme Gacrux) über unseren Server – mit Grenzen; bei jedem Fehler liest die Stimme des Geräts vor
   var STIMME = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/vorlesen';
+  // 0,15 Sekunden Stille (MP3) – gibt auf dem iPhone den Abspieler beim Antippen frei
+  var STILL = 'data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADTGF2ZjYzLjEuMTAyAAAAAAAAAAAAAAD/84TAAAAAAAAAAAAASW5mbwAAAA8AAAAJAAAEIABFRUVFRUVFRUVFRV1dXV1dXV1dXV1ddHR0dHR0dHR0dHSLi4uLi4uLi4uLi6KioqKioqKioqKiurq6urq6urq6urrR0dHR0dHR0dHR0ejo6Ojo6Ojo6Ojo//////////////8AAAAATGF2YzYzLjEuAAAAAAAAAAAAAAAAJAPwAAAAAAAABCBnYR4dAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/80TEAAAAA0gAAAAATEFNRTQuMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FNC7/80TEUwAAA0gAAAAAMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FNC7/80TEpgAAA0gAAAAAMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FNC7/80TErAAAA0gAAAAAMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FNC7/80TErAAAA0gAAAAAMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FNC7/80TErAAAA0gAAAAAMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FNC7/80TErAAAA0gAAAAAMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80TErAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80TErAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=';
   var main = document.getElementById('inhalt');
   var daten = null;
   var sprache = startSprache();
@@ -371,16 +373,23 @@
     // Eigene Stimme versuchen; klappt etwas nicht (Grenze erreicht, kein Netz, Dienst aus): Stimme des Geräts
     aktiverKnopf = knopf; knopf.classList.add('spricht'); knopf.setAttribute('aria-label', t('stopp'));
     var abbruch = tonAbbruch = window.AbortController ? new AbortController() : null;
-    // Abspieler schon jetzt (noch beim Tippen) anlegen – sonst blockiert das iPhone den Ton, der später vom Server kommt
-    var spieler = ton = new Audio();
+    // iPhone/iPad spielen Ton nur, wenn er beim Antippen startet. Darum jetzt (noch beim Tippen) einen winzigen stillen
+    // Ton abspielen – das gibt diesen Abspieler frei – und die Geräte-Stimme mit einem leeren Satz freigeben (Rückfall).
+    var spieler = ton = new Audio(STILL);
+    spieler.setAttribute('playsinline', '');
     try { var leer = spieler.play(); if (leer && leer.catch) leer.catch(function () {}); } catch (e) {}
+    try { if ('speechSynthesis' in window) { var frei = new SpeechSynthesisUtterance(' '); frei.volume = 0; speechSynthesis.speak(frei); } } catch (e) {}
+    // Kommt die Stimme nicht in 8 Sekunden, liest das Gerät vor
+    var zuLang = setTimeout(function () { if (ton === spieler && !spieler._echt) { if (abbruch) abbruch.abort(); zuGeraet(); } }, 8000);
     var zuGeraet = function () { if (aktiverKnopf === knopf && knopf.classList.contains('spricht')) geraetVorlesen(text, knopf); };
     fetch(STIMME, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: abbruch ? abbruch.signal : undefined,
       body: JSON.stringify({ text: text, sprache: knopf._sprache || sprache, zeichen: knopf._zeichen }) })
       .then(function (r) { if (!r.ok) throw new Error('stimme'); return r.blob(); })
       .then(function (blob) {
         if (abbruch && abbruch.signal.aborted) return;
+        clearTimeout(zuLang);
         if (ton !== spieler) return; // inzwischen gestoppt oder etwas anderes vorgelesen
+        spieler._echt = true;
         var url = URL.createObjectURL(blob);
         spieler.onended = function () { URL.revokeObjectURL(url); fertig(knopf); };
         spieler.onerror = function () { URL.revokeObjectURL(url); zuGeraet(); };
@@ -388,7 +397,7 @@
         var p = spieler.play();
         if (p && p.catch) p.catch(function () { URL.revokeObjectURL(url); zuGeraet(); });
       })
-      .catch(function () { if (!(abbruch && abbruch.signal.aborted)) zuGeraet(); });
+      .catch(function () { clearTimeout(zuLang); if (!(abbruch && abbruch.signal.aborted)) zuGeraet(); });
   }
   function geraetVorlesen(text, knopf) {
     if (!('speechSynthesis' in window)) { fertig(knopf); return; }
