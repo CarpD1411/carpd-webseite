@@ -328,6 +328,8 @@
     feld.value = '';
     wartet = true;
     var denkt = blase('bot', t('denkt')); denkt.classList.add('tippt');
+    // Automatisch vorlesen: Ton schon jetzt beim Absenden freigeben – die Antwort kommt erst später (iPhone-Regel)
+    var bereit = document.getElementById('autoVorlesen').checked ? tonFreigeben() : null;
     var fs = frageSprache(q);
     var timeout = new Promise(function (_, nein) { setTimeout(function () { nein(new Error('zeit')); }, 30000); });
     Promise.race([fetch(SERVER, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ frage: q, sprache: fs, verlauf: gespraech.slice(-6) }) }), timeout])
@@ -341,7 +343,7 @@
         denkt._huelle.remove();
         var b = blase('bot', d.antwort || (t('fehler') + daten.kontakt), d.links || [], true, d.antwort && d.zeichen, fs);
         if (!d.limit) { gespraech.push({ role: 'user', content: q }); gespraech.push({ role: 'assistant', content: d.antwort || '' }); }
-        if (document.getElementById('autoVorlesen').checked && b._lautsprecher) vorlesen(d.antwort, b._lautsprecher);
+        if (document.getElementById('autoVorlesen').checked && b._lautsprecher) vorlesen(d.antwort, b._lautsprecher, bereit);
         wartet = false;
       });
   }
@@ -367,7 +369,15 @@
   }
   var aktiverKnopf = null, ton = null, tonAbbruch = null;
   function fertig(knopf) { knopf.classList.remove('spricht'); knopf.setAttribute('aria-label', t('vorlesen')); }
-  function vorlesen(text, knopf) {
+  // Muss direkt beim Antippen laufen (Knopf 🔊 oder Absenden der Frage): gibt auf iPhone/iPad Ton und Geräte-Stimme frei
+  function tonFreigeben() {
+    var a = new Audio(STILL);
+    a.setAttribute('playsinline', '');
+    try { var leer = a.play(); if (leer && leer.catch) leer.catch(function () {}); } catch (e) {}
+    try { if ('speechSynthesis' in window) { var frei = new SpeechSynthesisUtterance(' '); frei.volume = 0; speechSynthesis.speak(frei); } } catch (e) {}
+    return a;
+  }
+  function vorlesen(text, knopf, bereit) {
     stillsein();
     if (!knopf._zeichen) return geraetVorlesen(text, knopf);
     // Eigene Stimme versuchen; klappt etwas nicht (Grenze erreicht, kein Netz, Dienst aus): Stimme des Geräts
@@ -375,10 +385,7 @@
     var abbruch = tonAbbruch = window.AbortController ? new AbortController() : null;
     // iPhone/iPad spielen Ton nur, wenn er beim Antippen startet. Darum jetzt (noch beim Tippen) einen winzigen stillen
     // Ton abspielen – das gibt diesen Abspieler frei – und die Geräte-Stimme mit einem leeren Satz freigeben (Rückfall).
-    var spieler = ton = new Audio(STILL);
-    spieler.setAttribute('playsinline', '');
-    try { var leer = spieler.play(); if (leer && leer.catch) leer.catch(function () {}); } catch (e) {}
-    try { if ('speechSynthesis' in window) { var frei = new SpeechSynthesisUtterance(' '); frei.volume = 0; speechSynthesis.speak(frei); } } catch (e) {}
+    var spieler = ton = bereit || tonFreigeben();
     // Kommt die Stimme nicht in 8 Sekunden, liest das Gerät vor
     var zuLang = setTimeout(function () { if (ton === spieler && !spieler._echt) { if (abbruch) abbruch.abort(); zuGeraet(); } }, 8000);
     var zuGeraet = function () { if (aktiverKnopf === knopf && knopf.classList.contains('spricht')) geraetVorlesen(text, knopf); };
