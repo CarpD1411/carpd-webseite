@@ -7,6 +7,8 @@
   'use strict';
 
   var SERVER = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/swift-processor';
+  // Eigene Stimme (Google Cloud Text-to-Speech, Stimme Gacrux) über unseren Server – mit Grenzen; bei jedem Fehler liest die Stimme des Geräts vor
+  var STIMME = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/vorlesen';
   var main = document.getElementById('inhalt');
   var daten = null;
   var sprache = startSprache();
@@ -19,8 +21,8 @@
     return (navigator.language || 'de').slice(0, 2).toLowerCase() === 'de' ? 'de' : (['fr', 'it', 'pl', 'cs', 'sk', 'sl', 'hu', 'hr'].indexOf((navigator.language || '').slice(0, 2)) >= 0 ? 'en' : 'de');
   }
   var T = {
-    de: { titel: 'Wie können wir helfen?', unter: 'Anleitung, Kostenlos & Pro und über 70 Fragen rund um CarpD.', suchen: 'Suche, z. B. Spots, Offline, Konto löschen …', ki: 'Frag CarpD – unser KI-Assistent', bereiche: 'Themen', haeufig: 'Häufige Fragen', alleFragen: 'Alle Fragen ansehen', anleitung: 'Anleitung', anleitungUnter: 'CarpD von A bis Z – jede Funktion mit Schritten und Praxis-Tipp.', faq: 'Fragen & Antworten', alle: 'Alle', pro: 'Kostenlos & Pro', proUnter: 'Was die kostenlose Version kann – und was CarpD Pro dazu bringt.', funktion: 'Funktion', frei: 'Kostenlos', start: 'Hilfe', so: 'So geht’s', tipp: 'Praxis-Tipp', medien: 'Clip/Screenshot folgt', treffer: function (n) { return n === 1 ? '1 Treffer' : n + ' Treffer'; }, keine: 'Nichts gefunden. Frag einfach den Assistenten – oder schreib uns an ', zurueck: '← Zurück', weiter: 'Weiter →', mehr: 'Mehr dazu', hallo: 'Hi! Ich bin der KI-Assistent von CarpD. Frag mich alles zur App – kurz und ehrlich. Bitte tipp keine persönlichen Daten ein. Tight Lines!', beispiele: ['Sind meine Spots sicher?', 'Was kostet CarpD Pro?', 'Funktioniert CarpD ohne Netz?', 'Wie lösche ich mein Konto?'], denkt: 'Moment …', fehler: 'Gerade komme ich nicht an meine Antworten. Versuch es gleich nochmal – oder schreib an ', vorschau: 'Die KI ist gerade nicht erreichbar – das habe ich in der Hilfe gefunden:', nichtsGefunden: 'Dazu habe ich leider nichts in der Hilfe gefunden. Schreib uns gern an ', limit: 'Für heute sind genug Fragen gestellt. Morgen geht’s weiter – oder schreib uns an ', langsam: 'Nicht so schnell 🙂 Warte kurz und frag dann nochmal – oder schreib uns an ', pause: 'Der Assistent macht gerade Pause. Die Antworten findest du auch in der Suche – oder schreib uns an ', hoert: 'Ich höre zu … loslassen zum Senden. (Die Spracherkennung übernimmt dein Browser, z. B. Apple oder Google – wir bekommen nur den Text.)', mikroAus: 'Mikrofon nicht erlaubt – du kannst die Frage auch tippen.', vorlesen: 'Vorlesen', stopp: 'Stopp' },
-    en: { titel: 'How can we help?', unter: 'Guide, free & Pro, and more than 70 questions about CarpD.', suchen: 'Search, e.g. swims, offline, delete account …', ki: 'Ask CarpD – our AI assistant', bereiche: 'Topics', haeufig: 'Common questions', alleFragen: 'See all questions', anleitung: 'Guide', anleitungUnter: 'CarpD from A to Z – every feature with steps and a practical tip.', faq: 'Questions & answers', alle: 'All', pro: 'Free & Pro', proUnter: 'What the free version does – and what CarpD Pro adds.', funktion: 'Feature', frei: 'Free', start: 'Help', so: 'How it works', tipp: 'Practical tip', medien: 'Clip/screenshot coming soon', treffer: function (n) { return n === 1 ? '1 result' : n + ' results'; }, keine: 'Nothing found. Just ask the assistant – or write to us at ', zurueck: '← Back', weiter: 'Next →', mehr: 'More', hallo: 'Hi! I’m CarpD’s AI assistant. Ask me anything about the app – short and honest. Please don’t type in personal data. Tight Lines!', beispiele: ['Are my swims safe?', 'How much is CarpD Pro?', 'Does CarpD work offline?', 'How do I delete my account?'], denkt: 'One moment …', fehler: 'I can’t reach my answers right now. Try again in a moment – or write to ', vorschau: 'The AI isn’t reachable right now – this is what I found in the help:', nichtsGefunden: 'Sorry, I couldn’t find anything about that in the help. Feel free to write to us at ', limit: 'That’s enough questions for today. Back tomorrow – or write to us at ', langsam: 'Not so fast 🙂 Wait a moment and ask again – or write to us at ', pause: 'The assistant is taking a break. You can find the answers in the search too – or write to us at ', hoert: 'Listening … release to send. (Speech recognition is done by your browser, e.g. Apple or Google – we only receive the text.)', mikroAus: 'Microphone not allowed – you can type your question instead.', vorlesen: 'Read aloud', stopp: 'Stop' }
+    de: { titel: 'Wie können wir helfen?', unter: 'Anleitung, Kostenlos & Pro und über 70 Fragen rund um CarpD.', suchen: 'Suche, z. B. Spots, Offline, Konto löschen …', ki: 'Frag CarpD – unser KI-Assistent', bereiche: 'Themen', haeufig: 'Häufige Fragen', alleFragen: 'Alle Fragen ansehen', anleitung: 'Anleitung', anleitungUnter: 'CarpD von A bis Z – jede Funktion mit Schritten und Praxis-Tipp.', faq: 'Fragen & Antworten', alle: 'Alle', pro: 'Kostenlos & Pro', proUnter: 'Was die kostenlose Version kann – und was CarpD Pro dazu bringt.', funktion: 'Funktion', frei: 'Kostenlos', start: 'Hilfe', so: 'So geht’s', tipp: 'Praxis-Tipp', medien: 'Clip/Screenshot folgt', treffer: function (n) { return n === 1 ? '1 Treffer' : n + ' Treffer'; }, keine: 'Nichts gefunden. Frag einfach den Assistenten – oder schreib uns an ', zurueck: '← Zurück', weiter: 'Weiter →', mehr: 'Mehr dazu', hallo: 'Hi, ich bin Kim, die KI-Assistentin von CarpD 🎣 Frag mich alles zur App – kurz und ehrlich. Bitte tipp keine persönlichen Daten ein. Tight Lines!', beispiele: ['Sind meine Spots sicher?', 'Was kostet CarpD Pro?', 'Funktioniert CarpD ohne Netz?', 'Wie lösche ich mein Konto?'], denkt: 'Moment …', fehler: 'Gerade komme ich nicht an meine Antworten. Versuch es gleich nochmal – oder schreib an ', vorschau: 'Die KI ist gerade nicht erreichbar – das habe ich in der Hilfe gefunden:', nichtsGefunden: 'Dazu habe ich leider nichts in der Hilfe gefunden. Schreib uns gern an ', limit: 'Für heute sind genug Fragen gestellt. Morgen geht’s weiter – oder schreib uns an ', langsam: 'Nicht so schnell 🙂 Warte kurz und frag dann nochmal – oder schreib uns an ', pause: 'Der Assistent macht gerade Pause. Die Antworten findest du auch in der Suche – oder schreib uns an ', hoert: 'Ich höre zu … loslassen zum Senden. (Die Spracherkennung übernimmt dein Browser, z. B. Apple oder Google – wir bekommen nur den Text.)', mikroAus: 'Mikrofon nicht erlaubt – du kannst die Frage auch tippen.', vorlesen: 'Vorlesen', stopp: 'Stopp' },
+    en: { titel: 'How can we help?', unter: 'Guide, free & Pro, and more than 70 questions about CarpD.', suchen: 'Search, e.g. swims, offline, delete account …', ki: 'Ask CarpD – our AI assistant', bereiche: 'Topics', haeufig: 'Common questions', alleFragen: 'See all questions', anleitung: 'Guide', anleitungUnter: 'CarpD from A to Z – every feature with steps and a practical tip.', faq: 'Questions & answers', alle: 'All', pro: 'Free & Pro', proUnter: 'What the free version does – and what CarpD Pro adds.', funktion: 'Feature', frei: 'Free', start: 'Help', so: 'How it works', tipp: 'Practical tip', medien: 'Clip/screenshot coming soon', treffer: function (n) { return n === 1 ? '1 result' : n + ' results'; }, keine: 'Nothing found. Just ask the assistant – or write to us at ', zurueck: '← Back', weiter: 'Next →', mehr: 'More', hallo: 'Hi, I’m Kim, CarpD’s AI assistant 🎣 Ask me anything about the app – short and honest. Please don’t type in personal data. Tight Lines!', beispiele: ['Are my swims safe?', 'How much is CarpD Pro?', 'Does CarpD work offline?', 'How do I delete my account?'], denkt: 'One moment …', fehler: 'I can’t reach my answers right now. Try again in a moment – or write to ', vorschau: 'The AI isn’t reachable right now – this is what I found in the help:', nichtsGefunden: 'Sorry, I couldn’t find anything about that in the help. Feel free to write to us at ', limit: 'That’s enough questions for today. Back tomorrow – or write to us at ', langsam: 'Not so fast 🙂 Wait a moment and ask again – or write to us at ', pause: 'The assistant is taking a break. You can find the answers in the search too – or write to us at ', hoert: 'Listening … release to send. (Speech recognition is done by your browser, e.g. Apple or Google – we only receive the text.)', mikroAus: 'Microphone not allowed – you can type your question instead.', vorlesen: 'Read aloud', stopp: 'Stop' }
   };
   function t(k) { return T[sprache][k]; }
   function txt(o) { return o ? (o[sprache] || o.de) : ''; }
@@ -256,14 +258,15 @@
     t('beispiele').forEach(function (b) { var k = document.createElement('button'); k.type = 'button'; k.textContent = b; k.addEventListener('click', function () { fragen_(b); }); v.appendChild(k); });
     verlauf.appendChild(v);
   }
-  function blase(wer, text, links, mitLautsprecher) {
+  function blase(wer, text, links, mitLautsprecher, zeichen, antwortSprache) {
     var b = document.createElement('div'); b.className = 'blase ' + wer;
     b.innerHTML = esc(text).replace(/\n/g, '<br>');
     if (wer === 'bot' && links && links.length) b.insertAdjacentHTML('beforeend', linkLeiste(links));
-    if (wer === 'bot' && mitLautsprecher && 'speechSynthesis' in window) {
+    if (wer === 'bot' && mitLautsprecher && ('speechSynthesis' in window || zeichen)) {
       var fuss = document.createElement('div'); fuss.className = 'blase-fuss';
       var l = document.createElement('button'); l.type = 'button'; l.className = 'lautsprecher'; l.setAttribute('aria-label', t('vorlesen'));
       l.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4zM15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      l._zeichen = zeichen || ''; l._sprache = antwortSprache || '';
       l.addEventListener('click', function () { if (l.classList.contains('spricht')) stillsein(); else vorlesen(text, l); });
       fuss.appendChild(l); fuss.insertAdjacentHTML('beforeend', '<span>' + esc(sprache === 'de' ? 'KI-Antwort, ohne Gewähr' : 'AI answer, no guarantee') + '</span>');
       b.appendChild(fuss);
@@ -334,7 +337,7 @@
       .catch(function () { return lokaleAntwort(q); })
       .then(function (d) {
         denkt._huelle.remove();
-        var b = blase('bot', d.antwort || (t('fehler') + daten.kontakt), d.links || [], true);
+        var b = blase('bot', d.antwort || (t('fehler') + daten.kontakt), d.links || [], true, d.antwort && d.zeichen, fs);
         if (!d.limit) { gespraech.push({ role: 'user', content: q }); gespraech.push({ role: 'assistant', content: d.antwort || '' }); }
         if (document.getElementById('autoVorlesen').checked && b._lautsprecher) vorlesen(d.antwort, b._lautsprecher);
         wartet = false;
@@ -360,20 +363,51 @@
     function punkte(v) { return (v.localService ? 8 : 0) + (gut.test(v.name) ? 4 : 0) + (land.test(v.lang) ? 2 : 0); } // Stimmen auf dem Gerät zuerst – Online-Stimmen schicken den Text an Google o. Ä.
     return passend[0];
   }
-  var aktiverKnopf = null;
+  var aktiverKnopf = null, ton = null, tonAbbruch = null;
+  function fertig(knopf) { knopf.classList.remove('spricht'); knopf.setAttribute('aria-label', t('vorlesen')); }
   function vorlesen(text, knopf) {
-    if (!('speechSynthesis' in window)) return;
     stillsein();
+    if (!knopf._zeichen) return geraetVorlesen(text, knopf);
+    // Eigene Stimme versuchen; klappt etwas nicht (Grenze erreicht, kein Netz, Dienst aus): Stimme des Geräts
+    aktiverKnopf = knopf; knopf.classList.add('spricht'); knopf.setAttribute('aria-label', t('stopp'));
+    var abbruch = tonAbbruch = window.AbortController ? new AbortController() : null;
+    // Abspieler schon jetzt (noch beim Tippen) anlegen – sonst blockiert das iPhone den Ton, der später vom Server kommt
+    var spieler = ton = new Audio();
+    try { var leer = spieler.play(); if (leer && leer.catch) leer.catch(function () {}); } catch (e) {}
+    var zuGeraet = function () { if (aktiverKnopf === knopf && knopf.classList.contains('spricht')) geraetVorlesen(text, knopf); };
+    fetch(STIMME, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: abbruch ? abbruch.signal : undefined,
+      body: JSON.stringify({ text: text, sprache: knopf._sprache || sprache, zeichen: knopf._zeichen }) })
+      .then(function (r) { if (!r.ok) throw new Error('stimme'); return r.blob(); })
+      .then(function (blob) {
+        if (abbruch && abbruch.signal.aborted) return;
+        if (ton !== spieler) return; // inzwischen gestoppt oder etwas anderes vorgelesen
+        var url = URL.createObjectURL(blob);
+        spieler.onended = function () { URL.revokeObjectURL(url); fertig(knopf); };
+        spieler.onerror = function () { URL.revokeObjectURL(url); zuGeraet(); };
+        spieler.src = url;
+        var p = spieler.play();
+        if (p && p.catch) p.catch(function () { URL.revokeObjectURL(url); zuGeraet(); });
+      })
+      .catch(function () { if (!(abbruch && abbruch.signal.aborted)) zuGeraet(); });
+  }
+  function geraetVorlesen(text, knopf) {
+    if (!('speechSynthesis' in window)) { fertig(knopf); return; }
+    speechSynthesis.cancel();
     var lang = frageSprache(text) || sprache;
     var u = new SpeechSynthesisUtterance(text.replace(/\n+/g, ' '));
     var s = besteStimme(lang); if (s) u.voice = s;
     u.lang = s ? s.lang : (lang === 'de' ? 'de-DE' : 'en-GB');
     u.rate = 0.95; u.pitch = 1;
     aktiverKnopf = knopf; knopf.classList.add('spricht'); knopf.setAttribute('aria-label', t('stopp'));
-    u.onend = u.onerror = function () { knopf.classList.remove('spricht'); knopf.setAttribute('aria-label', t('vorlesen')); };
+    u.onend = u.onerror = function () { fertig(knopf); };
     speechSynthesis.speak(u);
   }
-  function stillsein() { if ('speechSynthesis' in window) speechSynthesis.cancel(); if (aktiverKnopf) aktiverKnopf.classList.remove('spricht'); }
+  function stillsein() {
+    if (tonAbbruch) { tonAbbruch.abort(); tonAbbruch = null; }
+    if (ton) { ton.onended = ton.onerror = null; ton.pause(); ton = null; }
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+    if (aktiverKnopf) fertig(aktiverKnopf);
+  }
 
   // ---------- Spracheingabe: gedrückt halten zum Sprechen ----------
   var Erkennung = window.SpeechRecognition || window.webkitSpeechRecognition;
