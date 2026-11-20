@@ -7,7 +7,7 @@
   'use strict';
 
   var SERVER = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/swift-processor';
-  // Eigene Stimme (ElevenLabs) über unseren Server – mit Grenzen; bei jedem Fehler liest die Stimme des Geräts vor
+  // Eigene Stimme (Google Cloud Text-to-Speech, Stimme Gacrux) über unseren Server – mit Grenzen; bei jedem Fehler liest die Stimme des Geräts vor
   var STIMME = 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/vorlesen';
   var main = document.getElementById('inhalt');
   var daten = null;
