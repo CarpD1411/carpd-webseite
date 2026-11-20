@@ -375,6 +375,8 @@
   // Muss direkt beim Antippen laufen (Knopf 🔊 oder Absenden der Frage): gibt auf iPhone/iPad Ton und Geräte-Stimme frei.
   // Immer DERSELBE Abspieler für die ganze Seite – ein einmal freigegebener bleibt frei (neue blockt Safari manchmal).
   function tonFreigeben() {
+    // iPhone (ab iOS 16.4): gewollter Ton wie bei einem Video – spielt auch, wenn das Handy auf lautlos steht
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
     if (!spielerFest) { spielerFest = new Audio(); spielerFest.setAttribute('playsinline', ''); }
     var a = spielerFest;
     a.onended = a.onerror = null;
