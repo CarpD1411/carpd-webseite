@@ -16,7 +16,7 @@ var GRUENDER = {
     de: { gruender: '39,99 €', jahr: '49,99 €', monat: '5,99 €', monatImJahr: '71,88 €' },
     // England (Pfund) – umgerechnet am 20.11.2026 (Kurs ca. 0,86 £/€, in England 20 % statt 19 % Steuer),
     // so dass nach Steuer mindestens so viel übrig bleibt wie in Deutschland. null = „Preis in £ folgt“.
-    en: { gruender: '£34.99', jahr: '£43.99', monat: '£5.49', monatImJahr: '£65.88' }
+    en: { gruender: '£34.99', jahr: '£44.99', monat: '£4.99', monatImJahr: '£59.88' }
   },
   server: 'https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste'
 };
