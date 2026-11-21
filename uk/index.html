@@ -346,6 +346,9 @@
     .wir img { width: 150px; height: 150px; filter: var(--bild-filter) drop-shadow(0 0 30px var(--schein-stark)); transition: filter var(--farbe) ease; }
     .wir p { font-size: 21px; color: var(--schilf); }
     .wir .gruss { font-family: var(--marke); font-weight: 700; font-size: 34px; color: var(--oliv-hell); margin: 28px 0 0; text-shadow: 0 0 30px var(--schein-stark); }
+    /* Vorstellungsvideo (Hochformat) unter dem Gruß */
+    .wir figure { margin: 36px 0 0; max-width: 360px; }
+    .wir figure video { display: block; width: 100%; height: auto; border-radius: 24px; background: #000; filter: var(--bild-filter); }
 
     footer { border-top: 1px solid var(--linie); padding: 40px 0 56px; color: var(--schilf); font-size: 15px; background: linear-gradient(180deg, var(--schein-leise), transparent 80%); }
     footer .breite { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px 32px; }
@@ -684,6 +687,8 @@
           <h2>Who is behind it?</h2>
           <p style="margin-top:24px">We are Davide and Kresimir, carp anglers ourselves, from Germany. We know the problems on the bank first-hand – like not knowing at three in the morning which rod just went off. With CarpD we are building the app that does exactly what you need for carp fishing. Your feedback as test anglers goes straight into the app.</p>
           <p class="gruss">Tight Lines!</p>
+          <!-- Hier kommt das Vorstellungsvideo hin, sobald das Marketing die Fassung mit englischen Untertiteln liefert
+               (auf der deutschen Seite steht es schon: <figure> mit video/carpd-vorstellung.mp4). Der Stil .wir figure ist schon da. -->
         </div>
       </div>
     </section>

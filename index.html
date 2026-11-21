@@ -346,6 +346,9 @@
     .wir img { width: 150px; height: 150px; filter: var(--bild-filter) drop-shadow(0 0 30px var(--schein-stark)); transition: filter var(--farbe) ease; }
     .wir p { font-size: 21px; color: var(--schilf); }
     .wir .gruss { font-family: var(--marke); font-weight: 700; font-size: 34px; color: var(--oliv-hell); margin: 28px 0 0; text-shadow: 0 0 30px var(--schein-stark); }
+    /* Vorstellungsvideo (Hochformat) unter dem Gruß */
+    .wir figure { margin: 36px 0 0; max-width: 360px; }
+    .wir figure video { display: block; width: 100%; height: auto; border-radius: 24px; background: #000; filter: var(--bild-filter); }
 
     footer { border-top: 1px solid var(--linie); padding: 40px 0 56px; color: var(--schilf); font-size: 15px; background: linear-gradient(180deg, var(--schein-leise), transparent 80%); }
     footer .breite { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px 32px; }
@@ -684,6 +687,14 @@
           <h2>Wer steckt dahinter?</h2>
           <p style="margin-top:24px">Wir sind Davide und Kresimir, selbst Karpfenangler. Wir kennen die Probleme am Wasser aus eigener Erfahrung, zum Beispiel um drei Uhr nachts nicht mehr zu wissen, auf welcher Rute es gepiept hat. Mit CarpD bauen wir die App, die genau das kann, was man beim Karpfenangeln braucht. Eure Rückmeldungen als Testangler fließen direkt in die App ein.</p>
           <p class="gruss">Tight Lines!</p>
+          <!-- Vorstellungsvideo (vom Marketing, 21.11.2026). Deutsch gesprochen: auf carpd.de/uk kommt es erst mit englischen Untertiteln. -->
+          <figure>
+            <video controls playsinline preload="none" poster="video/carpd-vorstellung.jpg" width="720" height="1280">
+              <source src="video/carpd-vorstellung.mp4" type="video/mp4">
+              Dein Browser kann das Video nicht abspielen. <a href="video/carpd-vorstellung.mp4">Video herunterladen</a>.
+            </video>
+            <figcaption class="klein-text">Davide und Kreso stellen CarpD vor (4:37 Min.). Musik: „Ice Flow“ von Kevin MacLeod (incompetech.com), Lizenz CC BY 4.0.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
