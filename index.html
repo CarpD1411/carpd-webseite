@@ -771,7 +771,7 @@
         fetch(ADRESSE, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ liste: 'test', email: email, handy: handy, quelle: quelle, medium: medium, kanal: kanal, firma: f.firma.value })
-        }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll') voll(); return r.ok && d.ok; }); })
+        }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll' || d.grund === 'beendet') voll(); return r.ok && d.ok; }); })
           .then(function (ok) {
             if (test.classList.contains('voll')) return;
             if (ok) { meldung(m, 'Fast geschafft! Schau in dein Postfach und bestätige die Mail (auch im Spam-Ordner nachsehen).', true); f.reset(); document.getElementById('testHinweis').classList.remove('an'); }

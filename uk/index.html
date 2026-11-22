@@ -772,7 +772,7 @@
         fetch(ADRESSE, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ liste: 'test', email: email, handy: handy, quelle: quelle, medium: medium, kanal: kanal, land: 'UK', sprache: 'en', firma: f.firma.value })
-        }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll') voll(); return r.ok && d.ok; }); })
+        }).then(function (r) { return r.json().then(function (d) { if (d.grund === 'voll' || d.grund === 'beendet') voll(); return r.ok && d.ok; }); })
           .then(function (ok) {
             if (test.classList.contains('voll')) return;
             if (ok) { meldung(m, 'Almost done! Check your inbox and confirm the email (have a look in your spam folder too).', true); f.reset(); document.getElementById('testHinweis').classList.remove('an'); }
