@@ -53,6 +53,7 @@ var GRUENDER = {
       fNetz: 'Keine Verbindung. Bitte versuch es später noch einmal.',
       moment: 'Einen Moment …',
       beendet: 'Die Aktion Gründerpreis ist beendet. Danke an alle Gründer!',
+      geschlossen: 'Die Warteliste ist geschlossen – CarpD ist gestartet! Wer sich vor dem Start eingetragen hat, kann den Gründerpreis noch bis 15.03.2027 in der App abschließen (Mehr → CarpD Pro).',
       testVoll: 'Alle Plätze vergeben',
       testBeendet: 'Testangler-Anmeldung beendet',
       testZuText: 'Danke für euer Interesse! Sichere dir jetzt den Gründerpreis.',
@@ -86,6 +87,7 @@ var GRUENDER = {
       fNetz: 'No connection. Please try again later.',
       moment: 'One moment …',
       beendet: 'The founder price offer has ended. Thanks to all founders!',
+      geschlossen: 'The waiting list is closed – CarpD has launched! If you joined before launch, you can still take up the founder price in the app until 15 March 2027 (More → CarpD Pro).',
       testVoll: 'All spots taken',
       testBeendet: 'Test angler sign-up closed',
       testZuText: 'Thanks for your interest! Secure the founder price now.',
@@ -227,6 +229,8 @@ var GRUENDER = {
   // „aus“:   nach gruenderBis → nur noch Hinweis „Aktion beendet“
   function phase(voll) {
     if (heute > GRUENDER.gruenderBis) return 'aus';
+    // Ab dem Start: keine neuen Einträge mehr (Plan: Gründerpreis nur für die Warteliste vor dem Start)
+    if (heute >= GRUENDER.launch) return 'geschlossen';
     if (voll || heute >= GRUENDER.wechselAb) return 'vorn';
     return 'unten';
   }
@@ -234,8 +238,8 @@ var GRUENDER = {
   function anwenden(ziel, sp, pfad, voll, festOffen) {
     var p = phase(voll), t = T[sp];
     document.documentElement.setAttribute('data-gruender', p);
-    if (p === 'aus') {
-      ziel.innerHTML = '<div class="breite gp-aus"><p>' + esc(t.beendet) + '</p></div>';
+    if (p === 'aus' || p === 'geschlossen') {
+      ziel.innerHTML = '<div class="breite gp-aus"><p>' + esc(p === 'aus' ? t.beendet : t.geschlossen) + '</p></div>';
       return;
     }
     ziel.setAttribute('data-vorn', p === 'vorn' || festOffen ? 'ja' : 'nein');
