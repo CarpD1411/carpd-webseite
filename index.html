@@ -754,7 +754,7 @@
       var f = document.getElementById('testForm'), m = document.getElementById('testMeldung'), test = document.getElementById('test');
       function voll() { test.classList.add('voll'); }
       if (VORSCHAU) { if (/[?&]voll/.test(location.search)) voll(); }
-      else fetch(ADRESSE + '?stand=1').then(function (r) { return r.json(); }).then(function (d) { if (d && d.voll) voll(); else if (d && d.frei > 0) { var k = document.getElementById('testFrei'); k.textContent = 'Nur noch ' + d.frei + (d.frei === 1 ? ' Platz' : ' Plätze') + ' frei!'; k.hidden = false; } }).catch(function () {});
+      else (function (l) { var c = window.__carpdStand = window.__carpdStand || {}; return c[l] || (c[l] = fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste?stand=1&land=' + l).then(function (r) { return r.json(); })); })('DE').then(function (d) { if (d && d.voll) voll(); else if (d && d.frei > 0) { var k = document.getElementById('testFrei'); k.textContent = 'Nur noch ' + d.frei + (d.frei === 1 ? ' Platz' : ' Plätze') + ' frei!'; k.hidden = false; } }).catch(function () {});
       var u = new URLSearchParams(location.search);
       var kanal = (u.get('kanal') || '').toLowerCase().slice(0, 20);
       var quelle = (u.get('utm_source') || (kanal && kanal !== 'landingpage' ? kanal : '') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);

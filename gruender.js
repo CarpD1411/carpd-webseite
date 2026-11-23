@@ -270,7 +270,8 @@ var GRUENDER = {
       if (VORSCHAU) return anwenden(ziel, sp, pfad, suche.has('voll'), festOffen);
       anwenden(ziel, sp, pfad, false, festOffen);
       // Testangler voll? Server fragen (wie bisher) – dann umschalten
-      fetch(GRUENDER.server + '?stand=1&land=' + (sp === 'en' ? 'UK' : 'DE')).then(function (r) { return r.json(); })
+      // Dieselbe Anfrage wie das Testangler-Formular auf der Seite – nur einmal stellen (window.__carpdStand)
+      (function (l) { var c = window.__carpdStand = window.__carpdStand || {}; return c[l] || (c[l] = fetch(GRUENDER.server + '?stand=1&land=' + l).then(function (r) { return r.json(); })); })(sp === 'en' ? 'UK' : 'DE')
         .then(function (d) { if (d && d.voll) anwenden(ziel, sp, pfad, true, festOffen); })
         .catch(function () {});
     }

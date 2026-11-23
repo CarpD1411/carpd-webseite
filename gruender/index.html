@@ -49,7 +49,9 @@
     (function () {
       // Sprache: ?lang=en, sonst Englisch nur bei englischem Handy/Browser
       var q = new URLSearchParams(location.search).get('lang');
-      var sp = q === 'en' || q === 'de' ? q : (/^en\b/i.test(navigator.language || '') ? 'en' : 'de');
+      // Suchmaschinen (Googlebot meldet sich auf Englisch) bekommen immer die deutsche Fassung, wie lang="de" sagt
+      var bot = /bot|crawl|spider|slurp/i.test(navigator.userAgent || '');
+      var sp = q === 'en' || q === 'de' ? q : (!bot && /^en\b/i.test(navigator.language || '') ? 'en' : 'de');
       document.documentElement.lang = sp;
       if (sp === 'en') document.title = 'Founder price – CarpD';
       // Sprachwahl behält die übrigen Link-Zusätze (z. B. ?kanal=messe)
