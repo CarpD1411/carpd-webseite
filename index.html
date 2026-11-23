@@ -324,6 +324,7 @@
     .test-zu { display: none; }
     .test.voll .test-offen { display: none; }
     .test.voll .test-zu { display: flex; }
+    .knapp { margin: 0; font-weight: 700; color: var(--oliv-hell); font-size: 1.1rem; }
 
     /* Warteliste */
     .warte .breite > * { max-width: 780px; }
@@ -646,6 +647,7 @@
         <div>
           <form id="testForm" class="formular test-offen" novalidate>
             <h3>Jetzt melden</h3>
+            <p id="testFrei" class="knapp" hidden></p>
             <label class="feld">Deine E-Mail-Adresse
               <input type="email" name="email" placeholder="deine@email.de" autocomplete="email" required>
             </label>
@@ -752,7 +754,7 @@
       var f = document.getElementById('testForm'), m = document.getElementById('testMeldung'), test = document.getElementById('test');
       function voll() { test.classList.add('voll'); }
       if (VORSCHAU) { if (/[?&]voll/.test(location.search)) voll(); }
-      else fetch(ADRESSE + '?stand=1').then(function (r) { return r.json(); }).then(function (d) { if (d && d.voll) voll(); }).catch(function () {});
+      else fetch(ADRESSE + '?stand=1').then(function (r) { return r.json(); }).then(function (d) { if (d && d.voll) voll(); else if (d && d.frei > 0) { var k = document.getElementById('testFrei'); k.textContent = 'Nur noch ' + d.frei + (d.frei === 1 ? ' Platz' : ' Plätze') + ' frei!'; k.hidden = false; } }).catch(function () {});
       var u = new URLSearchParams(location.search);
       var kanal = (u.get('kanal') || '').toLowerCase().slice(0, 20);
       var quelle = (u.get('utm_source') || (kanal && kanal !== 'landingpage' ? kanal : '') || 'webseite').slice(0, 40), medium = (u.get('utm_medium') || '').slice(0, 40);
