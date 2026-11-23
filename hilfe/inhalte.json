@@ -1,5 +1,5 @@
 {
- "version": "2026-11-19",
+ "version": "2026-11-23",
  "kontakt": "info@carpd.de",
  "hinweis": "Zentrale Hilfe-Texte für carpd.de/hilfe und später die App. Nur Einträge mit status \"ok\" werden angezeigt und vom Assistenten benutzt.",
  "bereiche": [
@@ -1120,6 +1120,31 @@
      "“Delete my data from the server” removes everything at once."
     ],
     "tipp": "Never shared: name, e-mail, your exact location, photos, notes and rig. A water only gets statistics once at least 5 anglers have reported there."
+   }
+  },
+  {
+   "id": "nutzungs-statistik",
+   "bereich": "konto",
+   "status": "ok",
+   "de": {
+    "titel": "Nutzungs-Statistik",
+    "was": "Freiwillig kannst du uns helfen, CarpD besser zu machen: Die App zählt dann anonym, welche Seiten und Funktionen du wie oft benutzt – z. B. „Session gestartet: 2“. Fänge, Gewichte, Köder, Spots, Standort, Name und Konto werden nie gezählt.",
+    "schritte": [
+     "Die Frage „CarpD besser machen?“ kommt einmal beim Start – „Ja, anonym zählen“ oder „Nein danke“.",
+     "Ändern jederzeit unter Mehr → Nutzungs-Statistik.",
+     "Schließt du die Frage mit dem X, gilt das als „Nein“."
+    ],
+    "tipp": "Die Zahlen gehen einmal am Tag ohne Konto an unseren Server in Frankfurt und werden dort nur über alle Geräte zusammengezählt. Schaltest du sie aus, löscht die App auch alle noch nicht gesendeten Zahlen."
+   },
+   "en": {
+    "titel": "Usage statistics",
+    "was": "You can choose to help us improve CarpD: the app then counts anonymously which screens and features you use and how often – e.g. “session started: 2”. Catches, weights, baits, swims, location, name and account are never counted.",
+    "schritte": [
+     "The question “Help improve CarpD?” appears once at start-up – “Yes, count anonymously” or “No thanks”.",
+     "Change it at any time under More → Usage statistics.",
+     "Closing the question with the X counts as “No”."
+    ],
+    "tipp": "The numbers go to our server in Frankfurt once a day without an account and are only added up across all devices there. If you switch it off, the app also deletes all numbers not yet sent."
    }
   },
   {
@@ -2447,6 +2472,22 @@
    "en": {
     "f": "Can I switch off anonymous statistics?",
     "a": "Yes, at any time under More → Anonymous statistics. By default it’s off – as long as you don’t agree, everything stays on your phone. “Delete my data from the server” removes everything you’ve already shared."
+   }
+  },
+  {
+   "id": "nutzungs-statistik-was",
+   "thema": "statistik",
+   "status": "ok",
+   "links": [
+    "nutzungs-statistik"
+   ],
+   "de": {
+    "f": "Was zählt die Nutzungs-Statistik?",
+    "a": "Nur, welche Seiten und Funktionen du wie oft benutzt (z. B. Futterrechner, Rotlicht, Session gestartet) – nie Fänge, Gewichte, Köder, Spots, Standort oder deinen Namen. Sie ist freiwillig und lässt sich unter Mehr → Nutzungs-Statistik jederzeit aus- oder einschalten."
+   },
+   "en": {
+    "f": "What do usage statistics count?",
+    "a": "Only which screens and features you use and how often (e.g. feed calculator, red light, session started) – never catches, weights, baits, swims, location or your name. It’s optional and can be switched on or off at any time under More → Usage statistics."
    }
   },
   {
