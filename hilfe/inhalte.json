@@ -560,7 +560,7 @@
      "„Privat“, „Statistik“ oder „Öffentlich“ wählen.",
      "Ob überhaupt etwas geteilt wird, entscheidest du unter Mehr → Anonyme Statistik."
     ],
-    "tipp": "Solange „Anonyme Statistik“ aus ist, bleibt alles auf deinem Handy – egal, was beim Fang steht."
+    "tipp": "Solange „Anonyme Statistik“ aus ist, bleibt alles auf deinem Handy – egal, was beim Fang steht. Schaltest du sie später aus, löscht CarpD schon Geteiltes vom Server."
    },
    "en": {
     "titel": "Visibility: private, statistics, public",
@@ -570,7 +570,7 @@
      "Choose “Private”, “Statistics” or “Public”.",
      "Whether anything is shared at all is up to you under More → Anonymous statistics."
     ],
-    "tipp": "As long as “Anonymous statistics” is off, everything stays on your phone – whatever the catch says."
+    "tipp": "As long as “Anonymous statistics” is off, everything stays on your phone – whatever the catch says. If you switch it off later, CarpD deletes what was already shared from the server."
    }
   },
   {
@@ -2483,11 +2483,11 @@
    ],
    "de": {
     "f": "Was zählt die Nutzungs-Statistik?",
-    "a": "Nur, welche Seiten und Funktionen du wie oft benutzt (z. B. Futterrechner, Rotlicht, Session gestartet) – nie Fänge, Gewichte, Köder, Spots, Standort oder deinen Namen. Sie ist freiwillig und lässt sich unter Mehr → Nutzungs-Statistik jederzeit aus- oder einschalten."
+    "a": "Nur, welche Seiten und Funktionen du wie oft benutzt (z. B. Futterrechner, Rotlicht, Session gestartet) – nie Fänge, Gewichte, Köder, Spots, Standort oder deinen Namen. Sie ist freiwillig und aus, bis du sie einschaltest – beim ersten Start auf der Seite „Hilf mit“ oder später. Sie lässt sich unter Mehr → Nutzungs-Statistik jederzeit aus- oder einschalten."
    },
    "en": {
     "f": "What do usage statistics count?",
-    "a": "Only which screens and features you use and how often (e.g. feed calculator, red light, session started) – never catches, weights, baits, swims, location or your name. It’s optional and can be switched on or off at any time under More → Usage statistics."
+    "a": "Only which screens and features you use and how often (e.g. feed calculator, red light, session started) – never catches, weights, baits, swims, location or your name. It’s optional and off until you switch it on – on the “Help out” page at first start or later. You can switch it on or off at any time under More → Usage statistics."
    }
   },
   {
