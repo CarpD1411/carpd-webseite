@@ -331,10 +331,18 @@
     .vorteile li { position: relative; padding: 8px 0 8px 36px; font-size: 19px; font-weight: 600; line-height: 1.35; }
     .vorteile li::before { content: "✓"; position: absolute; left: 0; top: 6px; width: 26px; height: 26px; border-radius: 50%; background: var(--oliv); color: var(--knopf-text); font-size: 16px; line-height: 26px; text-align: center; font-weight: 700; }
     .formular-oben { display: none; }
+    @media (max-width: 385px) { .kopf .breite { gap: 8px; } .kopf nav { gap: 6px; } .kopf nav .knopf.klein { padding: 0 9px; font-size: 15px; } .kopf .mond { min-width: 44px; } }
+    .wasist { display: none; }
+    /* Nur für Besucher aus der Werbung: gleich sagen, was CarpD ist (der Einleitungstext ist dort ausgeblendet) */
+    body.werbung .wasist { display: block; margin: 6px 0 8px; font-size: 1.25rem; line-height: 1.25; font-weight: 600; color: var(--oliv-hell, #A8BA4A); }
+    body.werbung .start .slogan { margin: 0 0 12px; }
+    body.werbung .vorteile { margin: 12px 0 14px; }
+    body.werbung .vorteile li { padding-top: 5px; padding-bottom: 5px; }
+    body.werbung .vorteile li::before { top: 3px; }
     body.werbung .vorteile { display: block; }
     body.werbung .formular-oben { display: block; margin: 6px 0 28px; }
     body.werbung .start .einleitung, body.werbung .start .aufruf, body.werbung .start .termine { display: none; }
-    body.werbung .start { padding-top: 32px; }
+    body.werbung .start { padding-top: 18px; }
 
     /* Warteliste */
     .warte .breite > * { max-width: 780px; }
@@ -436,6 +444,7 @@
       <div class="breite">
         <div>
           <h1>Every bite counts.</h1>
+          <p class="wasist">The app just for carp anglers</p>
           <p class="slogan">
             <span>Your water.</span>
             <span>Your data.</span>
