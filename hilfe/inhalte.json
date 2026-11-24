@@ -303,7 +303,7 @@
     "titel": "Swims",
     "was": "In your swim book you save your best spots: depth, bottom, distance (also in wraps), marker point, feeding plan, note and your peg position. Everything stays private on your phone.",
     "schritte": [
-     "More → My swims → “New swim”.",
+     "More → My spots → “New spot”.",
      "Choose a name and water, then enter depth, bottom and distance.",
      "“Use my position” saves where you sit.",
      "In a session you assign a rod to a swim – catches on that rod are then listed with the swim."
@@ -464,7 +464,7 @@
      "Tap “How many rods?”.",
      "Press “Start session”."
     ],
-    "tipp": "Without Pro you have 2 rods per session, with Pro 4. Use “Choose swim” to assign each rod to a swim from your swim book."
+    "tipp": "Without Pro you have 2 rods per session, with Pro 4. Use “Choose spot” to assign each rod to a swim from your swim book."
    }
   },
   {
@@ -514,7 +514,7 @@
      "Catch log → “Sessions” → “Add past session”.",
      "Choose water, start and end.",
      "“Save session”.",
-     "Add catches with “Add past catch” and bites with “Add bite”."
+     "Add catches with “Add past catch” and bites with “Add run later”."
     ],
     "tipp": "Without Pro you can add 10 past catches for free, with Pro unlimited."
    }
@@ -539,7 +539,7 @@
     "titel": "Logging a catch",
     "was": "You log a catch in seconds: weight, species, rod, bait – optionally rig and note. CarpD saves time, location and weather automatically.",
     "schritte": [
-     "In the session, tap “Catch” on the rod (or “Log catch” at the bottom).",
+     "In the session, tap “Catch” on the rod (or “Log a catch” at the bottom).",
      "Set the weight with −1 / −0.1 / +0.1 / +1.",
      "Choose the species: mirror, common, linear, leather, grass carp or other.",
      "Tap or type the bait.",
@@ -590,12 +590,12 @@
    },
    "en": {
     "titel": "Bite log",
-    "was": "In a session every rod has three big buttons: “Catch”, “Missed bite” and “Lost”. One tap – and the bite is in the timeline with its time.",
+    "was": "In a session every rod has three big buttons: “Catch”, “Missed” and “Lost”. One tap – and the bite is in the timeline with its time.",
     "schritte": [
      "Start a session.",
-     "Tap “Missed bite” or “Lost” on the rod – “Catch” if you land a fish.",
+     "Tap “Missed” or “Lost” on the rod – “Catch” if you land a fish.",
      "Wrong tap? “Undo” shows up briefly at the bottom.",
-     "Add forgotten bites with “Add bite” in the timeline."
+     "Add forgotten bites with “Add run later” in the timeline."
     ],
     "tipp": "The buttons are big for the night and wet hands. Later the bite index learns from your bites."
    }
@@ -672,7 +672,7 @@
     "schritte": [
      "More → tap your profile at the very top.",
      "Fill in what you like – everything is optional.",
-     "“Show name on pictures” puts your name in the watermark and on your year in review."
+     "“Show name on images” puts your name in the watermark and on your year in review."
     ],
     "tipp": "Profile details stay on your phone."
    }
@@ -699,9 +699,9 @@
      "Tap “Save & photo” when logging a catch.",
      "Choose instant, 3 s, 5 s or 10 s.",
      "Press the shutter and present the fish.",
-     "From the 5 photos “Choose best photo” → “Use this photo”."
+     "From the 5 photos “Choose the best photo” → “Use this photo”."
     ],
-    "tipp": "“Instant” takes a single photo like the normal camera – available without Pro. Self-timer and burst come with Pro."
+    "tipp": "“Now” takes a single photo like the normal camera – available without Pro. Self-timer and burst come with Pro."
    }
   },
   {
@@ -773,7 +773,7 @@
     "was": "CarpD works without signal: sessions, bites, catches, photos, catch log, swims and licences are on your phone. Waters for 13 countries are built in. If the weather is missing when you log a catch, CarpD fetches it once you have signal again.",
     "schritte": [
      "Just use it as normal.",
-     "The catch then shows “Will be loaded once you have signal”.",
+     "The catch then shows “Will be loaded as soon as you have signal”.",
      "Without signal the bite index shows the last loaded forecast with its time."
     ],
     "tipp": "Weather, place search and waters outside the 13 countries need signal. Weather is filled in for catches from the last 3 months."
@@ -799,9 +799,9 @@
     "schritte": [
      "Catch log → “Statistics” → “Year in review”.",
      "Scroll through.",
-     "Tap “Share as picture”."
+     "Tap “Share as image”."
     ],
-    "tipp": "Only a few catches yet? “Create example data” shows you what it looks like – then delete it again."
+    "tipp": "Only a few catches yet? “Create sample data” shows you what it looks like – then delete it again."
    }
   },
   {
@@ -824,7 +824,7 @@
     "was": "A crew is a closed group with up to 20 members – only members see what is shared in it. You need an account with a nickname.",
     "schritte": [
      "More → My crews.",
-     "“Found crew” and enter a name – or “Join with code”.",
+     "“Start a crew” and enter a name – or “Join with a code”.",
      "As boss or admin: “Invite mates” → create an invite code and send it. The code is valid for 7 days.",
      "Agree to the crew rules the first time."
     ],
@@ -903,7 +903,7 @@
     "schritte": [
      "Tap ⋯ on the catch.",
      "“Report catch” and choose a reason – or block the person.",
-     "Your own catch: “Withdraw from crew”."
+     "Your own catch: “Remove from crew”."
     ],
     "tipp": "The CarpD team reviews reports within 24 hours. A blocked person is not notified."
    }
@@ -982,7 +982,7 @@
     "was": "Pick what you really need for your session from a large selection and tick it off while packing. Save your selection as a template.",
     "schritte": [
      "More → Kit list.",
-     "“1. Select”: tap what you want to take.",
+     "“1. Choose”: tap what you want to take.",
      "“Create kit list”.",
      "“2. Kit list”: tick off while packing. “Pack again” clears all ticks."
     ],
@@ -1009,7 +1009,7 @@
     "schritte": [
      "More → My licences → “Add licence”.",
      "Enter type, name and validity.",
-     "“Take photo of licence”."
+     "“Take a photo of the licence”."
     ],
     "tipp": "The photo does not replace the original – during checks the real licence applies. Without Pro 1 licence, with Pro several."
    }
@@ -1063,7 +1063,7 @@
      "More → Backup.",
      "Switch on “Back up on Wi-Fi only” if you like.",
      "“Back up now” for an immediate backup.",
-     "On a new phone: sign in → “Restore from cloud”."
+     "On a new phone: sign in → “Restore from the cloud”."
     ],
     "tipp": "If CarpD finds a backup after you sign in, it asks you – and only starts backing up on the new phone once you’ve restored it. That way nothing is overwritten."
    }
@@ -1089,10 +1089,10 @@
     "schritte": [
      "More → Backup → “Create backup”.",
      "Save the file, e.g. in “Files” (iCloud Drive), Google Drive or via AirDrop.",
-     "On the new phone: “Load backup” → pick the file → “Replace”.",
+     "On the new phone: “Restore backup” → pick the file → “Replace”.",
      "Close CarpD completely once and open it again."
     ],
-    "tipp": "The file also contains your swims – don’t pass it on. Loaded the wrong one? “Restore state before last load” brings the previous state back. Backup as a file is free."
+    "tipp": "The file also contains your swims – don’t pass it on. Loaded the wrong one? “Restore the state before the last load” brings the previous state back. Backup as a file is free."
    }
   },
   {
@@ -1115,7 +1115,7 @@
     "was": "You can choose to share catches anonymously. This builds water statistics and a bite index that learns from many anglers’ catches. Shared are the water (never your swim), date and hour, species, weight, bait and the weather.",
     "schritte": [
      "More → Anonymous statistics.",
-     "“Yes, share anonymously” or “No, everything stays on the phone”.",
+     "“Yes, share anonymously” or “No, keep everything on my phone”.",
      "You can set any catch to “Private” individually.",
      "“Delete my data from the server” removes everything at once."
     ],
@@ -2017,7 +2017,7 @@
    },
    "en": {
     "f": "Is my data synced between two phones?",
-    "a": "There is no live sync between two phones. With an account and Pro, CarpD backs up everything to the cloud, and on another phone you get that backup with “Restore from cloud”."
+    "a": "There is no live sync between two phones. With an account and Pro, CarpD backs up everything to the cloud, and on another phone you get that backup with “Restore from the cloud”."
    }
   },
   {
@@ -2067,7 +2067,7 @@
    },
    "en": {
     "f": "I’m getting a new phone – how do I take everything with me?",
-    "a": "With cloud backup: sign in on the new phone and tap “Restore from cloud”. Without an account: create a backup file on the old phone and open it on the new one under Backup → “Load backup”. Then close CarpD completely once and reopen it."
+    "a": "With cloud backup: sign in on the new phone and tap “Restore from the cloud”. Without an account: create a backup file on the old phone and open it on the new one under Backup → “Restore backup”. Then close CarpD completely once and reopen it."
    }
   },
   {
@@ -2720,7 +2720,7 @@
    },
    "en": {
     "f": "How do I invite mates to my crew?",
-    "a": "As boss or admin: in the crew tap “Invite mates” → “Create invite code” and send the code via WhatsApp, SMS or mail – or read it out. The code is valid for 7 days. Your mate then taps More → My crews → “Join with code”."
+    "a": "As boss or admin: in the crew tap “Invite mates” → “Create invite code” and send the code via WhatsApp, SMS or mail – or read it out. The code is valid for 7 days. Your mate then taps More → My crews → “Join with a code”."
    }
   },
   {
@@ -2752,7 +2752,7 @@
    },
    "en": {
     "f": "Can I take back a shared catch?",
-    "a": "Yes. Tap ⋯ on the catch in the crew → “Withdraw from crew”. It disappears for everyone in that crew but stays in your catch log."
+    "a": "Yes. Tap ⋯ on the catch in the crew → “Remove from crew”. It disappears for everyone in that crew but stays in your catch log."
    }
   },
   {
