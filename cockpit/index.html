@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Cockpit">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<title>CarpD Cockpit</title>
+<!--
+  CarpD Cockpit (24.11.2026): die gespeicherten Supabase-Abfragen fürs Handy.
+  Nur lesen. Anmelden mit E-Mail-Code; Zahlen gibt es nur für Adressen in public.cockpit_zugang (SQL 055).
+  Nicht verlinkt, nicht in der Sitemap, kein Besucherzähler.
+-->
+<style>
+  @font-face { font-family: "Barlow SC"; src: url("../schrift/BarlowSemiCondensed-SemiBold.ttf"); font-weight: 600; font-display: swap; }
+  :root {
+    --hg: #0B0B0B; --flaeche: #1A1A1A; --flaeche2: #242424; --text: #F2F2F2; --neben: #A3A3A3;
+    --akzent: #8A9A3B; --auf-akzent: #0B0B0B; --warn: #E0A030; --rund: 16px;
+  }
+  body.rot { --flaeche: #1A0605; --flaeche2: #260907; --text: #E0342B; --neben: #B3271F; --akzent: #FF4A3D; --warn: #FF4A3D; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--hg); color: var(--text); }
+  body { font: 17px/1.4 -apple-system, system-ui, sans-serif; padding: calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 24px); max-width: 720px; margin: 0 auto; }
+  h1, h2, .knopf, .titel { font-family: "Barlow SC", -apple-system, sans-serif; font-weight: 600; }
+  h1 { font-size: 28px; margin: 4px 0 2px; }
+  h2 { font-size: 22px; margin: 0; }
+  .kopf { display: flex; align-items: center; gap: 12px; justify-content: space-between; margin-bottom: 14px; }
+  .leise { color: var(--neben); font-size: 15px; }
+  .knopf { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 10px 14px; border-radius: var(--rund);
+           border: 0; background: var(--flaeche); color: var(--text); font-size: 19px; text-align: center; cursor: pointer; width: 100%; }
+  .knopf.haupt { background: var(--akzent); color: var(--auf-akzent); }
+  .knopf.klein { min-height: 44px; width: auto; font-size: 16px; padding: 8px 14px; }
+  .knopf:disabled { opacity: .5; }
+  .gitter { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gitter .knopf.gross { grid-column: 1 / -1; }
+  input { width: 100%; min-height: 56px; border-radius: var(--rund); border: 1px solid #333; background: var(--flaeche); color: var(--text);
+          font-size: 20px; padding: 0 16px; margin: 8px 0 12px; }
+  input.code { letter-spacing: 6px; text-align: center; font-size: 26px; }
+  .karte { background: var(--flaeche); border-radius: var(--rund); padding: 14px 16px; margin-bottom: 10px; }
+  .meldung { min-height: 22px; margin: 8px 0; color: var(--neben); }
+  .meldung.schlecht { color: var(--warn); }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 10px 6px; border-bottom: 1px solid var(--flaeche2); vertical-align: top; }
+  th { color: var(--neben); font-weight: 500; font-size: 14px; }
+  td.zahl, th.zahl { text-align: right; }
+  td.zahl { font-family: "Barlow SC", sans-serif; font-weight: 600; font-size: 21px; }
+  .zeile-titel { font-family: "Barlow SC", sans-serif; font-weight: 600; font-size: 19px; margin-bottom: 6px; word-break: break-word; }
+  .paare { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 15px; }
+  .paare dt { color: var(--neben); }
+  .paare dd { margin: 0; word-break: break-word; }
+  .paare dd.zahl { font-family: "Barlow SC", sans-serif; font-weight: 600; font-size: 18px; }
+  .warn td, .warn .zeile-titel { color: var(--warn); }
+  [hidden] { display: none !important; }
+  .fuss { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+  <div class="kopf">
+    <div><h1>CarpD Cockpit</h1><div class="leise" id="wer"></div></div>
+    <button class="knopf klein" id="rotKnopf" aria-pressed="false" title="Rotlicht">🌙</button>
+  </div>
+
+  <!-- 1. Anmelden: E-Mail -->
+  <section id="schrittMail" hidden>
+    <div class="karte">
+      <h2>Anmelden</h2>
+      <p class="leise">Deine E-Mail-Adresse von CarpD. Du bekommst einen Code per Mail.</p>
+      <form id="formMail">
+        <input type="email" id="mail" autocomplete="email" placeholder="deine@mail.de" required>
+        <button class="knopf haupt" type="submit">Code schicken</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- 2. Anmelden: Code -->
+  <section id="schrittCode" hidden>
+    <div class="karte">
+      <h2>Code eingeben</h2>
+      <p class="leise" id="codeText"></p>
+      <form id="formCode">
+        <input class="code" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" required>
+        <button class="knopf haupt" type="submit">Anmelden</button>
+      </form>
+      <button class="knopf klein" id="andereMail" style="margin-top:10px">Andere Adresse</button>
+    </div>
+  </section>
+
+  <!-- 3. Knöpfe -->
+  <section id="schrittWahl" hidden>
+    <div class="gitter" id="knoepfe"></div>
+    <div class="fuss"><button class="knopf klein" id="abmelden">Abmelden</button></div>
+  </section>
+
+  <!-- 4. Ergebnis -->
+  <section id="schrittErgebnis" hidden>
+    <div class="kopf">
+      <div><h2 id="ergTitel"></h2><div class="leise" id="ergStand"></div></div>
+    </div>
+    <div id="ergebnis"></div>
+    <div class="fuss">
+      <button class="knopf haupt klein" id="neu" style="flex:1">↻ Neu laden</button>
+      <button class="knopf klein" id="zurueck" style="flex:1">← Übersicht</button>
+    </div>
+  </section>
+
+  <p class="meldung" id="meldung" role="status"></p>
+
+<script>
+(function () {
+  'use strict';
+  var SERVER = 'https://pajfamucnxdhnhrekykr.supabase.co';
+  // Öffentlicher Schlüssel (derselbe wie in der App, darf öffentlich sein – Zugriff regelt die Datenbank)
+  var SCHLUESSEL = 'sb_publishable_98r8T7xt_abNOtxuhQGeRQ_ZBnufmho';
+  var SPEICHER = 'carpd_cockpit_sitzung';
+
+  var ABFRAGEN = [
+    { id: 'cockpit', titel: 'Cockpit', gross: true },
+    { id: 'anmeldungen_zahl', titel: 'Anmeldungen Zahl' },
+    { id: 'anmeldungen_tag', titel: 'Anmeldungen pro Tag' },
+    { id: 'werbung_erfolg', titel: 'Werbung Erfolg' },
+    { id: 'werbung_anmeldungen', titel: 'Werbung Anmeldungen' },
+    { id: 'testangler_liste', titel: 'Testangler Liste' },
+    { id: 'besucher_tag', titel: 'Besucher pro Tag' },
+    { id: 'besucher_herkunft', titel: 'Besucher Herkunft' },
+    { id: 'besucher_liste', titel: 'Besucher Liste' },
+    { id: 'besuche_uhrzeit', titel: 'Besuche nach Uhrzeit' },
+    { id: 'app_konten', titel: 'App Konten' },
+    { id: 'app_nutzung', titel: 'App Nutzung' }
+  ];
+  var NAMEN = {
+    was: 'Was', heute: 'Heute', gestern: 'Gestern', liste: 'Liste', land: 'Land', handy: 'Handy', bestaetigt: 'Bestätigt',
+    offen: 'Offen', tag: 'Tag', test_de: 'Test DE', test_uk: 'Test UK', warteliste: 'Warteliste', unbestaetigt: 'Unbestätigt',
+    angemeldet: 'Angemeldet', email: 'E-Mail', kanal: 'Kanal', anzeige: 'Anzeige', quelle: 'Quelle', sprache: 'Sprache',
+    besucher: 'Besucher', anmeldungen: 'Anmeldungen', quote_prozent: 'Quote %', deutsch: 'Deutsch', englisch: 'Englisch',
+    aufrufe: 'Aufrufe', herkunft: 'Herkunft', zeit: 'Zeit', seite: 'Seite', geraet: 'Gerät', uhrzeit: 'Uhrzeit', gesamt: 'Gesamt',
+    anzahl: 'Anzahl', funktion: 'Funktion', geraete_tage: 'Geräte-Tage', prozent: 'Geräte %', benutzt: 'Benutzt', ios: 'iPhone', android: 'Android'
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var aktuell = null;
+
+  function zeigen(schritt) {
+    ['schrittMail', 'schrittCode', 'schrittWahl', 'schrittErgebnis'].forEach(function (s) { $(s).hidden = s !== schritt; });
+  }
+  function melden(text, schlecht) { var m = $('meldung'); m.textContent = text || ''; m.className = 'meldung' + (schlecht ? ' schlecht' : ''); }
+
+  // ---------- Sitzung (bleibt auf dem Handy gespeichert, damit man nicht jedes Mal einen Code braucht) ----------
+  function sitzungLesen() { try { return JSON.parse(localStorage.getItem(SPEICHER) || 'null'); } catch (e) { return null; } }
+  function sitzungSchreiben(s) {
+    try { if (s) localStorage.setItem(SPEICHER, JSON.stringify(s)); else localStorage.removeItem(SPEICHER); } catch (e) { /* privates Fenster */ }
+  }
+  function sitzungAus(antwort) {
+    return { access: antwort.access_token, refresh: antwort.refresh_token,
+             bis: Date.now() + (antwort.expires_in || 3600) * 1000, email: antwort.user && antwort.user.email };
+  }
+
+  function anfrage(pfad, daten, token) {
+    var kopf = { 'Content-Type': 'application/json', apikey: SCHLUESSEL };
+    if (token) kopf.Authorization = 'Bearer ' + token;
+    return fetch(SERVER + pfad, { method: 'POST', headers: kopf, body: JSON.stringify(daten || {}) })
+      .then(function (r) { return r.text().then(function (t) { var j = null; try { j = t ? JSON.parse(t) : null; } catch (e) {} return { ok: r.ok, status: r.status, daten: j }; }); });
+  }
+
+  function gueltigeSitzung() {
+    var s = sitzungLesen();
+    if (!s) return Promise.resolve(null);
+    if (s.bis - Date.now() > 60000) return Promise.resolve(s);
+    return anfrage('/auth/v1/token?grant_type=refresh_token', { refresh_token: s.refresh }).then(function (a) {
+      if (!a.ok || !a.daten || !a.daten.access_token) { sitzungSchreiben(null); return null; }
+      var neu = sitzungAus(a.daten); sitzungSchreiben(neu); return neu;
+    });
+  }
+
+  // ---------- Anmelden ----------
+  var mailAdresse = '';
+  $('formMail').addEventListener('submit', function (e) {
+    e.preventDefault();
+    mailAdresse = $('mail').value.trim().toLowerCase();
+    if (!mailAdresse) return;
+    var b = e.target.querySelector('button'); b.disabled = true; melden('Einen Moment …');
+    // create_user: false → hier entsteht nie ein neues Konto
+    anfrage('/auth/v1/otp', { email: mailAdresse, create_user: false }).then(function (a) {
+      b.disabled = false;
+      if (!a.ok) { melden(a.status === 429 ? 'Zu viele Versuche. Bitte in ein paar Minuten nochmal.' : 'Das hat nicht geklappt. Gibt es zu dieser Adresse ein CarpD-Konto?', true); return; }
+      melden('');
+      $('codeText').textContent = 'Wir haben dir einen Code an ' + mailAdresse + ' geschickt (auch im Spam nachsehen).';
+      $('code').value = ''; zeigen('schrittCode'); $('code').focus();
+    }).catch(function () { b.disabled = false; melden('Keine Verbindung.', true); });
+  });
+
+  $('formCode').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var code = $('code').value.replace(/\D/g, '');
+    if (code.length < 6) { melden('Bitte den ganzen Code eingeben.', true); return; }
+    var b = e.target.querySelector('button'); b.disabled = true; melden('Einen Moment …');
+    anfrage('/auth/v1/verify', { type: 'email', email: mailAdresse, token: code }).then(function (a) {
+      b.disabled = false;
+      if (!a.ok || !a.daten || !a.daten.access_token) { melden('Der Code stimmt nicht oder ist abgelaufen.', true); return; }
+      sitzungSchreiben(sitzungAus(a.daten)); melden(''); start();
+    }).catch(function () { b.disabled = false; melden('Keine Verbindung.', true); });
+  });
+
+  $('andereMail').addEventListener('click', function () { melden(''); zeigen('schrittMail'); });
+  $('abmelden').addEventListener('click', function () {
+    var s = sitzungLesen();
+    if (s) anfrage('/auth/v1/logout', {}, s.access).catch(function () {});
+    sitzungSchreiben(null); $('wer').textContent = ''; melden('Abgemeldet.'); zeigen('schrittMail');
+  });
+
+  // ---------- Abfragen ----------
+  function knoepfeBauen() {
+    var g = $('knoepfe'); g.innerHTML = '';
+    ABFRAGEN.forEach(function (a) {
+      var k = document.createElement('button');
+      k.className = 'knopf' + (a.gross ? ' haupt gross' : '');
+      k.textContent = a.titel;
+      k.addEventListener('click', function () { laden(a); });
+      g.appendChild(k);
+    });
+  }
+
+  function laden(a) {
+    aktuell = a;
+    $('ergTitel').textContent = a.titel; $('ergStand').textContent = 'lädt …'; $('ergebnis').innerHTML = '';
+    zeigen('schrittErgebnis'); melden(''); window.scrollTo(0, 0);
+    $('neu').disabled = true;
+    gueltigeSitzung().then(function (s) {
+      if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
+      return anfrage('/rest/v1/rpc/cockpit', { p_was: a.id }, s.access).then(function (r) {
+        if (!r.ok) {
+          var keinZugang = r.daten && /kein Zugang/.test(r.daten.message || '');
+          $('ergStand').textContent = '';
+          melden(keinZugang ? 'Diese Adresse hat keinen Zugang zum Cockpit.' : 'Fehler beim Laden (' + r.status + ').', true);
+          return;
+        }
+        var jetzt = new Date();
+        $('ergStand').textContent = 'Stand ' + jetzt.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' Uhr';
+        zeichnen(Array.isArray(r.daten) ? r.daten : []);
+      });
+    }).catch(function () { $('ergStand').textContent = ''; melden('Keine Verbindung.', true); })
+      .then(function () { $('neu').disabled = false; });
+  }
+
+  function istZahl(v) { return typeof v === 'number' || (typeof v === 'string' && /^-?\d+([.,]\d+)?$/.test(v.trim())); }
+  function text(v) { return v === null || v === undefined ? '–' : String(v); }
+
+  function zeichnen(zeilen) {
+    var ziel = $('ergebnis'); ziel.innerHTML = '';
+    if (!zeilen.length) { var leer = document.createElement('div'); leer.className = 'karte leise'; leer.textContent = 'Noch keine Daten.'; ziel.appendChild(leer); return; }
+    var spalten = Object.keys(zeilen[0]);
+    var zahlSpalte = spalten.map(function (s) { return zeilen.every(function (z) { return z[s] === null || z[s] === '' || istZahl(z[s]); }); });
+    var karte = document.createElement('div'); karte.className = 'karte';
+
+    if (spalten.length <= 4) {
+      // schmale Ergebnisse als Tabelle
+      var t = document.createElement('table'), kopf = document.createElement('tr');
+      spalten.forEach(function (s, i) { var th = document.createElement('th'); th.textContent = NAMEN[s] || s; if (zahlSpalte[i]) th.className = 'zahl'; kopf.appendChild(th); });
+      var thead = document.createElement('thead'); thead.appendChild(kopf); t.appendChild(thead);
+      var tbody = document.createElement('tbody');
+      zeilen.forEach(function (z) {
+        var tr = document.createElement('tr');
+        if (/⚠️/.test(text(z[spalten[0]])) && Number(z[spalten[1]]) > 0) tr.className = 'warn';
+        spalten.forEach(function (s, i) { var td = document.createElement('td'); td.textContent = text(z[s]); if (zahlSpalte[i]) td.className = 'zahl'; tr.appendChild(td); });
+        tbody.appendChild(tr);
+      });
+      t.appendChild(tbody); karte.appendChild(t); ziel.appendChild(karte);
+    } else {
+      // breite Ergebnisse: eine Karte pro Zeile (passt aufs schmale Handy)
+      zeilen.forEach(function (z) {
+        var k = document.createElement('div'); k.className = 'karte';
+        var titel = document.createElement('div'); titel.className = 'zeile-titel'; titel.textContent = text(z[spalten[0]]); k.appendChild(titel);
+        var dl = document.createElement('dl'); dl.className = 'paare';
+        spalten.slice(1).forEach(function (s, i) {
+          var dt = document.createElement('dt'); dt.textContent = NAMEN[s] || s;
+          var dd = document.createElement('dd'); dd.textContent = text(z[s]); if (zahlSpalte[i + 1]) dd.className = 'zahl';
+          dl.appendChild(dt); dl.appendChild(dd);
+        });
+        k.appendChild(dl); ziel.appendChild(k);
+      });
+    }
+  }
+
+  $('neu').addEventListener('click', function () { if (aktuell) laden(aktuell); });
+  $('zurueck').addEventListener('click', function () { melden(''); zeigen('schrittWahl'); });
+
+  // ---------- Rotlicht (wird gemerkt) ----------
+  function rot(an) { document.body.classList.toggle('rot', an); $('rotKnopf').setAttribute('aria-pressed', an ? 'true' : 'false'); try { localStorage.setItem('carpd_cockpit_rot', an ? '1' : '0'); } catch (e) {} }
+  $('rotKnopf').addEventListener('click', function () { rot(!document.body.classList.contains('rot')); });
+  try { rot(localStorage.getItem('carpd_cockpit_rot') === '1'); } catch (e) {}
+
+  // ---------- Start ----------
+  function start() {
+    gueltigeSitzung().then(function (s) {
+      if (!s) { zeigen('schrittMail'); return; }
+      $('wer').textContent = s.email || '';
+      knoepfeBauen(); zeigen('schrittWahl');
+    }).catch(function () { zeigen('schrittMail'); melden('Keine Verbindung.', true); });
+  }
+  start();
+})();
+</script>
+</body>
+</html>
