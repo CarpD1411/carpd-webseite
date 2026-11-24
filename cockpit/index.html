@@ -314,14 +314,22 @@
     $('kacheln').appendChild(k);
   }
 
-  function kachelnZeichnen(cockpit, tage, werbung) {
+  function kachelnZeichnen(cockpit, tage, werbung, liste) {
     function finde(teil, spalte) {
       var z = cockpit.filter(function (x) { return x.was.indexOf(teil) >= 0; })[0];
       return z && z[spalte] !== null && z[spalte] !== '' ? z[spalte] : '–';
     }
-    var heuteTag = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', timeZone: 'Europe/Berlin' });
-    var h = tage.filter(function (t) { return t.tag === heuteTag; })[0];
-    var offen = h ? Number(h.unbestaetigt) : 0;
+    // Anmeldungen eines Tages, getrennt nach bestätigt und offen (ohne Kumpels). „unbestaetigt“ gilt für beide Listen
+    // zusammen, darum kommen die offenen Testangler aus der Testangler-Liste und der Rest ist die Warteliste.
+    function neue(tagZurueck) {
+      var tag = new Date(Date.now() - tagZurueck * 864e5).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', timeZone: 'Europe/Berlin' });
+      var z = tage.filter(function (t) { return t.tag === tag; })[0] || { test_de: 0, test_uk: 0, warteliste: 0, unbestaetigt: 0 };
+      var testOffen = liste.filter(function (l) { return l.angemeldet.indexOf(tag) === 0 && l.kanal !== 'Kumpel' && l.bestaetigt === 'offen'; }).length;
+      var warteOffen = Math.max(0, Number(z.unbestaetigt) - testOffen);
+      return { offen: Number(z.unbestaetigt), testOffen: testOffen, warteOffen: warteOffen,
+        test: Math.max(0, Number(z.test_de) + Number(z.test_uk) - testOffen), warte: Math.max(0, Number(z.warteliste) - warteOffen) };
+    }
+    var h = neue(0), g = neue(1), offen = h.offen;
 
     // Eine Anzeige kann in zwei Sprachen vorkommen: Besucher zusammenzählen, Anmeldungen nur einmal
     var anzeigen = {}, besucher = 0, anmeldungen = 0;
@@ -343,8 +351,8 @@
     kachel('Alles in Ordnung?', probleme.length ? probleme.map(function (p) { return '⚠️ ' + p; }).join('\n') : '✅ Alles normal',
       offen ? 'Heute noch unbestätigt: ' + offen : '', 'breit ampel' + (probleme.length ? ' warn' : ''));
     kachel('Besucher heute', finde('Besucher', 'heute'), 'gestern ' + finde('Besucher', 'gestern'));
-    kachel('Neue Testangler', finde('Testangler neu', 'heute'), 'gestern ' + finde('Testangler neu', 'gestern'));
-    kachel('Neu auf der Warteliste', finde('Warteliste neu', 'heute'), 'gestern ' + finde('Warteliste neu', 'gestern') + '\nbestätigt: ' + finde('STAND Warteliste', 'heute'));
+    kachel('Neue Testangler', h.test, 'noch offen: ' + h.testOffen + '\ngestern ' + g.test);
+    kachel('Neu auf der Warteliste', h.warte, 'noch offen: ' + h.warteOffen + '\ngestern ' + g.warte + '\ngesamt: ' + finde('STAND Warteliste', 'heute'));
     kachel('Testplätze belegt', 'DE ' + finde('Testangler DE', 'heute') + ' / 200\nUK ' + finde('Testangler UK', 'heute') + ' / 100', '', 'text');
     kachel('Beste Anzeige (30 Tage)', beste ? beste.name : 'Noch keine Anmeldung',
       beste ? beste.anmeldungen + (beste.anmeldungen === 1 ? ' Anmeldung · ' : ' Anmeldungen · ') + beste.besucher + ' Besucher' : besucher + ' Besucher über Anzeigen', 'breit');
@@ -354,7 +362,7 @@
     $('kachelStand').textContent = 'lädt …'; $('kachelnNeu').disabled = true; melden('');
     gueltigeSitzung().then(function (s) {
       if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
-      return Promise.all(['cockpit', 'anmeldungen_tag', 'werbung_erfolg'].map(function (id) {
+      return Promise.all(['cockpit', 'anmeldungen_tag', 'werbung_erfolg', 'testangler_liste'].map(function (id) {
         return anfrage('/rest/v1/rpc/cockpit', { p_was: id }, s.access);
       })).then(function (alle) {
         var schlecht = alle.filter(function (r) { return !r.ok; })[0];
