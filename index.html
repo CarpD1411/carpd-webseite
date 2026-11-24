@@ -326,6 +326,16 @@
     .test.voll .test-zu { display: flex; }
     .knapp { margin: 0; font-weight: 700; color: var(--oliv-hell); font-size: 1.1rem; }
 
+    /* Besucher aus der Werbung (?utm_source=…): drei Vorteile + Formular gleich oben (Rest der Seite bleibt darunter) */
+    .vorteile { display: none; list-style: none; padding: 0; margin: 26px 0 22px; }
+    .vorteile li { position: relative; padding: 8px 0 8px 36px; font-size: 19px; font-weight: 600; line-height: 1.35; }
+    .vorteile li::before { content: "✓"; position: absolute; left: 0; top: 6px; width: 26px; height: 26px; border-radius: 50%; background: var(--oliv); color: var(--knopf-text); font-size: 16px; line-height: 26px; text-align: center; font-weight: 700; }
+    .formular-oben { display: none; }
+    body.werbung .vorteile { display: block; }
+    body.werbung .formular-oben { display: block; margin: 6px 0 28px; }
+    body.werbung .start .einleitung, body.werbung .start .aufruf, body.werbung .start .termine { display: none; }
+    body.werbung .start { padding-top: 32px; }
+
     /* Warteliste */
     .warte .breite > * { max-width: 780px; }
     .warte form { display: flex; gap: 10px; margin-top: 26px; }
@@ -431,6 +441,12 @@
             <span><span class="d">D</span>eine Daten.</span>
             <span><span class="d">D</span>ein nächster Fisch.</span>
           </p>
+          <ul class="vorteile" aria-label="Das bekommst du als Testangler">
+            <li><strong>1 Jahr CarpD Pro kostenlos</strong>, mit allen Funktionen</li>
+            <li>Testen ab <strong>1. Januar 2027</strong>, auf iPhone oder Android</li>
+            <li>Nur E-Mail eintragen. Keine Kosten, jederzeit abmelden.</li>
+          </ul>
+          <div class="formular-oben" id="formularOben"></div>
           <p class="einleitung">CarpD ist die App <strong>nur fürs Karpfenangeln</strong>. Wetter, Luftdruck-Trend und Beißindex hast du am Wasser auf einen Blick. Bisse und Fänge trägst du mit einem Tipp ein, Uhrzeit und Wetter speichert die App selbst. Gemacht für die Nacht und für nasse Hände.</p>
           <div class="aufruf">
             <a class="knopf" href="#test">Jetzt Testangler werden</a>
@@ -636,7 +652,7 @@
         <div>
           <p class="plaetze">200</p>
           <h2>Testangler gesucht.</h2>
-          <p class="leise gross" style="margin-top:22px">Teste CarpD ab dem <strong style="color:var(--text)">1. Januar 2027</strong> auf iPhone oder Android. Als Dankeschön bekommst du <strong style="color:var(--text)">CarpD ein Jahr kostenlos, mit allen Funktionen</strong>.</p>
+          <p class="leise gross" style="margin-top:22px">Teste CarpD ab dem <strong style="color:var(--text)">1. Januar 2027</strong> auf iPhone oder Android. Als Dankeschön bekommst du <strong style="color:var(--text)">1 Jahr CarpD Pro kostenlos, mit allen Funktionen</strong>.</p>
           <ol class="schritte">
             <li><div><b>Melden</b><span>Trag deine E-Mail ein, wähl dein Handy und bestätige die Mail von uns.</span></div></li>
             <li><div><b>Einladung</b><span>Ab 1. Januar 2027 kommt deine Einladung, über TestFlight (iPhone) oder Google Play (Android).</span></div></li>
@@ -752,7 +768,7 @@
     // Testangler-Formular (wie auf carpd.de, inkl. Quelle aus der Werbung)
     (function () {
       var f = document.getElementById('testForm'), m = document.getElementById('testMeldung'), test = document.getElementById('test');
-      function voll() { test.classList.add('voll'); }
+      function voll() { test.classList.add('voll'); document.body.classList.remove('werbung'); }
       if (VORSCHAU) { if (/[?&]voll/.test(location.search)) voll(); }
       else (function (l) { var c = window.__carpdStand = window.__carpdStand || {}; return c[l] || (c[l] = fetch('https://pajfamucnxdhnhrekykr.supabase.co/functions/v1/warteliste?stand=1&land=' + l).then(function (r) { return r.json(); })); })('DE').then(function (d) { if (d && d.voll) voll(); else if (d && d.frei > 0) { var k = document.getElementById('testFrei'); k.textContent = 'Nur noch ' + d.frei + (d.frei === 1 ? ' Platz' : ' Plätze') + ' frei!'; k.hidden = false; } }).catch(function () {});
       var u = new URLSearchParams(location.search);
@@ -784,6 +800,20 @@
       });
     })();
 
+
+    // Besucher aus der Werbung oder von Social Media: Vorteile + Formular direkt unter der Überschrift
+    (function () {
+      var u = new URLSearchParams(location.search);
+      var q = (u.get('utm_source') || u.get('kanal') || '').toLowerCase();
+      if (!/^(meta|facebook|fb|instagram|ig|tiktok)$/.test(q) && !u.has('werbung')) return;
+      var test = document.getElementById('test');
+      if (test && test.classList.contains('voll')) return;
+      var f = document.getElementById('testForm'), ziel = document.getElementById('formularOben');
+      if (!f || !ziel) return;
+      document.body.classList.add('werbung');
+      ziel.appendChild(f);
+      document.querySelectorAll('a[href="#test"]').forEach(function (a) { a.setAttribute('href', '#formularOben'); });
+    })();
   </script>
 <script>
   // Wer weniger Bewegung möchte (Einstellung im System): Film anhalten, Standbild zeigen
