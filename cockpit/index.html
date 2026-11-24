@@ -65,6 +65,7 @@
   .kachel .name { color: var(--neben); font-family: "Barlow SC", sans-serif; font-weight: 600; }
   .kachel .wert { font-family: "Barlow SC", sans-serif; font-weight: 600; font-size: 44px; line-height: 1.1; margin: 4px 0; white-space: pre-line; }
   .kachel .wert.mittel { font-size: 27px; line-height: 1.2; margin: 8px 0; }
+  .kachel .leise { white-space: pre-line; }
   .abstand { margin-top: 10px; }
   .fuss { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
 </style>
@@ -343,7 +344,7 @@
       offen ? 'Heute noch unbestätigt: ' + offen : '', 'breit ampel' + (probleme.length ? ' warn' : ''));
     kachel('Besucher heute', finde('Besucher', 'heute'), 'gestern ' + finde('Besucher', 'gestern'));
     kachel('Neue Testangler', finde('Testangler neu', 'heute'), 'gestern ' + finde('Testangler neu', 'gestern'));
-    kachel('Neu auf der Warteliste', finde('Warteliste neu', 'heute'), 'gestern ' + finde('Warteliste neu', 'gestern'));
+    kachel('Neu auf der Warteliste', finde('Warteliste neu', 'heute'), 'gestern ' + finde('Warteliste neu', 'gestern') + '\nbestätigt: ' + finde('STAND Warteliste', 'heute'));
     kachel('Testplätze belegt', 'DE ' + finde('Testangler DE', 'heute') + ' / 200\nUK ' + finde('Testangler UK', 'heute') + ' / 100', '', 'text');
     kachel('Beste Anzeige (30 Tage)', beste ? beste.name : 'Noch keine Anmeldung',
       beste ? beste.anmeldungen + (beste.anmeldungen === 1 ? ' Anmeldung · ' : ' Anmeldungen · ') + beste.besucher + ' Besucher' : besucher + ' Besucher über Anzeigen', 'breit');
