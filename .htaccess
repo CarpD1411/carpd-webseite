@@ -4,6 +4,10 @@ RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://carpd.de%{REQUEST_URI} [L,R=301]
 
+# Cockpit: auch mit großem C (iPhone schreibt Wörter gern groß)
+RewriteCond %{REQUEST_URI} !^/cockpit/
+RewriteRule ^cockpit/?$ https://carpd.de/cockpit/ [NC,L,R=301]
+
 # Eigene Fehlerseite gibt es nicht – Standard reicht. Videos dürfen im Browser zwischengespeichert werden.
 <IfModule mod_expires.c>
   ExpiresActive On
