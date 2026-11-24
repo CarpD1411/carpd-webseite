@@ -57,6 +57,15 @@
   .paare dd.zahl { font-family: "Barlow SC", sans-serif; font-weight: 600; font-size: 18px; }
   .warn td, .warn .zeile-titel { color: var(--warn); }
   [hidden] { display: none !important; }
+  .kachel { background: var(--flaeche); border-radius: var(--rund); padding: 14px 16px; min-height: 118px; overflow-wrap: anywhere; }
+  .kachel.breit { grid-column: 1 / -1; min-height: 0; }
+  .kachel.ampel { border-left: 5px solid var(--akzent); }
+  .kachel.ampel.warn { border-left-color: var(--warn); }
+  .kachel.ampel.warn .wert { color: var(--warn); }
+  .kachel .name { color: var(--neben); font-family: "Barlow SC", sans-serif; font-weight: 600; }
+  .kachel .wert { font-family: "Barlow SC", sans-serif; font-weight: 600; font-size: 44px; line-height: 1.1; margin: 4px 0; white-space: pre-line; }
+  .kachel .wert.mittel { font-size: 27px; line-height: 1.2; margin: 8px 0; }
+  .abstand { margin-top: 10px; }
   .fuss { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
 </style>
 </head>
@@ -93,8 +102,14 @@
 
   <!-- 3. Knöpfe -->
   <section id="schrittWahl" hidden>
-    <div class="gitter" id="knoepfe"></div>
-    <div class="fuss"><button class="knopf klein" id="abmelden">Abmelden</button></div>
+    <div class="leise" id="kachelStand" style="margin-bottom:8px"></div>
+    <div class="gitter" id="kacheln"></div>
+    <button class="knopf haupt abstand" id="kachelnNeu">↻ Neu laden</button>
+    <button class="knopf abstand" id="mehr" aria-expanded="false" aria-controls="mehrBereich">Mehr anzeigen ▾</button>
+    <div id="mehrBereich" class="abstand" hidden>
+      <div class="gitter" id="knoepfe"></div>
+      <div class="fuss"><button class="knopf klein" id="abmelden">Abmelden</button></div>
+    </div>
   </section>
 
   <!-- 4. Ergebnis -->
@@ -286,6 +301,79 @@
     }
   }
 
+  // ---------- Startseite: 6 Kacheln aus den vorhandenen Abfragen ----------
+  var WERBE_GRENZE = 100, OFFEN_GRENZE = 10; // ab hier wird die Ampel gelb
+
+  function kachel(name, wert, klein, art) {
+    var k = document.createElement('div'); k.className = 'kachel ' + (art || '');
+    [['name', name], ['wert' + (/breit|text/.test(art || '') ? ' mittel' : ''), wert], ['leise', klein]].forEach(function (t) {
+      if (t[1] === '') return;
+      var d = document.createElement('div'); d.className = t[0]; d.textContent = t[1]; k.appendChild(d);
+    });
+    $('kacheln').appendChild(k);
+  }
+
+  function kachelnZeichnen(cockpit, tage, werbung) {
+    function finde(teil, spalte) {
+      var z = cockpit.filter(function (x) { return x.was.indexOf(teil) >= 0; })[0];
+      return z && z[spalte] !== null && z[spalte] !== '' ? z[spalte] : '–';
+    }
+    var heuteTag = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', timeZone: 'Europe/Berlin' });
+    var h = tage.filter(function (t) { return t.tag === heuteTag; })[0];
+    var offen = h ? Number(h.unbestaetigt) : 0;
+
+    // Eine Anzeige kann in zwei Sprachen vorkommen: Besucher zusammenzählen, Anmeldungen nur einmal
+    var anzeigen = {}, besucher = 0, anmeldungen = 0;
+    werbung.forEach(function (w) {
+      var a = anzeigen[w.anzeige] = anzeigen[w.anzeige] || { name: w.anzeige, besucher: 0, anmeldungen: 0 };
+      a.besucher += Number(w.besucher); a.anmeldungen = Math.max(a.anmeldungen, Number(w.anmeldungen));
+    });
+    var rang = Object.keys(anzeigen).map(function (n) { return anzeigen[n]; });
+    rang.forEach(function (a) { besucher += a.besucher; anmeldungen += a.anmeldungen; });
+    rang.sort(function (a, b) { return b.anmeldungen - a.anmeldungen || a.besucher - b.besucher; });
+    var beste = rang[0] && rang[0].anmeldungen > 0 ? rang[0] : null;
+
+    var probleme = [], fehler = Number(finde('Mails nicht raus', 'heute'));
+    if (fehler > 0) probleme.push(fehler + (fehler === 1 ? ' Mail ging' : ' Mails gingen') + ' nicht raus');
+    if (offen >= OFFEN_GRENZE) probleme.push('Viele Unbestätigte heute: ' + offen);
+    if (besucher >= WERBE_GRENZE && anmeldungen === 0) probleme.push('Werbung: ' + besucher + ' Besucher, keine bestätigte Anmeldung');
+
+    $('kacheln').innerHTML = '';
+    kachel('Alles in Ordnung?', probleme.length ? probleme.map(function (p) { return '⚠️ ' + p; }).join('\n') : '✅ Alles normal',
+      offen ? 'Heute noch unbestätigt: ' + offen : '', 'breit ampel' + (probleme.length ? ' warn' : ''));
+    kachel('Besucher heute', finde('Besucher', 'heute'), 'gestern ' + finde('Besucher', 'gestern'));
+    kachel('Neue Testangler', finde('Testangler neu', 'heute'), 'gestern ' + finde('Testangler neu', 'gestern'));
+    kachel('Neu auf der Warteliste', finde('Warteliste neu', 'heute'), 'gestern ' + finde('Warteliste neu', 'gestern'));
+    kachel('Testplätze belegt', 'DE ' + finde('Testangler DE', 'heute') + ' / 200\nUK ' + finde('Testangler UK', 'heute') + ' / 100', '', 'text');
+    kachel('Beste Anzeige (30 Tage)', beste ? beste.name : 'Noch keine Anmeldung',
+      beste ? beste.anmeldungen + (beste.anmeldungen === 1 ? ' Anmeldung · ' : ' Anmeldungen · ') + beste.besucher + ' Besucher' : besucher + ' Besucher über Anzeigen', 'breit');
+  }
+
+  function kachelnLaden() {
+    $('kachelStand').textContent = 'lädt …'; $('kachelnNeu').disabled = true; melden('');
+    gueltigeSitzung().then(function (s) {
+      if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
+      return Promise.all(['cockpit', 'anmeldungen_tag', 'werbung_erfolg'].map(function (id) {
+        return anfrage('/rest/v1/rpc/cockpit', { p_was: id }, s.access);
+      })).then(function (alle) {
+        var schlecht = alle.filter(function (r) { return !r.ok; })[0];
+        if (schlecht) {
+          $('kachelStand').textContent = '';
+          melden(/kein Zugang/.test((schlecht.daten && schlecht.daten.message) || '') ? 'Diese Adresse hat keinen Zugang zum Cockpit.' : 'Fehler beim Laden (' + schlecht.status + ').', true);
+          return;
+        }
+        kachelnZeichnen.apply(null, alle.map(function (r) { return Array.isArray(r.daten) ? r.daten : []; }));
+        $('kachelStand').textContent = 'Stand ' + new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+      });
+    }).catch(function () { $('kachelStand').textContent = ''; melden('Keine Verbindung.', true); })
+      .then(function () { $('kachelnNeu').disabled = false; });
+  }
+
+  $('kachelnNeu').addEventListener('click', kachelnLaden);
+  $('mehr').addEventListener('click', function () {
+    var auf = $('mehrBereich').hidden; $('mehrBereich').hidden = !auf;
+    $('mehr').textContent = auf ? 'Weniger anzeigen ▴' : 'Mehr anzeigen ▾'; $('mehr').setAttribute('aria-expanded', auf ? 'true' : 'false');
+  });
   $('neu').addEventListener('click', function () { if (aktuell) laden(aktuell); });
   $('zurueck').addEventListener('click', function () { melden(''); zeigen('schrittWahl'); });
 
@@ -299,7 +387,7 @@
     gueltigeSitzung().then(function (s) {
       if (!s) { zeigen('schrittMail'); return; }
       $('wer').textContent = s.email || '';
-      knoepfeBauen(); zeigen('schrittWahl');
+      knoepfeBauen(); zeigen('schrittWahl'); kachelnLaden();
     }).catch(function () { zeigen('schrittMail'); melden('Keine Verbindung.', true); });
   }
   start();
