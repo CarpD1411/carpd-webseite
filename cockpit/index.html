@@ -68,6 +68,14 @@
   .kachel .wert.mittel { font-size: 27px; line-height: 1.2; margin: 8px 0; }
   .kachel .leise { white-space: pre-line; }
   .abstand { margin-top: 10px; }
+  .schritt { border: 2px solid var(--neben); background: transparent; margin-top: 10px; }
+  .schritt.dran { border-color: var(--akzent); background: var(--akzent); color: var(--auf-akzent); }
+  .schritt.fertig { border-color: var(--akzent); color: var(--akzent); }
+  .schritt:disabled { opacity: .4; }
+  .schritt.senden.dran { border-color: var(--warn); background: var(--warn); color: var(--auf-akzent); }
+  .person { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--flaeche2); }
+  .person .adresse { user-select: all; -webkit-user-select: all; font-size: 18px; overflow-wrap: anywhere; }
+  .person .hinweis { margin-top: 8px; font-size: 15px; color: var(--neben); }
   .fuss { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
 </style>
 </head>
@@ -107,8 +115,8 @@
     <div class="leise" id="kachelStand" style="margin-bottom:8px"></div>
     <div class="gitter" id="kacheln"></div>
     <div class="kachel breit abstand" id="androidKasten" hidden>
-      <div class="name">Android: diese Personen warten auf die App</div>
-      <div class="leise">Je Person: <b>1.</b> Adresse kopieren <b>2.</b> Play Console (info@carpd.de) → Closed testing → alpha → Testers → „Testers“ → einfügen, Enter, Save changes („already exists“ = schon drin, auch gut) <b>3.</b> erst danach „Einladung schicken“. <b>Dieser Knopf verschickt sofort eine Mail.</b></div>
+      <div class="name" id="androidTitel">Android: diese Personen warten auf die App</div>
+      <div class="leise">Immer auf den farbigen Knopf tippen, von 1 bis 3. Orange heißt: Jetzt geht eine Mail raus.</div>
       <div id="androidListe"></div>
     </div>
     <button class="knopf haupt abstand" id="kachelnNeu">↻ Neu laden</button>
@@ -378,49 +386,79 @@
   }
 
   // ---------- Android: Adressen für Googles Testerliste (SQL 058) ----------
-  var androidWartet = [], androidGeladen = false; // Adressen nur einmal je Öffnen laden
+  // Je Person drei Schritte; nur der nächste ist farbig. „Einladung schicken“ ist gesperrt, bis 1 und 2 angetippt sind.
+  // carpd.de/cockpit/?probe zeigt erfundene Personen: zum Üben, ohne Server, es geht keine Mail raus.
+  var PROBE = /[?&]probe\b/.test(location.search), PROBE_LISTE = [{ id: -1, email: 'beispiel.eins@example.com' }, { id: -2, email: 'beispiel.zwei@example.com' }];
+  var androidGeladen = false;
+  // Gemerkt wird nur die Nummer der Person und der Schritt (falls Safari die Seite nach dem Ausflug zu Google neu lädt)
+  function schrittLesen(id) { try { return Number(sessionStorage.getItem('carpd_android_' + id) || 0); } catch (e) { return 0; } }
+  function schrittMerken(id, n) { try { sessionStorage.setItem('carpd_android_' + id, String(n)); } catch (e) {} }
   function androidLaden(token) {
+    if (PROBE) { androidZeichnen(PROBE_LISTE); return Promise.resolve(); }
     return anfrage('/rest/v1/rpc/cockpit_android', {}, token).then(function (r) {
       if (!r.ok) androidGeladen = false;
-      androidWartet = r.ok && Array.isArray(r.daten) ? r.daten : []; // SQL 058 noch nicht da → Kasten bleibt weg
-      var liste = $('androidListe'); liste.innerHTML = '';
-      androidWartet.forEach(function (p) {
-        var z = document.createElement('div'); z.style.cssText = 'margin-top:14px';
-        var m = document.createElement('div'); m.textContent = p.email; m.style.cssText = 'user-select:all;-webkit-user-select:all;overflow-wrap:anywhere;margin-bottom:6px';
-        var k = document.createElement('button'); k.className = 'knopf klein'; k.textContent = '1. Adresse kopieren';
-        k.addEventListener('click', function () { androidKopieren(p.email, m); });
-        var f = document.createElement('button'); f.className = 'knopf haupt klein abstand'; f.textContent = '3. Einladung schicken';
-        f.addEventListener('click', function () { androidEinladen(p, f); });
-        z.appendChild(m); z.appendChild(k); z.appendChild(f); liste.appendChild(z);
-      });
-      $('androidKasten').hidden = !androidWartet.length;
+      androidZeichnen(r.ok && Array.isArray(r.daten) ? r.daten : []);
     });
   }
-  // Geht das Kopieren nicht (ältere Handys), wird die Adresse markiert und auf dem alten Weg kopiert
-  function androidKopieren(text, zeile) {
-    function alt() {
-      var r = document.createRange(); r.selectNodeContents(zeile);
-      var w = window.getSelection(); w.removeAllRanges(); w.addRange(r);
-      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
-      melden(ok ? 'Adresse kopiert.' : 'Die Adresse ist markiert – bitte „Kopieren“ antippen.', !ok);
-    }
-    if (!navigator.clipboard) { alt(); return; }
-    navigator.clipboard.writeText(text).then(function () { melden('Adresse kopiert.'); }).catch(alt);
+  function androidZeichnen(personen) {
+    $('androidTitel').textContent = PROBE ? '🧪 PROBE – erfundene Personen, es geht keine Mail raus' : 'Android: diese Personen warten auf die App';
+    var liste = $('androidListe'); liste.innerHTML = '';
+    personen.forEach(function (p) { liste.appendChild(androidPerson(p)); });
+    $('androidKasten').hidden = !personen.length;
   }
-  function androidEinladen(p, knopf) {
-    if (!confirm('Steht ' + p.email + ' schon bei Google in der Liste?\n\nOK = Die Einladungs-Mail geht jetzt raus.')) return;
-    knopf.disabled = true;
-    gueltigeSitzung().then(function (s) {
-      if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
-      return anfrage('/rest/v1/rpc/cockpit_android_eingetragen', { p_ids: [p.id] }, s.access).then(function (r) {
-        if (!r.ok) { melden('Fehler (' + r.status + ') – nichts verschickt.', true); return; }
-        melden(r.daten === 1 ? 'Die Einladung geht in der nächsten Minute raus.' : 'Diese Person war schon eingeladen.');
-        return androidLaden(s.access);
+  function androidPerson(p) {
+    var stand = PROBE ? 0 : schrittLesen(p.id); // 0 = nichts, 1 = kopiert, 2 = Google geöffnet, 3 = verschickt
+    var z = document.createElement('div'); z.className = 'person';
+    var m = document.createElement('div'); m.className = 'adresse'; m.textContent = p.email; z.appendChild(m);
+    var namen = ['1. Adresse kopieren', '2. Google öffnen und eintragen', '3. Einladung schicken (Mail geht raus)'], fertig = ['✓ Adresse kopiert', '✓ Google geöffnet', '✓ Einladung verschickt'];
+    var hilfen = ['', 'Bei Google: CarpD → ☰ → Test and release → Testing → Closed testing → alpha → Testers → Liste „Testers“ → einfügen, Enter, Save changes. „already exists“ heißt: schon drin, auch gut.', 'Steht die Adresse bei Google? Dann jetzt die Einladung schicken.', PROBE ? 'Probe fertig. In echt wäre jetzt die Mail unterwegs.' : 'Die Einladung geht in der nächsten Minute raus.'];
+    var k = namen.map(function (_, i) {
+      var b = document.createElement('button'); b.type = 'button'; z.appendChild(b);
+      b.addEventListener('click', function () { [kopieren, google, senden][i](b); });
+      return b;
+    });
+    var h = document.createElement('div'); h.className = 'hinweis'; h.setAttribute('role', 'status'); z.appendChild(h);
+    function malen(text) {
+      k.forEach(function (b, i) {
+        b.className = 'knopf schritt' + (i === 2 ? ' senden' : '') + (i < stand ? ' fertig' : i === stand ? ' dran' : '');
+        b.textContent = i < stand ? fertig[i] : namen[i];
+        b.disabled = i > stand || stand === 3;
       });
-    }).catch(function () { melden('Keine Verbindung.', true); }).then(function () { knopf.disabled = false; });
+      h.textContent = text || hilfen[stand];
+    }
+    function weiter(n, text) { stand = Math.max(stand, n); if (!PROBE) schrittMerken(p.id, stand); malen(text); }
+    function kopieren() {
+      function alt() {
+        // Geht das Kopieren nicht (ältere Handys): Adresse markieren und auf dem alten Weg kopieren
+        var r = document.createRange(); r.selectNodeContents(m);
+        var w = window.getSelection(); w.removeAllRanges(); w.addRange(r);
+        var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+        weiter(1, ok ? '' : 'Die Adresse ist markiert: bitte lange darauf drücken und „Kopieren“ wählen.');
+      }
+      if (!navigator.clipboard) { alt(); return; }
+      // antwortet das Handy nicht, nach 1 Sekunde den alten Weg nehmen
+      var da = false, uhr = setTimeout(function () { if (!da) { da = true; alt(); } }, 1000);
+      navigator.clipboard.writeText(p.email).then(function () { if (!da) { da = true; clearTimeout(uhr); weiter(1); } })
+        .catch(function () { if (!da) { da = true; clearTimeout(uhr); alt(); } });
+    }
+    function google() { window.open('https://play.google.com/console/', '_blank', 'noopener'); weiter(2); }
+    function senden(b) {
+      if (!confirm((PROBE ? 'PROBE – es passiert nichts.\n\n' : '') + 'Steht ' + p.email + ' bei Google in der Liste?\n\nOK = Die Einladungs-Mail geht jetzt raus.')) return;
+      if (PROBE) { weiter(3); return; }
+      b.disabled = true;
+      gueltigeSitzung().then(function (s) {
+        if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
+        return anfrage('/rest/v1/rpc/cockpit_android_eingetragen', { p_ids: [p.id] }, s.access).then(function (r) {
+          if (!r.ok) { malen('Fehler (' + r.status + ') – nichts verschickt.'); return; }
+          weiter(3, r.daten === 1 ? '' : 'Diese Person war schon eingeladen.');
+        });
+      }).catch(function () { malen('Keine Verbindung – bitte „Neu laden“ und nachsehen, ob die Person noch da ist.'); });
+    }
+    malen();
+    return z;
   }
 
-  $('kachelnNeu').addEventListener('click', kachelnLaden);
+  $('kachelnNeu').addEventListener('click', function () { androidGeladen = false; kachelnLaden(); });
   $('mehr').addEventListener('click', function () {
     var auf = $('mehrBereich').hidden; $('mehrBereich').hidden = !auf;
     $('mehr').textContent = auf ? 'Weniger anzeigen ▴' : 'Mehr anzeigen ▾'; $('mehr').setAttribute('aria-expanded', auf ? 'true' : 'false');
