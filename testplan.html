@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testplan für Testangler – CarpD</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="seite.css">
+  <link rel="stylesheet" href="marke.css">
+  <style>
+    .plan { list-style: none; padding: 0; margin: 28px 0; display: grid; gap: 14px; counter-reset: p; }
+    .plan li { counter-increment: p; background: var(--flaeche, #1A1A1A); border-radius: 16px; padding: 18px 20px 18px 68px; position: relative; }
+    .plan li::before { content: counter(p); position: absolute; left: 20px; top: 14px; font-family: var(--marke); font-weight: 700; font-size: 36px; line-height: 1; color: var(--oliv); }
+    .plan b { display: block; font-family: var(--marke); font-size: 22px; line-height: 1.2; margin-bottom: 4px; }
+  </style>
+</head>
+<body class="unterseite-schein">
+  <header class="leiste">
+    <div class="breite">
+      <a class="marke" href="index.html"><img src="logo.svg" alt="" width="36" height="36"><span>Carp<span class="d">D</span></span></a>
+      <nav>
+        <a href="funktionen.html">Funktionen</a>
+        <a href="preise.html">Kostenlos &amp; Pro</a>
+        <a href="index.html#crews">Crews</a>
+        <a href="hilfe/">Hilfe &amp; FAQ</a>
+        <button class="mond" type="button" data-rotlicht aria-pressed="false" title="Rotlicht-Modus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Rotlicht</span></button>
+        <a class="knopf klein" href="index.html#test">Testangler werden</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="text">
+    <p><a href="index.html">← zurück zu CarpD</a></p>
+    <h1>Schön, dass du testest!</h1>
+    <p>Hier sind fünf Dinge, die uns am meisten helfen. Du musst nicht alles machen, und es gibt kein Richtig oder Falsch. Nimm CarpD einfach mit ans Wasser.</p>
+    <ol class="plan">
+      <li><b>Einrichten</b>Geh die Einführung durch und leg unter Mehr → Konto ein Konto mit Spitznamen an. Daran erkennt dich CarpD als Testangler, und du bekommst dein Gratisjahr.</li>
+      <li><b>Dein Gewässer finden</b>Such dein Gewässer auf der Karte und schau dir Wetter, Luftdruck und Beißindex an. Stimmt alles?</li>
+      <li><b>Eine Session angeln</b>Starte eine Session, trag Bisse und einen Fang ein und beende sie wieder. Geht das schnell genug, auch mit kalten oder nassen Händen?</li>
+      <li><b>In der Nacht</b>Schalte oben rechts mit dem Mond das Rotlicht ein. Blendet noch etwas?</li>
+      <li><b>Ohne Netz</b>Trag im Flugmodus einen Fang ein. Ist das Wetter da, sobald du wieder Netz hast?</li>
+    </ol>
+    <h2>Gerade nicht am Wasser?</h2>
+    <p>Trag einen alten Fang nach, plan deine nächste Tour oder probier die Packliste und den Futterrechner aus. Das geht auch vom Sofa.</p>
+    <h2>So sagst du uns, was du denkst</h2>
+    <p>In der App unter <strong>Mehr → Feedback &amp; Fehler melden</strong> oder per Mail an <a href="mailto:test@carpd.de">test@carpd.de</a>. Ein Satz reicht. Sei ruhig ehrlich, auch wenn dir etwas nicht gefällt. Bitte schick uns keine Bilder, auf denen man deinen Spot erkennt.</p>
+    <p>Bis zum Start am 01.03.2027 ist für dich alles frei. Danach läuft dein Jahr CarpD Pro gratis.</p>
+    <p>Tight Lines!<br>Davide &amp; Kreso von CarpD</p>
+    <p class="klein">Fragen zur Installation? In der <a href="hilfe/">Hilfe</a> findest du Antworten.</p>
+  </main>
+  <footer>
+    <div class="breite">
+      <span><strong style="color:var(--text)">Tight Lines!</strong> · <a href="index.html">Startseite</a> · <a href="funktionen.html">Funktionen</a> · <a href="preise.html">Kostenlos &amp; Pro</a> · Gewässerdaten © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a></span>
+      <span><a href="hilfe/">Hilfe &amp; FAQ</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a></span>
+    </div>
+  </footer>
+
+  <script src="rotlicht.js"></script>
+<script src="zaehler.js" defer></script>
+</body>
+</html>
