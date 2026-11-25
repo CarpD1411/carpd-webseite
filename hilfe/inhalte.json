@@ -2629,6 +2629,48 @@
    }
   },
   {
+   "id": "testangler-app",
+   "thema": "abo",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Wie bekomme ich die App als Testangler?",
+    "a": "Melde dich auf carpd.de an und klick in der Mail auf „Bestätigen“. iPhone: Die Einladung kommt gleich danach per Mail – lade TestFlight aus dem App Store, öffne den Link aus der Mail und tippe auf „Akzeptieren“ und „Installieren“. Android: Die Einladung kommt innerhalb von 1 bis 2 Tagen, weil Google dich erst freischalten muss – öffne den Link mit dem Google-Konto deiner Anmeldung, tippe auf „Tester werden“ und installiere CarpD."
+   },
+   "en": {
+    "f": "How do I get the app as a test angler?",
+    "a": "Sign up on carpd.de/uk and confirm the email. In England the test phase starts on 1 January 2027 – then your invitation arrives by email: via TestFlight on iPhone or via Google Play on Android."
+   }
+  },
+  {
+   "id": "testangler-mail-fehlt",
+   "thema": "abo",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Meine Einladung kommt nicht an – was tun?",
+    "a": "Schau zuerst im Spam-Ordner und prüfe, ob du in der ersten Mail auf „Bestätigen“ geklickt hast. Auf Android dauert es 1 bis 2 Tage. Danach melde dich auf carpd.de mit derselben Adresse noch einmal an, dann schicken wir die Einladung erneut (höchstens einmal am Tag) – oder schreib an test@carpd.de."
+   },
+   "en": {
+    "f": "My invitation has not arrived – what can I do?",
+    "a": "Check your spam folder first and make sure you clicked “Confirm” in the first email. In England invitations go out from 1 January 2027. Otherwise write to test@carpd.de."
+   }
+  },
+  {
+   "id": "testangler-feedback",
+   "thema": "abo",
+   "status": "ok",
+   "links": [],
+   "de": {
+    "f": "Wie gebe ich als Testangler Feedback?",
+    "a": "In der App unter Mehr → „Feedback & Fehler melden“ oder per Mail an test@carpd.de. Schreib kurz dazu, was du gemacht hast – die Version der App steht automatisch dabei."
+   },
+   "en": {
+    "f": "How do I give feedback as a test angler?",
+    "a": "In the app under More → Feedback & report a bug, or by email to test@carpd.de. Briefly describe what you did – the app version is added automatically."
+   }
+  },
+  {
    "id": "gruender",
    "thema": "abo",
    "status": "ok",

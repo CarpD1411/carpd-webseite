@@ -70,7 +70,7 @@
         if (fuss) fuss.innerHTML = '<span><strong style="color:var(--text)">Tight Lines!</strong> · <a href="uk/">carpd.de/uk</a></span><span><a href="hilfe/?lang=en">Help &amp; FAQ</a> · <a href="uk/legal.html">Legal notice</a> · <a href="uk/privacy.html">Privacy</a></span>';
         ergebnis = {
           ok: ['Thanks – you are in!', 'Your email address is confirmed and your founder price is reserved. We will email you at launch on 1 March 2027. Tight Lines!'],
-          testok: ['Thanks – you are a test angler!', 'Your sign-up is confirmed. Your invitation arrives by email: on iPhone within a few minutes (TestFlight), on Android as soon as the Google Play test opens in the UK. Please check your spam folder too.'],
+          testok: ['Thanks – you are a test angler!', 'Your sign-up is confirmed. The test phase starts on 1 January 2027 – then you will get your invitation by email.'],
           abgemeldet: ['Unsubscribed', 'Your email address has been deleted. We will not email you again.'],
           testvoll: ['Sorry, already full', 'While you were confirming, the last test angler places were taken. Secure the founder price instead on carpd.de/uk – Tight Lines!'],
           fehler: ['Link invalid', 'This link has expired or has already been used. Simply sign up again on carpd.de.']
@@ -78,7 +78,7 @@
       } else {
         ergebnis.ok = ['Danke – du bist dabei!', 'Deine E-Mail-Adresse ist bestätigt und dein Gründerpreis reserviert. Wir schreiben dir zum Start am 01.03.2027. Tight Lines!'];
       }
-      function zeigeErgebnis(s, nr) {
+      function zeigeErgebnis(s, nr, app) {
         var t = ergebnis[s] || ergebnis.fehler;
         titel.textContent = t[0];
         text.textContent = t[1];
@@ -89,6 +89,15 @@
           n.innerHTML = (en ? 'Founder no. ' : 'Gründer Nr. ') + '<b></b>';
           n.querySelector('b').textContent = nr;
           text.parentNode.insertBefore(n, text.nextSibling);
+        }
+        // iPhone und Einladungen laufen: App gleich hier holen (der Link führt auch zu TestFlight selbst)
+        if (s === 'testok' && app === 'iphone' && !en) {
+          text.textContent = 'Deine Anmeldung ist bestätigt. Hol dir CarpD jetzt auf dein iPhone:';
+          var kasten = document.createElement('div');
+          kasten.innerHTML = '<ol><li>Tippe auf den Knopf und installiere <b>TestFlight</b> (kostenlos, von Apple).</li><li>Tippe danach noch einmal auf den Knopf, dann auf „Akzeptieren“ und „Installieren“.</li></ol>' +
+            '<p><a class="knopf" href="https://testflight.apple.com/join/cXWdhEvS" rel="noopener">CarpD auf dem iPhone installieren</a></p>' +
+            '<p class="klein">Bist du gerade am Computer? Der Link steht auch in der Mail, die du gerade bekommen hast (schau notfalls im Spam-Ordner). Öffne ihn auf dem iPhone.</p>';
+          text.parentNode.insertBefore(kasten, knopf.parentNode);
         }
         knopf.hidden = true;
         meldung.textContent = '';
@@ -125,7 +134,7 @@
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ aktion: aktion, token: token })
           }).then(function (r) { return r.json(); })
-            .then(function (d) { zeigeErgebnis(d.s, d.nr); })
+            .then(function (d) { zeigeErgebnis(d.s, d.nr, d.app); })
             .catch(function () {
               meldung.textContent = en ? 'No connection. Please try again in a moment.' : 'Keine Verbindung. Bitte versuch es gleich noch einmal.';
               knopf.disabled = false;

@@ -6,8 +6,8 @@
  */
 var GRUENDER = {
   testPlaetze: 200,             // so viele Testangler-Plätze (muss zu GRENZE in der Server-Funktion passen)
-  testBis: '2027-02-28',        // letzter Tag der Testangler-Anmeldung
-  wechselAb: '2027-03-01',      // ab diesem Tag (oder wenn die Testangler voll sind) ist der Gründerpreis die Hauptaktion
+  testBis: '2026-12-31',        // letzter Tag der Testangler-Anmeldung
+  wechselAb: '2027-01-01',      // ab diesem Tag (oder wenn die Testangler voll sind) ist der Gründerpreis die Hauptaktion
   launch: '2027-03-01',         // Start in den Stores
   gruenderBis: '2027-03-15',    // letzter Tag, an dem man den Gründerpreis abschließen kann (Warteliste)
   gratisMonat: true,            // Gründer-Abo startet mit 1 Monat gratis

@@ -362,7 +362,7 @@
     $('kachelStand').textContent = 'lädt …'; $('kachelnNeu').disabled = true; melden('');
     gueltigeSitzung().then(function (s) {
       if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
-      androidLaden(s.access).catch(function () {});
+      if (!androidGeladen) { androidGeladen = true; androidLaden(s.access).catch(function () { androidGeladen = false; }); }
       return Promise.all(['kacheln', 'werbung_erfolg', 'anmeldungen_zahl'].map(function (id) {
         return anfrage('/rest/v1/rpc/cockpit', { p_was: id }, s.access);
       })).then(function (alle) {
@@ -380,7 +380,7 @@
   }
 
   // ---------- Android: Adressen für Googles Testerliste (SQL 058) ----------
-  var androidWartet = [];
+  var androidWartet = [], androidGeladen = false; // Adressen nur einmal je Öffnen laden
   function androidLaden(token) {
     return anfrage('/rest/v1/rpc/cockpit_android', {}, token).then(function (r) {
       androidWartet = r.ok && Array.isArray(r.daten) ? r.daten : []; // SQL 058 noch nicht da → Kasten bleibt weg
@@ -389,7 +389,7 @@
     });
   }
   $('androidKopieren').addEventListener('click', function () {
-    navigator.clipboard.writeText(androidWartet.map(function (a) { return a.email; }).join('\n'))
+    navigator.clipboard.writeText(androidWartet.map(function (a) { return a.email; }).join(', '))
       .then(function () { melden('Adressen kopiert.'); }).catch(function () { melden('Kopieren ging nicht – bitte markieren.', true); });
   });
   $('androidFertig').addEventListener('click', function () {
