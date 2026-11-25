@@ -315,12 +315,14 @@
     $('kacheln').appendChild(k);
   }
 
-  function kachelnZeichnen(zahlen, werbung) {
+  function kachelnZeichnen(zahlen, werbung, listen) {
     // „neu“ zählt auch Unbestätigte, groß angezeigt werden nur die Bestätigten
     function tag(name) { return zahlen.filter(function (z) { return z.tag === name; })[0] || {}; }
     function n(w) { return Number(w || 0); }
     var h = tag('heute'), g = tag('gestern');
     var testOffen = n(h.test_neu) - n(h.test_bestaetigt), warteOffen = n(h.warte_neu) - n(h.warte_bestaetigt), offen = testOffen + warteOffen;
+    // alle, die noch nicht bestätigt haben (auch von früheren Tagen, ohne Kumpels)
+    function offenGesamt(liste) { return listen.reduce(function (s, z) { return s + (z.liste === liste ? n(z.offen) : 0); }, 0); }
 
     // Eine Anzeige kann in zwei Sprachen vorkommen: Besucher zusammenzählen, Anmeldungen nur einmal
     var anzeigen = {}, besucher = 0, anmeldungen = 0;
@@ -342,8 +344,8 @@
     kachel('Alles in Ordnung?', probleme.length ? probleme.map(function (p) { return '⚠️ ' + p; }).join('\n') : '✅ Alles normal',
       offen ? 'Heute noch unbestätigt: ' + offen : '', 'breit ampel' + (probleme.length ? ' warn' : ''));
     kachel('Besucher heute', n(h.besucher), 'gestern ' + n(g.besucher));
-    kachel('Neue Testangler', n(h.test_bestaetigt), 'noch offen: ' + testOffen + '\ngestern ' + n(g.test_bestaetigt));
-    kachel('Neu auf der Warteliste', n(h.warte_bestaetigt), 'noch offen: ' + warteOffen + '\ngestern ' + n(g.warte_bestaetigt) + '\ngesamt: ' + n(h.warte));
+    kachel('Neue Testangler', n(h.test_bestaetigt), 'noch offen gesamt: ' + offenGesamt('Testangler') + '\ngestern ' + n(g.test_bestaetigt));
+    kachel('Neu auf der Warteliste', n(h.warte_bestaetigt), 'noch offen gesamt: ' + offenGesamt('Warteliste') + '\ngestern ' + n(g.warte_bestaetigt) + '\ngesamt: ' + n(h.warte));
     kachel('Testplätze belegt', 'DE ' + n(h.test_de) + ' / 200\nUK ' + n(h.test_uk) + ' / 100', '', 'text');
     kachel('Beste Anzeige (30 Tage)', beste ? beste.name : 'Noch keine Anmeldung',
       beste ? beste.anmeldungen + (beste.anmeldungen === 1 ? ' Anmeldung · ' : ' Anmeldungen · ') + beste.besucher + ' Besucher' : besucher + ' Besucher über Anzeigen', 'breit');
@@ -353,7 +355,7 @@
     $('kachelStand').textContent = 'lädt …'; $('kachelnNeu').disabled = true; melden('');
     gueltigeSitzung().then(function (s) {
       if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
-      return Promise.all(['kacheln', 'werbung_erfolg'].map(function (id) {
+      return Promise.all(['kacheln', 'werbung_erfolg', 'anmeldungen_zahl'].map(function (id) {
         return anfrage('/rest/v1/rpc/cockpit', { p_was: id }, s.access);
       })).then(function (alle) {
         var schlecht = alle.filter(function (r) { return !r.ok; })[0];
