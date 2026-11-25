@@ -416,7 +416,9 @@
       .knopf:active, .mond:active, .schalter:active, .handy-wahl span:active { transform: none; }
       .schalter::after, .mond svg, .wegweiser a::before { transition: background-color var(--farbe) ease; }
     }
-      .marke .tm { font-size: .45em; font-weight: inherit; line-height: 0; vertical-align: .75em; margin-left: 1px; opacity: .8; }
+      .marke .tm { font-size: .6em; font-weight: inherit; line-height: 0; vertical-align: .6em; margin-left: 2px; color: var(--text); }
+    .nicht-testen { margin: 4px 0 0; padding-top: 14px; border-top: 1px solid var(--linie); font-size: 16px; line-height: 1.5; }
+    .nicht-testen a { display: inline-block; font-weight: 600; padding: 6px 0; }
     .tm-hinweis { flex-basis: 100%; width: 100%; margin: 12px 0 0; font-size: 14px; }
   </style>
   <link rel="stylesheet" href="../gruender.css">
@@ -691,6 +693,7 @@
             <button class="knopf" type="submit">Become a test angler</button>
             <p id="testMeldung" class="meldung" role="status"></p>
             <p class="klein-text" style="margin:0">You will receive an email to confirm. Questions? <a href="mailto:test@carpd.de">test@carpd.de</a></p>
+            <p class="nicht-testen">Don’t want to test? <a href="#gruender">Join the waiting list and get the founder price</a></p>
           </form>
 
           <div class="formular test-zu">
