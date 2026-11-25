@@ -107,11 +107,9 @@
     <div class="leise" id="kachelStand" style="margin-bottom:8px"></div>
     <div class="gitter" id="kacheln"></div>
     <div class="kachel breit abstand" id="androidKasten" hidden>
-      <div class="name">Android: bitte bei Google eintragen</div>
-      <div id="androidListe" style="user-select:all;-webkit-user-select:all;white-space:pre-line;overflow-wrap:anywhere;margin:8px 0"></div>
-      <div class="leise">1. Adressen kopieren · 2. Play Console (info@carpd.de) → Testen → Geschlossener Test → Alpha → Tester → Liste „Testers“ → einfügen und speichern · 3. unten auf „Eingetragen“ tippen. Dann gehen die Einladungen raus.</div>
-      <button class="knopf klein abstand" id="androidKopieren">Adressen kopieren</button>
-      <button class="knopf haupt klein abstand" id="androidFertig">✓ Eingetragen</button>
+      <div class="name">Android: diese Personen warten auf die App</div>
+      <div class="leise">Je Person: <b>1.</b> Adresse kopieren <b>2.</b> Play Console (info@carpd.de) → Closed testing → alpha → Testers → „Testers“ → einfügen, Enter, Save changes („already exists“ = schon drin, auch gut) <b>3.</b> erst danach „Einladung schicken“. <b>Dieser Knopf verschickt sofort eine Mail.</b></div>
+      <div id="androidListe"></div>
     </div>
     <button class="knopf haupt abstand" id="kachelnNeu">↻ Neu laden</button>
     <button class="knopf abstand" id="mehr" aria-expanded="false" aria-controls="mehrBereich">Mehr anzeigen ▾</button>
@@ -383,28 +381,44 @@
   var androidWartet = [], androidGeladen = false; // Adressen nur einmal je Öffnen laden
   function androidLaden(token) {
     return anfrage('/rest/v1/rpc/cockpit_android', {}, token).then(function (r) {
+      if (!r.ok) androidGeladen = false;
       androidWartet = r.ok && Array.isArray(r.daten) ? r.daten : []; // SQL 058 noch nicht da → Kasten bleibt weg
-      $('androidListe').textContent = androidWartet.map(function (a) { return a.email; }).join('\n');
+      var liste = $('androidListe'); liste.innerHTML = '';
+      androidWartet.forEach(function (p) {
+        var z = document.createElement('div'); z.style.cssText = 'margin-top:14px';
+        var m = document.createElement('div'); m.textContent = p.email; m.style.cssText = 'user-select:all;-webkit-user-select:all;overflow-wrap:anywhere;margin-bottom:6px';
+        var k = document.createElement('button'); k.className = 'knopf klein'; k.textContent = '1. Adresse kopieren';
+        k.addEventListener('click', function () { androidKopieren(p.email, m); });
+        var f = document.createElement('button'); f.className = 'knopf haupt klein abstand'; f.textContent = '3. Einladung schicken';
+        f.addEventListener('click', function () { androidEinladen(p, f); });
+        z.appendChild(m); z.appendChild(k); z.appendChild(f); liste.appendChild(z);
+      });
       $('androidKasten').hidden = !androidWartet.length;
     });
   }
-  $('androidKopieren').addEventListener('click', function () {
-    navigator.clipboard.writeText(androidWartet.map(function (a) { return a.email; }).join(', '))
-      .then(function () { melden('Adressen kopiert.'); }).catch(function () { melden('Kopieren ging nicht – bitte markieren.', true); });
-  });
-  $('androidFertig').addEventListener('click', function () {
-    var ids = androidWartet.map(function (a) { return a.id; });
-    if (!ids.length || !confirm('Stehen alle ' + ids.length + ' Adressen in der Google-Liste? Dann gehen die Einladungen raus.')) return;
-    $('androidFertig').disabled = true;
+  // Geht das Kopieren nicht (ältere Handys), wird die Adresse markiert und auf dem alten Weg kopiert
+  function androidKopieren(text, zeile) {
+    function alt() {
+      var r = document.createRange(); r.selectNodeContents(zeile);
+      var w = window.getSelection(); w.removeAllRanges(); w.addRange(r);
+      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+      melden(ok ? 'Adresse kopiert.' : 'Die Adresse ist markiert – bitte „Kopieren“ antippen.', !ok);
+    }
+    if (!navigator.clipboard) { alt(); return; }
+    navigator.clipboard.writeText(text).then(function () { melden('Adresse kopiert.'); }).catch(alt);
+  }
+  function androidEinladen(p, knopf) {
+    if (!confirm('Steht ' + p.email + ' schon bei Google in der Liste?\n\nOK = Die Einladungs-Mail geht jetzt raus.')) return;
+    knopf.disabled = true;
     gueltigeSitzung().then(function (s) {
       if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
-      return anfrage('/rest/v1/rpc/cockpit_android_eingetragen', { p_ids: ids }, s.access).then(function (r) {
+      return anfrage('/rest/v1/rpc/cockpit_android_eingetragen', { p_ids: [p.id] }, s.access).then(function (r) {
         if (!r.ok) { melden('Fehler (' + r.status + ') – nichts verschickt.', true); return; }
-        melden('Erledigt: ' + r.daten + ' freigegeben.');
+        melden(r.daten === 1 ? 'Die Einladung geht in der nächsten Minute raus.' : 'Diese Person war schon eingeladen.');
         return androidLaden(s.access);
       });
-    }).catch(function () { melden('Keine Verbindung.', true); }).then(function () { $('androidFertig').disabled = false; });
-  });
+    }).catch(function () { melden('Keine Verbindung.', true); }).then(function () { knopf.disabled = false; });
+  }
 
   $('kachelnNeu').addEventListener('click', kachelnLaden);
   $('mehr').addEventListener('click', function () {
