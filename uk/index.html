@@ -416,6 +416,8 @@
       .knopf:active, .mond:active, .schalter:active, .handy-wahl span:active { transform: none; }
       .schalter::after, .mond svg, .wegweiser a::before { transition: background-color var(--farbe) ease; }
     }
+      .marke .tm { font-size: .45em; font-weight: inherit; line-height: 0; vertical-align: .75em; margin-left: 1px; opacity: .8; }
+    .tm-hinweis { flex-basis: 100%; width: 100%; margin: 12px 0 0; font-size: 14px; }
   </style>
   <link rel="stylesheet" href="../gruender.css">
 </head>
@@ -423,7 +425,7 @@
 
   <header class="kopf">
     <div class="breite">
-      <a class="marke" href="#"><img src="../logo.svg" alt="" width="36" height="36"><span>Carp<span class="d">D</span></span></a>
+      <a class="marke" href="#"><img src="../logo.svg" alt="" width="36" height="36"><span>Carp<span class="d">D</span><sup class="tm">™</sup></span></a>
       <nav>
         <a href="#session">Features</a>
         <a href="#gruender">Founder price</a>
@@ -739,6 +741,7 @@
         <a href="privacy.html#konto-loeschen">Delete account</a>
         <a href="../" hreflang="de" lang="de">Deutsch</a>
       </nav>
+      <p class="tm-hinweis">CarpD™ is a trade mark of workping GbR (EU trade mark application filed).</p>
     </div>
   </footer>
 
