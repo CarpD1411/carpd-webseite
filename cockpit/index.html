@@ -123,6 +123,7 @@
     <button class="knopf abstand" id="mehr" aria-expanded="false" aria-controls="mehrBereich">Mehr anzeigen ▾</button>
     <div id="mehrBereich" class="abstand" hidden>
       <div class="gitter" id="knoepfe"></div>
+      <button class="knopf abstand" id="probeKnopf">🧪 Android üben (es passiert nichts)</button>
       <div class="fuss"><button class="knopf klein" id="abmelden">Abmelden</button></div>
     </div>
   </section>
@@ -387,16 +388,23 @@
 
   // ---------- Android: Adressen für Googles Testerliste (SQL 058) ----------
   // Je Person drei Schritte; nur der nächste ist farbig. „Einladung schicken“ ist gesperrt, bis 1 und 2 angetippt sind.
-  // carpd.de/cockpit/?probe zeigt erfundene Personen: zum Üben, ohne Server, es geht keine Mail raus.
+  // Mehr anzeigen → „Android üben“ (oder carpd.de/cockpit/?probe) zeigt erfundene Personen: zum Üben, ohne Server, es geht keine Mail raus.
   var PROBE = /[?&]probe\b/.test(location.search), PROBE_LISTE = [{ id: -1, email: 'beispiel.eins@example.com' }, { id: -2, email: 'beispiel.zwei@example.com' }];
   var androidGeladen = false;
   // Gemerkt wird nur die Nummer der Person und der Schritt (falls Safari die Seite nach dem Ausflug zu Google neu lädt)
+  $('probeKnopf').addEventListener('click', function () {
+    PROBE = !PROBE;
+    $('probeKnopf').textContent = PROBE ? '🧪 Üben beenden' : '🧪 Android üben (es passiert nichts)';
+    if (PROBE) { androidZeichnen(PROBE_LISTE); $('androidKasten').scrollIntoView({ block: 'start' }); }
+    else { androidZeichnen([]); androidGeladen = false; kachelnLaden(); }
+  });
   function schrittLesen(id) { try { return Number(sessionStorage.getItem('carpd_android_' + id) || 0); } catch (e) { return 0; } }
   function schrittMerken(id, n) { try { sessionStorage.setItem('carpd_android_' + id, String(n)); } catch (e) {} }
   function androidLaden(token) {
     if (PROBE) { androidZeichnen(PROBE_LISTE); return Promise.resolve(); }
     return anfrage('/rest/v1/rpc/cockpit_android', {}, token).then(function (r) {
       if (!r.ok) androidGeladen = false;
+      if (PROBE) return;
       androidZeichnen(r.ok && Array.isArray(r.daten) ? r.daten : []);
     });
   }
@@ -407,6 +415,7 @@
     $('androidKasten').hidden = !personen.length;
   }
   function androidPerson(p) {
+    var PROBE = p.id < 0; // erfundene Personen haben negative Nummern – sie gehen nie zum Server
     var stand = PROBE ? 0 : schrittLesen(p.id); // 0 = nichts, 1 = kopiert, 2 = Google geöffnet, 3 = verschickt
     var z = document.createElement('div'); z.className = 'person';
     var m = document.createElement('div'); m.className = 'adresse'; m.textContent = p.email; z.appendChild(m);
