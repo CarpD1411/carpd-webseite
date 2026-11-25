@@ -106,6 +106,13 @@
   <section id="schrittWahl" hidden>
     <div class="leise" id="kachelStand" style="margin-bottom:8px"></div>
     <div class="gitter" id="kacheln"></div>
+    <div class="kachel breit abstand" id="androidKasten" hidden>
+      <div class="name">Android: bitte bei Google eintragen</div>
+      <div id="androidListe" style="user-select:all;-webkit-user-select:all;white-space:pre-line;overflow-wrap:anywhere;margin:8px 0"></div>
+      <div class="leise">1. Adressen kopieren · 2. Play Console (info@carpd.de) → Testen → Geschlossener Test → Alpha → Tester → Liste „Testers“ → einfügen und speichern · 3. unten auf „Eingetragen“ tippen. Dann gehen die Einladungen raus.</div>
+      <button class="knopf klein abstand" id="androidKopieren">Adressen kopieren</button>
+      <button class="knopf haupt klein abstand" id="androidFertig">✓ Eingetragen</button>
+    </div>
     <button class="knopf haupt abstand" id="kachelnNeu">↻ Neu laden</button>
     <button class="knopf abstand" id="mehr" aria-expanded="false" aria-controls="mehrBereich">Mehr anzeigen ▾</button>
     <div id="mehrBereich" class="abstand" hidden>
@@ -355,6 +362,7 @@
     $('kachelStand').textContent = 'lädt …'; $('kachelnNeu').disabled = true; melden('');
     gueltigeSitzung().then(function (s) {
       if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
+      androidLaden(s.access).catch(function () {});
       return Promise.all(['kacheln', 'werbung_erfolg', 'anmeldungen_zahl'].map(function (id) {
         return anfrage('/rest/v1/rpc/cockpit', { p_was: id }, s.access);
       })).then(function (alle) {
@@ -370,6 +378,33 @@
     }).catch(function () { $('kachelStand').textContent = ''; melden('Keine Verbindung.', true); })
       .then(function () { $('kachelnNeu').disabled = false; });
   }
+
+  // ---------- Android: Adressen für Googles Testerliste (SQL 058) ----------
+  var androidWartet = [];
+  function androidLaden(token) {
+    return anfrage('/rest/v1/rpc/cockpit_android', {}, token).then(function (r) {
+      androidWartet = r.ok && Array.isArray(r.daten) ? r.daten : []; // SQL 058 noch nicht da → Kasten bleibt weg
+      $('androidListe').textContent = androidWartet.map(function (a) { return a.email; }).join('\n');
+      $('androidKasten').hidden = !androidWartet.length;
+    });
+  }
+  $('androidKopieren').addEventListener('click', function () {
+    navigator.clipboard.writeText(androidWartet.map(function (a) { return a.email; }).join('\n'))
+      .then(function () { melden('Adressen kopiert.'); }).catch(function () { melden('Kopieren ging nicht – bitte markieren.', true); });
+  });
+  $('androidFertig').addEventListener('click', function () {
+    var ids = androidWartet.map(function (a) { return a.id; });
+    if (!ids.length || !confirm('Stehen alle ' + ids.length + ' Adressen in der Google-Liste? Dann gehen die Einladungen raus.')) return;
+    $('androidFertig').disabled = true;
+    gueltigeSitzung().then(function (s) {
+      if (!s) { melden('Bitte neu anmelden.', true); zeigen('schrittMail'); return; }
+      return anfrage('/rest/v1/rpc/cockpit_android_eingetragen', { p_ids: ids }, s.access).then(function (r) {
+        if (!r.ok) { melden('Fehler (' + r.status + ') – nichts verschickt.', true); return; }
+        melden('Erledigt: ' + r.daten + ' freigegeben.');
+        return androidLaden(s.access);
+      });
+    }).catch(function () { melden('Keine Verbindung.', true); }).then(function () { $('androidFertig').disabled = false; });
+  });
 
   $('kachelnNeu').addEventListener('click', kachelnLaden);
   $('mehr').addEventListener('click', function () {
