@@ -58,6 +58,8 @@ var GRUENDER = {
       testBeendet: 'Testangler-Anmeldung beendet',
       testZuText: 'Danke für euer Interesse! Sichere dir jetzt den Gründerpreis.',
       kopfKnopf: 'Gründerpreis sichern',
+      werbungVorab: 'Founder price – until launch only:', werbungTitel: 'CarpD Pro for {p}', werbungJahr: 'a year.',
+      werbungVorab: 'Gründerpreis – nur bis zum Start:', werbungTitel: 'CarpD Pro für {p}', werbungJahr: 'im Jahr.',
       datenschutz: 'datenschutz.html'
     },
     en: {
@@ -254,7 +256,16 @@ var GRUENDER = {
       var zuTitel = test.querySelector('.test-zu h3'), zuText = test.querySelector('.test-zu p');
       if (zuTitel) zuTitel.textContent = voll ? t.testVoll : t.testBeendet;
       if (zuText) zuText.textContent = t.testZuText;
-      document.querySelectorAll('a[href="#test"]').forEach(function (a) { a.setAttribute('href', '#gruender'); a.textContent = t.kopfKnopf; });
+      document.querySelectorAll('a[href="#test"], a[href="#formularOben"]').forEach(function (a) { a.setAttribute('href', '#gruender'); a.textContent = t.kopfKnopf; });
+      // Besucher aus der Werbung: statt „1 Jahr Pro für Testangler“ der Gründerpreis als Überschrift (Preis aus GRUENDER)
+      var hg = document.querySelector('.h-gp'), pr = GRUENDER.preise[sp];
+      if (document.body.classList.contains('werbung')) {
+        document.body.classList.remove('werbung');
+        if (hg && pr.gruender) {
+          hg.innerHTML = '<span class="vorab">' + esc(t.werbungVorab) + '</span>' + esc(t.werbungTitel.replace('{p}', pr.gruender)) + ' <em>' + esc(t.werbungJahr) + '</em>';
+          document.body.classList.add('werbung-gp');
+        }
+      }
     }
   }
 

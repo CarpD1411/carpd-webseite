@@ -324,6 +324,8 @@
     .test-zu { display: none; }
     .test.voll .test-offen { display: none; }
     .test.voll .test-zu { display: flex; }
+    /* Testangler voll (oder ab 01.01.): alles rund ums Testen ausblenden – gesetzt von gruender.js */
+    html[data-gruender="vorn"] #test, html[data-gruender="vorn"] .nur-test, html[data-gruender="vorn"] .start .termine { display: none; }
     .knapp { margin: 0; font-weight: 700; color: var(--oliv-hell); font-size: 1.1rem; }
 
     /* Besucher aus der Werbung (?utm_source=…): drei Vorteile + Formular gleich oben (Rest der Seite bleibt darunter) */
@@ -342,6 +344,25 @@
     body.werbung .formular-oben { display: block; margin: 6px 0 28px; }
     body.werbung .start .einleitung, body.werbung .start .aufruf, body.werbung .start .termine { display: none; }
     body.werbung .start { padding-top: 18px; }
+    /* Anzeigen-Besucher: das Angebot ist die Überschrift (Punkt 1 der Liste wäre doppelt) */
+    .h-werbung { display: none; }
+    body.werbung .h-normal { display: none; }
+    body.werbung .h-werbung { display: block; }
+    body.werbung h1 { font-size: clamp(54px, 9vw, 120px); line-height: .9; letter-spacing: -1px; margin: 0 0 14px; }
+    body.werbung h1 em { font-style: normal; color: var(--oliv-hell); }
+    body.werbung h1 .vorab { display: block; font-size: 26px; line-height: 1.2; letter-spacing: 0; color: var(--oliv-hell); margin: 0 0 6px; }
+    body.werbung .vorteile li:first-child { display: none; }
+    /* Ab dem Wechsel (01.01. oder Testangler voll): Anzeigen-Besucher sehen den Gründerpreis als Überschrift */
+    .h-gp { display: none; }
+    body.werbung-gp .h-normal { display: none; }
+    body.werbung-gp .h-gp { display: block; }
+    body.werbung-gp h1 { font-size: clamp(54px, 9vw, 120px); line-height: .9; letter-spacing: -1px; margin: 0 0 14px; }
+    body.werbung-gp h1 em { font-style: normal; color: var(--oliv-hell); }
+    body.werbung-gp h1 .vorab { display: block; font-size: 26px; line-height: 1.2; letter-spacing: 0; color: var(--oliv-hell); margin: 0 0 6px; }
+    body.werbung-gp .wasist { display: block; margin: 6px 0 8px; font-size: 1.25rem; line-height: 1.25; font-weight: 600; color: var(--oliv-hell, #A8BA4A); }
+    body.werbung-gp .start .einleitung, body.werbung-gp .start .aufruf, body.werbung-gp .start .termine { display: none; }
+    body.werbung-gp .start { padding-top: 18px; padding-bottom: 24px; }
+    @media (max-width: 980px) { body.werbung-gp .start .eckdaten, body.werbung-gp .start .breite > :nth-child(2) { display: none; } }
 
     /* Warteliste */
     .warte .breite > * { max-width: 780px; }
@@ -447,7 +468,7 @@
     <div class="start">
       <div class="breite">
         <div>
-          <h1>Jeder Biss zählt.</h1>
+          <h1><span class="h-normal">Jeder Biss zählt.</span><span class="h-werbung"><span class="vorab">Für Testangler:</span>1 Jahr CarpD Pro <em>kostenlos.</em></span><span class="h-gp"></span></h1>
           <p class="wasist">Die App nur für Karpfenangler</p>
           <p class="slogan">
             <span><span class="d">D</span>ein Gewässer.</span>
@@ -717,7 +738,7 @@
         <img src="logo.svg" alt="CarpD-Logo: Karpfen im C" width="150" height="150">
         <div>
           <h2>Wer steckt dahinter?</h2>
-          <p style="margin-top:24px">Wir sind Davide und Kresimir, selbst Karpfenangler. Wir kennen die Probleme am Wasser aus eigener Erfahrung, zum Beispiel um drei Uhr nachts nicht mehr zu wissen, auf welcher Rute es gepiept hat. Mit CarpD bauen wir die App, die genau das kann, was man beim Karpfenangeln braucht. Eure Rückmeldungen als Testangler fließen direkt in die App ein.</p>
+          <p style="margin-top:24px">Wir sind Davide und Kresimir, selbst Karpfenangler. Wir kennen die Probleme am Wasser aus eigener Erfahrung, zum Beispiel um drei Uhr nachts nicht mehr zu wissen, auf welcher Rute es gepiept hat. Mit CarpD bauen wir die App, die genau das kann, was man beim Karpfenangeln braucht.<span class="nur-test"> Eure Rückmeldungen als Testangler fließen direkt in die App ein.</span></p>
           <p class="gruss">Tight Lines!</p>
           <!-- Vorstellungsvideo (vom Marketing, 21.11.2026). Fassung mit englischen Untertiteln: uk/index.html (video/carpd-vorstellung-en.mp4). Bei Änderungen BEIDE Seiten anpassen. -->
           <figure>

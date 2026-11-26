@@ -324,6 +324,8 @@
     .test-zu { display: none; }
     .test.voll .test-offen { display: none; }
     .test.voll .test-zu { display: flex; }
+    /* Testangler voll (oder ab 01.01.): alles rund ums Testen ausblenden – gesetzt von gruender.js */
+    html[data-gruender="vorn"] #test, html[data-gruender="vorn"] .nur-test, html[data-gruender="vorn"] .start .termine { display: none; }
     .knapp { margin: 0; font-weight: 700; color: var(--oliv-hell); font-size: 1.1rem; }
 
     /* Besucher aus der Werbung (?utm_source=…): drei Vorteile + Formular gleich oben (Rest der Seite bleibt darunter) */
