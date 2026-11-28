@@ -1887,11 +1887,11 @@
    ],
    "de": {
     "f": "Woher kennt CarpD die Wassertemperatur?",
-    "a": "Sie ist grob geschätzt – aus der Lufttemperatur der letzten Wochen und der Größe des Gewässers. Sie kann einige Grad abweichen, gemessen wird nichts."
+    "a": "Sie ist geschätzt – aus Luft, Sonne und Wind der letzten Wochen und der Größe des Gewässers. Sie kann einige Grad abweichen. Bist du am Wasser (höchstens 100 m) oder läuft dort eine Session, tippst du in der Kachel „Wasser“ auf „Wassertemperatur messen“ und trägst deinen Wert vom Thermometer oder Echolot ein. Dann rechnet CarpD ein paar Tage mit deinem Wert und lernt danach, wie sehr die Schätzung an diesem See danebenliegt. Mit „Anonyme Statistik“ geht die Messung anonym zum Server (nur See, Tag und Grad): Haben mindestens 3 Angler an einem See gemessen, wird die Schätzung dort für alle genauer."
    },
    "en": {
     "f": "How does CarpD know the water temperature?",
-    "a": "It’s a rough estimate – from the air temperature of the last few weeks and the size of the water. It can be a few degrees off; nothing is measured."
+    "a": "It’s an estimate – from air temperature, sunshine and wind of the last few weeks and the size of the water. It can be a few degrees off. If you are at the water (within 100 m) or a session is running there, tap “Measure water temperature” in the “Water” tile and enter your value from a thermometer or echo sounder. CarpD then uses your value for a few days and afterwards learns how far off the estimate is at this lake. With “Anonymous statistics” the measurement goes to the server anonymously (only lake, day and degrees): once at least 3 anglers have measured at a lake, the estimate there gets more accurate for everyone."
    }
   },
   {
@@ -2639,7 +2639,7 @@
    },
    "en": {
     "f": "How do I get the app as a test angler?",
-    "a": "Sign up on carpd.de/uk and confirm the email. In England the test phase starts on 1 January 2027 – then your invitation arrives by email: via TestFlight on iPhone or via Google Play on Android."
+    "a": "Sign up on carpd.de/uk and confirm the email. Then your invitation arrives by email: on iPhone within a few minutes via TestFlight, on Android within 1 to 2 days via Google Play."
    }
   },
   {
@@ -2653,7 +2653,7 @@
    },
    "en": {
     "f": "My invitation has not arrived – what can I do?",
-    "a": "Check your spam folder first and make sure you clicked “Confirm” in the first email. In England invitations go out from 1 January 2027. Otherwise write to test@carpd.de."
+    "a": "Check your spam folder first and make sure you clicked “Confirm” in the first email. On iPhone the invitation comes within a few minutes, on Android within 1 to 2 days. Otherwise write to test@carpd.de."
    }
   },
   {
