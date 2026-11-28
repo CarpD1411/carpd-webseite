@@ -1895,6 +1895,38 @@
    }
   },
   {
+   "id": "stroemung",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "heute"
+   ],
+   "de": {
+    "f": "Woher kennt CarpD die Strömung an meinem Fluss?",
+    "a": "An Flüssen zeigt „Heute“ eine Kachel „Strömung“. An großen Flüssen (zum Beispiel Neckar, Main, Rhein, Donau, Mosel) steht dort die geschätzte Fließgeschwindigkeit in Metern pro Sekunde, berechnet aus dem aktuellen Abfluss am Pegel, der Flussbreite und dem Gefälle. Das ist ein Mittelwert über den Fluss: In der Hauptströmung ist es schneller, am Ufer und in Buhnen langsamer. Außerdem vergleicht CarpD die Wassermenge mit sonst um diese Jahreszeit („stärker als sonst“, „schwächer als sonst“) und zeigt, ob sie in den nächsten Tagen zu- oder abnimmt. Dazu gibt es einen Hinweis zu Blei und Futterplatz. An Seen gibt es keine Strömungsanzeige."
+   },
+   "en": {
+    "f": "How does CarpD know the current on my river?",
+    "a": "On rivers, “Today” shows a “Current” tile. On large rivers (for example the Rhine, Danube, Main, Moselle) it shows the estimated flow speed in metres per second, calculated from the current discharge at the gauge, the river width and the gradient. It is an average across the river: faster in the main flow, slower at the bank and behind groynes. CarpD also compares the amount of water with what is usual for the time of year (“stronger than usual”, “weaker than usual”) and shows whether it will rise or ease over the next days, plus a tip on lead and baiting. Lakes have no current display."
+   }
+  },
+  {
+   "id": "algen",
+   "thema": "technik",
+   "status": "ok",
+   "links": [
+    "heute"
+   ],
+   "de": {
+    "f": "Wie erkennt CarpD Algen im See?",
+    "a": "Mit Pro zeigt CarpD von April bis Oktober an Seen ab etwa 1,3 ha die Kachel „Algen (Satellit)“: wenig Algen, etwas Algen, viele Algen oder Algenblüte. Grundlage sind Satellitenbilder (Sentinel-2) der Seemitte, etwa alle 4–5 Tage, aber nur bei klarem Himmel – das Bild ist also oft ein paar Tage alt, das Datum steht dabei. Bei vielen Algen wird nachts der Sauerstoff knapp: Karpfen fressen dann oft am frühen Morgen und stehen flacher. An kleinen Teichen, schmalen Seen und im Winter gibt es keine Anzeige, weil die Werte dort nicht verlässlich sind."
+   },
+   "en": {
+    "f": "How does CarpD detect algae in a lake?",
+    "a": "With Pro, from April to October CarpD shows the “Algae (satellite)” tile on lakes from about 1.3 ha: little algae, some algae, a lot of algae or algal bloom. It is based on satellite images (Sentinel-2) of the middle of the lake, about every 4–5 days but only with clear skies – so the image is often a few days old; the date is shown. With a lot of algae, oxygen gets low at night: carp then often feed early in the morning and sit shallower. Small ponds, narrow lakes and winter get no display because the values are not reliable there."
+   }
+  },
+  {
    "id": "ruten",
    "thema": "technik",
    "status": "ok",
